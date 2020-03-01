@@ -8,7 +8,7 @@ class home extends Component {
     }
 
     componentDidMount(){
-        axios.get('https://us-east1-cartolalol.cloudfunctions.net/api/posts')
+        axios.get('/posts')
             .then(res => {
                 this.setState({
                     posts: res.data
