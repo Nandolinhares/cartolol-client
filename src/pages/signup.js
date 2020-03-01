@@ -10,6 +10,9 @@ const styles = {
     form: {
         textAlign: 'center'
     },
+    h3: {
+        textAlign: 'center'
+    },
     TextField: {
         margin: '10px auto 10px auto'
     },
@@ -82,6 +85,7 @@ export class signup extends Component {
             <Grid container>
                 <Grid item sm></Grid>
                 <Grid item sm>
+                    <Typography variant="h3" className={classes.h3}>Signup</Typography>
                     <form noValidate onSubmit={this.handleSubmit} className={classes.form}>
                         <TextField 
                             className={classes.TextField}
