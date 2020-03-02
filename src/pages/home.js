@@ -21,10 +21,12 @@ class home extends Component {
         return (
             <Grid container spacing={3}>
                 <Grid item xs={12} sm={8}>
-                    {this.state.posts ? (this.state.posts.map(post => 
-                        <div>
+                    {(this.state.posts) ? (this.state.posts.map(post => 
+                        <div key={post.postId}>
                             <p>{post.name}</p>
                             <p>{post.age}</p>
+                            <p>{post.postId}</p>
+                            
                         </div>
                     )) : <p>Não há posts</p>}
                 </Grid>
