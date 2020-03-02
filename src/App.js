@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import './App.css';
 import jwtDecode from 'jwt-decode';
 import axios from 'axios';
+import AuthRoute from './util/AuthRoute';
 
 //Pages
 import home from './pages/home';
@@ -21,7 +22,7 @@ if(token) {
     authenticated = false;
   } else {
     authenticated = true;
-    //axios.defaults.headers.common['Authorization'] = token;
+    axios.defaults.headers.common['Authorization'] = token;
     console.log(authenticated)
   }
 }
@@ -31,12 +32,12 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Navbar />
+        <Navbar authenticated={authenticated} />
         <div className="container">
           <Switch>
             <Route exact path="/" component={home} />
-            <Route exact path="/signup" component={signup}/>
-            <Route exact path="/login" component={login}/>
+            <AuthRoute exact path="/signup" component={signup} authenticated={authenticated} />
+            <AuthRoute exact path="/login" component={login} authenticated={authenticated} />
           </Switch>
         </div>
       </Router>

@@ -47,7 +47,8 @@ export class login extends Component {
                 console.log(res.data);
                 localStorage.setItem('FBIdToken', `Bearer ${res.data.token}`);
                 axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`;
-                this.props.history.push('/');
+                //this.props.history.push('/');
+                window.location.reload(false);
             })
             .catch(err => {
                 this.setState({
