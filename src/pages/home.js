@@ -17,7 +17,7 @@ class home extends Component {
             .catch(err => console.log(err));
     }        
 
-    render() {
+    render() { 
         return (
             <Grid container spacing={3}>
                 <Grid item xs={12} sm={8}>
@@ -25,8 +25,7 @@ class home extends Component {
                         <div key={post.postId}>
                             <p>{post.name}</p>
                             <p>{post.age}</p>
-                            <p>{post.postId}</p>
-                            
+                            <p>{post.postId}</p>            
                         </div>
                     )) : <p>Não há posts</p>}
                 </Grid>
