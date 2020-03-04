@@ -1,21 +1,22 @@
-import React, { Component } from 'react';
-import Grid from '@material-ui/core/Grid';
-import axios from 'axios';
+import React, { Component } from "react";
+import Grid from "@material-ui/core/Grid";
+import axios from "axios";
 
 class home extends Component {
-    state = {
-        posts: null
-    }
+  state = {
+    posts: null
+  };
 
-    componentDidMount(){
-        axios.get('/posts')
-            .then(res => {
-                this.setState({
-                    posts: res.data
-                })
-            })
-            .catch(err => console.log(err));
-    }        
+  componentDidMount() {
+    axios
+      .get("/posts")
+      .then(res => {
+        this.setState({
+          posts: res.data
+        });
+      })
+      .catch(err => console.log(err));
+  }
 
     render() { 
         return (
@@ -37,4 +38,4 @@ class home extends Component {
     }
 }
 
-export default home
+export default home;
