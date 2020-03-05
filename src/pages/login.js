@@ -5,6 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import axios from "axios";
+import { loginUser } from '../redux/actions/userActions';
 
 const styles = {
   h3: {
@@ -41,20 +42,8 @@ export class login extends Component {
             email: this.state.email,
             password: this.state.password
         }
-        
-        axios.post('/login', userData)
-            .then(res => {
-                console.log(res.data);
-                localStorage.setItem('FBIdToken', `Bearer ${res.data.token}`);
-                //axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`;
-                //this.props.history.push('/');
-                window.location.reload(false);
-            })
-            .catch(err => {
-                this.setState({
-                    errors: err.response.data
-                })
-            })
+
+        loginUser(userData);
     }
 
   handleChange = event => {

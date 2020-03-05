@@ -5,6 +5,9 @@ import "./App.css";
 import jwtDecode from "jwt-decode";
 import axios from "axios";
 import AuthRoute from "./util/AuthRoute";
+//Redux stuffs
+import { Provider } from 'react-redux';
+import store from './redux/store';
 
 //Pages
 import home from "./pages/home";
@@ -29,28 +32,30 @@ if (token) {
 
 function App() {
   return (
-    <div className="App">
-      <Router>
-        <Navbar authenticated={authenticated} />
-        <div className="container">
-          <Switch>
-            <Route exact path="/" component={home} />
-            <AuthRoute
-              exact
-              path="/signup"
-              component={signup}
-              authenticated={authenticated}
-            />
-            <AuthRoute
-              exact
-              path="/login"
-              component={login}
-              authenticated={authenticated}
-            />
-          </Switch>
-        </div>
-      </Router>
-    </div>
+    <Provider store={store}>
+      <div className="App">
+        <Router>
+          <Navbar authenticated={authenticated} />
+          <div className="container">
+            <Switch>
+              <Route exact path="/" component={home} />
+              <AuthRoute
+                exact
+                path="/signup"
+                component={signup}
+                authenticated={authenticated}
+              />
+              <AuthRoute
+                exact
+                path="/login"
+                component={login}
+                authenticated={authenticated}
+              />
+            </Switch>
+          </div>
+        </Router>
+      </div>
+    </Provider>
   );
 }
 
