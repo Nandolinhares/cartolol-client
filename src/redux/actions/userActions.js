@@ -9,6 +9,7 @@ export const loginUser = (userData) => (dispatch) => {
             localStorage.setItem('FBIdToken', `Bearer ${res.data.token}`);
             axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`;
             //this.props.history.push('/');
+            dispatch(getUserData());
             dispatch({ type: CLEAR_ERRORS });
             window.location.reload(false);
         })
@@ -16,6 +17,17 @@ export const loginUser = (userData) => (dispatch) => {
             dispatch({
                 type: SET_ERRORS,
                 payload: err.response.data 
-            });//
+            });
         })
 } 
+
+export const getUserData = () => (dispatch) => {
+    axios.get('/user')
+        .then(res => {
+            dispatch({
+                type: SET_USER,
+                payload: res.data
+            })
+        })
+        .catch(err => console.error(err));
+}

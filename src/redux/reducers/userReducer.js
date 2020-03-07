@@ -8,7 +8,8 @@ import {
 } from '../types';
 
  const initialState = {
-    authenticated: false
+    authenticated: false,
+    credentials: {}
  }
 
  export default function(state = initialState, action){

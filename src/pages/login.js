@@ -5,7 +5,11 @@ import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import axios from "axios";
+import PropTypes from 'prop-types';
+import CircularProgress from '@material-ui/core/CircularProgress';
+//Redux Stuff
 import { loginUser } from '../redux/actions/userActions';
+import { connect } from 'react-redux';
 
 const styles = {
   h3: {
@@ -43,7 +47,7 @@ export class login extends Component {
             password: this.state.password
         }
 
-        loginUser(userData);
+        this.props.loginUser(userData);
     }
 
   handleChange = event => {
@@ -52,9 +56,8 @@ export class login extends Component {
     });
   };
 
-  render() {
-    const { classes } = this.props;
-    const { errors } = this.state;
+  render() { 
+    const { classes, ui: { loading, errors } } = this.props;
     return (
       <Grid container>
         <Grid item sm></Grid>
@@ -102,6 +105,9 @@ export class login extends Component {
               className={classes.button}
             >
               Login
+              {loading &&(
+                <CircularProgress className={classes.progress} />
+              )}
             </Button>
           </form>
         </Grid>
@@ -111,4 +117,21 @@ export class login extends Component {
   }
 }
 
-export default withStyles(styles)(login);
+login.propTypes = {
+  classes: PropTypes.object.isRequired,
+  loginUser: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
+  ui: PropTypes.object.isRequired
+};
+
+//O state mapeia o state global presente no combineReducers dentro da store
+const mapStateToProps = (state) => ({
+  user: state.user,
+  ui: state.ui
+});
+
+const mapActionsToProps = {
+  loginUser
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(login));
