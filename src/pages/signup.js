@@ -3,8 +3,12 @@ import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
-import axios from "axios";
 import Typography from "@material-ui/core/Typography";
+import PropTypes from 'prop-types';
+import CircularProgress from '@material-ui/core/CircularProgress';
+//Redux Stuff
+import { connect } from 'react-redux';  
+import { signupUser } from '../redux/actions/userActions';
 
 const styles = {
   form: {
@@ -34,17 +38,11 @@ export class signup extends Component {
     email: "",
     password: "",
     confirmPassword: "",
-    handle: "",
-    loading: false,
-    errors: {}
+    handle: ""
   };
 
   handleSubmit = event => {
     event.preventDefault();
-    this.setState({
-      loading: true
-    });
-
     const newUser = {
       name: this.state.name,
       email: this.state.email,
@@ -53,26 +51,7 @@ export class signup extends Component {
       handle: this.state.handle
     };
 
-    axios
-      .post("/signup", newUser)
-      .then(res => {
-        console.log(res.data);
-        localStorage.setItem("FBIdToken", `Bearer ${res.data.token}`);
-        axios.defaults.headers.common[
-          "Authorization"
-        ] = `Bearer ${res.data.token}`;
-        this.setState({
-          loading: false
-        });
-        this.props.history.push("/");
-        console.log(res.data.token);
-      })
-      .catch(err => {
-        this.setState({
-          errors: err.response.data,
-          loading: false
-        });
-      });
+    this.props.signupUser(newUser, this.props.history);
   };
 
   handleChange = event => {
@@ -82,8 +61,8 @@ export class signup extends Component {
   };
 
   render() {
-    const { classes } = this.props;
-    const { errors, loading } = this.state;
+    const { classes, ui: { loading, errors } } = this.props;
+
     return (
       <Grid container>
         <Grid item sm></Grid>
@@ -167,6 +146,9 @@ export class signup extends Component {
               type="submit"
             >
               Cadastrar
+              {loading &&(
+                <CircularProgress className={classes.progress} />
+              )}
             </Button>
           </form>
         </Grid>
@@ -176,4 +158,20 @@ export class signup extends Component {
   }
 }
 
-export default withStyles(styles)(signup);
+signup.propTypes = {
+  classes: PropTypes.object.isRequired,
+  signupUser: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
+  ui: PropTypes.object.isRequired
+}
+
+const mapStateToProps = (state) => ({
+  user: state.user,
+  ui: state.ui
+});
+
+const mapActionsToProps = {
+  signupUser
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(signup));

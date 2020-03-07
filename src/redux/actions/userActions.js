@@ -1,17 +1,16 @@
-import { SET_USER, SET_ERRORS, CLEAR_ERRORS, LOADING_UI } from '../types';
+import { SET_USER, SET_ERRORS, CLEAR_ERRORS, LOADING_UI, SET_UNAUTHENTICATED } from '../types';
 import axios from 'axios';
 
-export const loginUser = (userData) => (dispatch) => {
+export const loginUser = (userData, history) => (dispatch) => {
     dispatch({ type: LOADING_UI });
     axios.post('/login', userData)
         .then(res => {
             console.log(res.data);
-            localStorage.setItem('FBIdToken', `Bearer ${res.data.token}`);
-            axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`;
-            //this.props.history.push('/');
+            setAuthorizationHeader(res.data.token);
             dispatch(getUserData());
             dispatch({ type: CLEAR_ERRORS });
-            window.location.reload(false);
+            history.push('/');
+            //window.location.reload(false);
         })
         .catch(err => {
             dispatch({
@@ -20,6 +19,23 @@ export const loginUser = (userData) => (dispatch) => {
             });
         })
 } 
+
+export const signupUser = (newUser, history) => (dispatch) => {
+    dispatch({ type: LOADING_UI });
+    axios.post("/signup", newUser)
+      .then(res => {
+        setAuthorizationHeader(res.data.token)
+        dispatch(getUserData());
+        dispatch({ type: CLEAR_ERRORS });
+        history.push("/");
+      })
+      .catch(err => {
+        dispatch({
+            type: SET_ERRORS,
+            payload: err.response.data
+        })
+      });
+}
 
 export const getUserData = () => (dispatch) => {
     axios.get('/user')
@@ -30,4 +46,16 @@ export const getUserData = () => (dispatch) => {
             })
         })
         .catch(err => console.error(err));
+}
+
+export const setAuthorizationHeader = (token) => {
+    const FBIdToken = `Bearer ${token}`
+    localStorage.setItem('FBIdToken', FBIdToken);
+    axios.defaults.headers.common['Authorization'] = FBIdToken;
+}
+
+export const logoutUser = () => (dispatch) => {
+    localStorage.removeItem('FBIdToken');
+    delete axios.defaults.headers.commom['Authorization'];
+    dispatch({ type: SET_UNAUTHENTICATED });
 }

@@ -4,7 +4,6 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import axios from "axios";
 import PropTypes from 'prop-types';
 import CircularProgress from '@material-ui/core/CircularProgress';
 //Redux Stuff
@@ -47,7 +46,7 @@ export class login extends Component {
             password: this.state.password
         }
 
-        this.props.loginUser(userData);
+        this.props.loginUser(userData, this.props.history);
     }
 
   handleChange = event => {
