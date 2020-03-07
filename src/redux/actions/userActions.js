@@ -16,6 +16,6 @@ export const loginUser = (userData) => (dispatch) => {
             dispatch({
                 type: SET_ERRORS,
                 payload: err.response.data 
-            });
+            });//
         })
 } 
