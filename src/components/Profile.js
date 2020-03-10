@@ -12,14 +12,21 @@ import MuiLink from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 import { IconButton } from '@material-ui/core';
 import Tooltip from '@material-ui/core/Tooltip';
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 //Icons
 import CalendarToday from '@material-ui/icons/CalendarToday';
 import PersonIcon from '@material-ui/icons/Person';
 import EditIcon from '@material-ui/icons/Edit';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
+import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 //Redux Stuff
 import { connect } from 'react-redux';
-import { uploadImage } from '../redux/actions/userActions';
+import { uploadImage, updateUserDetails } from '../redux/actions/userActions';
 
 
 const styles = {
@@ -64,11 +71,25 @@ const styles = {
         '& a': {
             margin: '20px 10px'
         }
+    },
+    editIcon: {
+        cursor: 'pointer',
+    },
+    actions: {
+        margin: '0 auto'
+    },
+    textField: {
+        margin: '10px auto 10px auto'
     }
 };
 
 class Profile extends Component {
+    state = {
+        nameState: "",
+        open: false
+    }
     
+    //Lidar com editar imagem
     handleImageChange = (event) => {
         const image = event.target.files[0];
         const formData = new FormData();
@@ -80,7 +101,42 @@ class Profile extends Component {
         const fileInput = document.getElementById('imageInput');
         fileInput.click();
     }
+
+    //Editar nome
+     handleClickOpen = () => {
+        this.setState({ open: true });
+        this.mapCredentialsToState(this.props.user.credentials.name)
+    };
+
+    handleClose = () => {
+        this.setState({ open: false });
+    };
+
+    handleUserDetails = () => {
+        const userData = {
+            name: document.querySelector('#name').value
+        }
+        this.props.updateUserDetails(userData);  
+        this.handleClose();
+    }
     
+    handleChange = (event) => {
+        this.setState({
+            [event.target.name]: event.target.value
+          });
+    }
+
+    mapCredentialsToState = (name) => {
+        this.setState({
+            nameState: name ? name : ''
+        })
+    }
+
+    componentDidMount() {
+        const { user: { credentials: { name } } } = this.props;
+        this.mapCredentialsToState(name);
+      }
+
     render() {
         dayjs.extend(relativeTime);
         dayjs.locale('pt-br')
@@ -88,13 +144,12 @@ class Profile extends Component {
                 user: { 
                     credentials: { name, email, handle, createdAt, imageUrl },
                     authenticated,
-                    loading 
-                } 
+                    loading
+                }
             } = this.props;
         
         let profileMarkup = !loading ? (authenticated ? ( 
             <Paper className={classes.paper}>
-                {console.log(authenticated)}
                 <div className={classes.profile}>
                     <div className="image-wrapper">
                     <img src={imageUrl} alt="profile" className="profile-image" />
@@ -104,7 +159,7 @@ class Profile extends Component {
                             hidden="hidden"
                             onChange={this.handleImageChange}
                         />
-                        <Tooltip title="Editar foto de perfil" placement="top">
+                        <Tooltip title="Alterar foto de perfil" placement="top">
                             <IconButton onClick={this.handleEditPicture} className="button">
                                 <EditIcon color="primary" />
                             </IconButton>
@@ -117,8 +172,45 @@ class Profile extends Component {
                         </MuiLink>
                         <hr/>
                         <Fragment>
-                            <PersonIcon color="primary" /> <span>{name}</span>
+                            <PersonIcon color="primary" /> <span>{name}</span> &nbsp;
+                            <Tooltip title="Alterar nome" placement="top">
+                                <IconButton onClick={this.handleClickOpen} className="button">
+                                    <EditOutlinedIcon color="primary" className={classes.editIcon} />
+                                </IconButton>
+                            </Tooltip>
                         </Fragment>
+                        <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
+                            <DialogTitle id="form-dialog-title">Alterar informações do perfil</DialogTitle>
+                            <DialogContent>
+                                <DialogContentText>
+                                    O email e nome de usuário não podem ser alterados.
+                                </DialogContentText>
+                                    <form noValidate>
+                                    <TextField
+                                        autoFocus
+                                        margin="dense"
+                                        id="name"
+                                        name="nameState"
+                                        label="Nome"
+                                        type="text"
+                                        className={classes.textField}
+                                        onChange={this.handleChange}
+                                        value={this.state.nameState}
+                                        fullWidth
+                                    />
+                                    <TextField  disabled id="email" label="Email" className={classes.textField} defaultValue={email} fullWidth />
+                                    <TextField  disabled id="handle" label="Username" className={classes.textField} defaultValue={handle} fullWidth />
+                                    </form>
+                            </DialogContent>
+                            <DialogActions className={classes.actions}>
+                                <Button variant="contained" onClick={this.handleClose} color="secondary">
+                                    Cancelar
+                                </Button>
+                                <Button variant="contained" onClick={this.handleUserDetails} color="primary">
+                                    Atualizar
+                                </Button>
+                            </DialogActions>
+                        </Dialog>
                         <hr/>
                         <Fragment>
                             <MailOutlineIcon /> <span>{email}</span>
@@ -150,11 +242,13 @@ Profile.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-    user: state.user
+    user: state.user,
+    ui: state.ui
 });
 
 const mapActionsToProps = {
-    uploadImage
+    uploadImage,
+    updateUserDetails
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(Profile));

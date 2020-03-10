@@ -2,7 +2,7 @@ import {
     SET_USER, 
     SET_AUTHENTICATED, 
     SET_UNAUTHENTICATED,
-    LOADING_USER 
+    LOADING_USER
 } from '../types';
 
  const initialState = {
@@ -30,7 +30,7 @@ import {
             return {
                 ...state,
                 loading: true
-            }   
+            };      
         default:
             return state;    
      }
