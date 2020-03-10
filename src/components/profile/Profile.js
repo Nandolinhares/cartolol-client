@@ -12,7 +12,7 @@ import MuiLink from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 import { IconButton } from '@material-ui/core';
 import Tooltip from '@material-ui/core/Tooltip';
-import TextField from '@material-ui/core/TextField';
+import TextField from '@material-ui/core/TextField'; 
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -26,7 +26,7 @@ import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 //Redux Stuff
 import { connect } from 'react-redux';
-import { uploadImage, updateUserDetails } from '../redux/actions/userActions';
+import { uploadImage, updateUserDetails } from '../../redux/actions/userActions';
 
 
 const styles = {
@@ -118,6 +118,7 @@ class Profile extends Component {
         }
         this.props.updateUserDetails(userData);  
         this.handleClose();
+        console.log(this.props.ui.errors);
     }
     
     handleChange = (event) => {
