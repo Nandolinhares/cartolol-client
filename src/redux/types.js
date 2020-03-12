@@ -10,7 +10,10 @@ export const LOADING_UI = 'LOADING_UI';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 
 //Data types
-
+export const SET_PLAYERS = 'SET_PLAYERS';
+export const LOADING_DATA = 'LOADING_DATA';
+export const SET_PLAYER = 'SET_PLAYER';
+export const CREATE_PLAYER = 'CREATE_PLAYER';
 
 
 

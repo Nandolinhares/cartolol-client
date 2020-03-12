@@ -14,7 +14,7 @@ export const loginUser = (userData, history) => (dispatch) => {
         })
         .catch(err => {
             dispatch({
-                type: SET_ERRORS,
+                type: SET_ERRORS, 
                 payload: err.response.data 
             });
         })
@@ -63,7 +63,7 @@ export const updateUserDetails = (userData) => (dispatch) => {
 
 export const getUserData = () => (dispatch) => {
     dispatch({ type: LOADING_USER });
-    axios.get('/user')
+    axios.get('/user') 
         .then(res => {
             dispatch({
                 type: SET_USER,

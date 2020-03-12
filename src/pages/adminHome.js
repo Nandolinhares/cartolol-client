@@ -1,14 +1,32 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+//MUI Stuff
+import Grid from '@material-ui/core/Grid';
+//Redux Stuff
 import { connect } from 'react-redux';
+
+//Components
+import AddPlayer from '../components/player/AddPlayer';
 
 export class adminHome extends Component {
     render() {
-        const { user: { credentials: { administrator } } } = this.props;
+        const { 
+                user: { 
+                    credentials: { 
+                        administrator 
+                    } 
+                } 
+            } = this.props;
 
         let adminProfile = administrator ? (
             <div>
-                <h2>Olá adm</h2>
+                <Grid container>
+                    <Grid item sm></Grid>
+                    <Grid item sm>
+                        <AddPlayer />
+                    </Grid>
+                    <Grid item sm></Grid>
+                </Grid>
             </div>
         ) : (
             <div>
