@@ -5,6 +5,7 @@ import "./App.css";
 import jwtDecode from "jwt-decode";
 import axios from "axios";
 import AuthRoute from "./util/AuthRoute";
+import AdminRoute from './util/AdminRoute';
 //Redux stuffs
 import { SET_AUTHENTICATED } from './redux/types';
 import { logoutUser, getUserData } from './redux/actions/userActions';
@@ -15,6 +16,7 @@ import store from './redux/store';
 import home from "./pages/home";
 import signup from "./pages/signup";
 import login from "./pages/login";
+import adminHome from './pages/adminHome';
 
 const token = localStorage.FBIdToken;
 
@@ -50,6 +52,10 @@ function App() {
                 path="/login"
                 component={login}
               />
+              <AdminRoute 
+                exact 
+                path="/admin" 
+                component={adminHome} />
             </Switch>
           </div>
         </Router>

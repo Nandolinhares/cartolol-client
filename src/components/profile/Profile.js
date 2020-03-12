@@ -13,6 +13,7 @@ import MuiLink from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 import { IconButton } from '@material-ui/core';
 import Tooltip from '@material-ui/core/Tooltip';
+import CircularProgress from '@material-ui/core/CircularProgress';
 //Icons
 import CalendarToday from '@material-ui/icons/CalendarToday';
 
@@ -148,7 +149,7 @@ class Profile extends Component {
                     <Button variant="contained" color="secondary" component={Link} to="/signup">Signup</Button>
                 </div>
             </Paper>
-        )) : (<p>Carregando...</p>)
+        )) : (<CircularProgress />)
 
         return profileMarkup; 
     }
