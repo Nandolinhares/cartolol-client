@@ -54,7 +54,7 @@ function App() {
               />
               <AdminRoute 
                 exact 
-                path="/admin" 
+                path="/secretAdmin" 
                 component={adminHome} />
             </Switch>
           </div>

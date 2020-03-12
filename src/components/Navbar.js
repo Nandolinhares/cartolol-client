@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import { logoutUser } from '../redux/actions/userActions';
 import store from '../redux/store';
 
-export function Navbar({ user: { authenticated } }) {
+export function Navbar({ user: { authenticated, credentials: { administrator } } }) {
 
   function handleLogout(){
     window.location.href = "/login";
@@ -20,26 +20,31 @@ export function Navbar({ user: { authenticated } }) {
   return (
     <AppBar position="fixed">
       <Toolbar className="menu">
-        {authenticated ? (
+        {authenticated ? (administrator ? (<div>
+          <Button color="inherit" component={Link} to="/">
+            Home
+          </Button>
+          <Button color="inherit" component={Link} to="/secretAdmin">Admin</Button>
+          <Button color="inherit" onClick={handleLogout}>Logout</Button>
+        </div>) : ( 
+        <div>
+          <Button color="inherit" component={Link} to="/">
+            Home
+          </Button>
+          <Button color="inherit" onClick={handleLogout}>Logout</Button>
+        </div>)) : (
           <div>
-            {console.log(authenticated)}
+            <Button color="inherit" component={Link} to="/signup">
+              Signup
+            </Button>
             <Button color="inherit" component={Link} to="/">
               Home
             </Button>
-            <Button color="inherit" component={Link} to="/admin">Admin</Button>
-            <Button color="inherit" onClick={handleLogout}>Logout</Button>
+            <Button color="inherit" component={Link} to="/login">
+              Login
+            </Button>
           </div>
-        ) : (<div>
-              <Button color="inherit" component={Link} to="/signup">
-                Signup
-              </Button>
-              <Button color="inherit" component={Link} to="/">
-                Home
-              </Button>
-              <Button color="inherit" component={Link} to="/login">
-                Login
-              </Button>
-            </div>)}
+        )}
       </Toolbar>
     </AppBar>
   );
