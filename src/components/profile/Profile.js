@@ -129,7 +129,7 @@ class Profile extends Component {
                         </MuiLink>
                         <hr/>
 
-                        <EditProfile teste="teste"/>
+                        <EditProfile />
 
                         <hr/>
                         <Fragment>

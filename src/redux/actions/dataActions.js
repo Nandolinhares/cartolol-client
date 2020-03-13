@@ -19,3 +19,16 @@ export const createPlayer = (playerData) => (dispatch) => {
             });
         });
 }
+
+export const getAllPlayers = () => (dispatch) => {
+    dispatch({ type: LOADING_DATA });
+    axios.get('/players')
+        .then(res => {
+            dispatch({
+                type: SET_PLAYERS,
+                payload: res.data
+            });
+            dispatch({ type: CLEAR_ERRORS });
+        })
+        .catch(err => console.error(err));
+} 

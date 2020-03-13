@@ -1,56 +1,84 @@
 import React, { Component } from "react";
-import Grid from "@material-ui/core/Grid";
-import axios from "axios";
 import PropTypes from 'prop-types';
 import Profile from '../components/profile/Profile';
+//MUI Stuff
+import Grid from "@material-ui/core/Grid";
+import { withStyles } from '@material-ui/core/styles';
+//Components
+import Player from '../components/player/Player';
 ///Redux Stuff
 import { connect } from 'react-redux';
+import { getAllPlayers } from '../redux/actions/dataActions';
+
+const styles = {
+	h3: {
+		textAlign: 'center'
+	}
+}
 
 class home extends Component {
-  state = {
-    posts: null
-  };
 
-  componentDidMount() {
-    axios
-      .get("/posts")
-      .then(res => {
-        this.setState({
-          posts: res.data
-        });
-      })
-      .catch(err => console.log(err));
-  }
+	componentDidMount(){
+		this.props.getAllPlayers();
+	}
 
     render() { 
-      const { user: { authenticated } } = this.props;
+      const { 
+				classes,
+				user: { 
+						authenticated 
+					},
+				data: { players }	
+			} = this.props;
         return (
-            <Grid container spacing={3}>
-                <Grid item xs={12} sm={8}>
-                  {authenticated ? (
-                        (this.state.posts) ? (this.state.posts.map(post => 
-                          <div key={post.postId}> 
-                              <p>{post.name}</p>
-                              <p>{post.age}</p>
-                              <p>{post.postId}</p>            
-                          </div>
-                      )) : <p>Não há posts</p>
-                      ) : <h2>Criar conteúdo para quem não está logado</h2>}
-                </Grid>
-                <Grid item xs={12} sm={4}>
-                  <Profile />    
-                </Grid>
-            </Grid>
+			<div>
+				<Grid container spacing={3}>
+					<Grid item xs={12} sm={8}>
+					{authenticated ? (
+							<h2>Time do usuário com 5 players</h2>
+						) : <h2>Criar conteúdo para quem não está logado</h2>}
+					</Grid>
+					<Grid item xs={12} sm={4}>
+					<Profile />    
+					</Grid>
+				</Grid>
+				<Grid container spacing={3}>
+					<Grid item>
+						<h3 className={classes.h3}>Mercado</h3>
+						{authenticated ? (
+							players.length > 0 ? (
+							<Grid container spacing={2}>
+								{players.map(player => (
+								<Grid key={player.playerId} item>
+									<Player player={player} />
+								</Grid>))}
+							</Grid>
+						) : <p>Não há jogadores</p>
+							
+						) : (<div>
+							<p>Criar conteúdo pra quem não está logado</p>
+						</div>)}
+					</Grid>
+				</Grid>
+			</div>	
         )
     }
 }
 
 home.propTypes = {
-  user: PropTypes.object.isRequired
+	classes: PropTypes.object.isRequired,
+  	user: PropTypes.object.isRequired,
+  	data: PropTypes.object.isRequired,
+  	getAllPlayers: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
-  user: state.user
+  user: state.user,
+  data: state.data
 });
 
-export default connect(mapStateToProps)(home);
+const mapActionsToProps = {
+	getAllPlayers
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(home));
