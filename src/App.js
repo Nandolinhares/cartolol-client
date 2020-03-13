@@ -17,6 +17,7 @@ import home from "./pages/home";
 import signup from "./pages/signup";
 import login from "./pages/login";
 import adminHome from './pages/adminHome';
+import playerProfile from './pages/playerProfile';
 
 const token = localStorage.FBIdToken;
 
@@ -56,6 +57,10 @@ function App() {
                 exact 
                 path="/secretAdmin" 
                 component={adminHome} />
+              <AdminRoute 
+                exact 
+                path="/players/:name" 
+                component={playerProfile} />
             </Switch>
           </div>
         </Router>

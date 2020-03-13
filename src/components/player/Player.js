@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import MuiLink from '@material-ui/core/Link';
 //MUI Stuff
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
 import Tooltip from '@material-ui/core/Tooltip';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Box from '@material-ui/core/Box';
@@ -56,23 +57,28 @@ const styles = {
     },
     button: {
         color: '#fff',
-        backgroundColor: '#4caf50'
+        backgroundColor: '#4caf50',
+        '&:hover': {
+            backgroundColor: '#388e3c'
+        }
     }  
 }
 
 class Player extends Component {
     render() {
-        const { classes, player: { name, position, team, price, imageUrl } } = this.props;
+        const { classes, player: { name, position, team, price, imageUrl } } = this.props; //player que vem da props da home
         return (
             <Box>
                 <Paper className={classes.paper}>
                     <div className="image-wrapper">
                         <img src={imageUrl} alt={name} className="image-profile" />
-                    </div>
+                    </div> 
                     <div className="profile-details">
                         <span className="price">R$ {price}</span>
                         <hr/>
-                        <span className="name">{name}</span>
+                        <MuiLink component={Link} to={`/players/${name}`} color="primary" variant="h5" className="name">
+                            {name}
+                        </MuiLink>
                         <hr/>
                         <span className="position">{position}</span>
                         <hr/>

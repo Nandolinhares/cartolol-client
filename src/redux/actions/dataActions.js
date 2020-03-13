@@ -20,6 +20,15 @@ export const createPlayer = (playerData) => (dispatch) => {
         });
 }
 
+export const updatePlayerImage = (formData, playerName) => (dispatch) => {
+    dispatch({ type: LOADING_DATA });
+    axios.post(`/player/image/${playerName}`, formData)
+        .then(() => {
+            dispatch(getAllPlayers());
+        })
+        .catch(err => console.error(err));
+}
+
 export const getAllPlayers = () => (dispatch) => {
     dispatch({ type: LOADING_DATA });
     axios.get('/players')
@@ -32,3 +41,16 @@ export const getAllPlayers = () => (dispatch) => {
         })
         .catch(err => console.error(err));
 } 
+
+export const getPlayer = (playerName) => (dispatch) => {
+    dispatch({ type: LOADING_DATA });
+    axios.get(`/players/${playerName}`)
+        .then(res => {
+            dispatch({
+                type: SET_PLAYER,
+                payload: res.data
+            });
+            dispatch({ type: CLEAR_ERRORS });
+        })
+        .catch(err => console.error(err));
+}
