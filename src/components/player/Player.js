@@ -6,11 +6,14 @@ import MuiLink from '@material-ui/core/Link';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Tooltip from '@material-ui/core/Tooltip';
+import { IconButton } from '@material-ui/core';
+import EditIcon from '@material-ui/icons/Edit';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Box from '@material-ui/core/Box';
+import { Button } from '@material-ui/core';
 //Redux Stuff
 import { connect } from 'react-redux';
-import { Button } from '@material-ui/core';
+import { updatePlayerImage } from '../../redux/actions/dataActions';
 
 const styles = {
     paper: {
@@ -65,20 +68,44 @@ const styles = {
 }
 
 class Player extends Component {
+
+    handleImageChange = (event) => {
+        const image = event.target.files[0];
+        const formData = new FormData();
+        formData.append('image', image, image.name);
+        const { player: { name } } = this.props;
+        this.props.updatePlayerImage(formData, name);
+    }
+
+    handleEditPicture = (name) => {
+        const fileInput = document.getElementById(name);
+        fileInput.click();
+    }
+
     render() {
-        const { classes, player: { name, position, team, price, imageUrl } } = this.props; //player que vem da props da home
+        const { classes, credentials: { administrator }, data: { loading }, player: { name, position, team, price, imageUrl } } = this.props; //player que vem da props da home
         return (
             <Box>
                 <Paper className={classes.paper}>
                     <div className="image-wrapper">
-                        <img src={imageUrl} alt={name} className="image-profile" />
+                        <img src={imageUrl} alt={name} className="image-profile"/> 
+                        <input 
+                            type="file"
+                            id={name}
+                            hidden="hidden"
+                            onChange={this.handleImageChange}
+                        />
+                        {administrator ? 
+                        <Tooltip title="Alterar foto do jogador">
+                            <IconButton onClick={() => this.handleEditPicture(name)} className="button">
+                                <EditIcon color="primary" />
+                            </IconButton>
+                        </Tooltip> : <div></div>}
                     </div> 
                     <div className="profile-details">
                         <span className="price">R$ {price}</span>
                         <hr/>
-                        <MuiLink component={Link} to={`/players/${name}`} color="primary" variant="h5" className="name">
-                            {name}
-                        </MuiLink>
+                        <span className="name">{name}</span>
                         <hr/>
                         <span className="position">{position}</span>
                         <hr/>
@@ -94,11 +121,17 @@ class Player extends Component {
 
 Player.propTypes ={
     classes: PropTypes.object.isRequired,
-    data: PropTypes.object.isRequired
+    data: PropTypes.object.isRequired,
+    updatePlayerImage: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
+    credentials: state.user.credentials,
     data: state.data
 });
 
-export default connect(mapStateToProps)(withStyles(styles)(Player));
+const mapActionToProps = {
+    updatePlayerImage
+}
+
+export default connect(mapStateToProps, mapActionToProps)(withStyles(styles)(Player));

@@ -17,7 +17,8 @@ export default function(state = initialState, action){
         case SET_PLAYER:
             return {
                 ...state,
-                player: action.payload
+                player: action.payload,
+                loading: false
             }
         case LOADING_DATA:
             return {
