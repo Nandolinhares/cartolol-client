@@ -54,3 +54,17 @@ export const getPlayer = (playerName) => (dispatch) => {
         })
         .catch(err => console.error(err));
 }
+
+export const updatePlayerDetails = (playerData, playerName) => (dispatch) => {
+    dispatch({ type: LOADING_DATA });
+    axios.post(`/player/${playerName}`, playerData)
+        .then(() => {
+            dispatch(getAllPlayers());
+        })
+        .catch(err => {
+            dispatch({
+                type: SET_ERRORS,
+                payload: err.response.data
+            })
+        })
+}

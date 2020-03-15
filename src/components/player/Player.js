@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import MuiLink from '@material-ui/core/Link';
+import EditPlayer from './EditPlayer';
 //MUI Stuff
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Tooltip from '@material-ui/core/Tooltip';
 import { IconButton } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import Box from '@material-ui/core/Box';
 import { Button } from '@material-ui/core';
 //Redux Stuff
@@ -16,10 +16,14 @@ import { connect } from 'react-redux';
 import { updatePlayerImage } from '../../redux/actions/dataActions';
 
 const styles = {
+    box: {
+        display: 'flex',
+        alignItems: 'center'
+    },
     paper: {
         padding: 20,
         width:200,
-        height: 280,   
+        height: 310,   
         '& .image-profile':{
             width: 100,
             height: 100,
@@ -58,6 +62,11 @@ const styles = {
             }
         } 
     },
+    Mui: {
+        textDecoration: 'none !important',
+        color: "#000",
+        fontWeight: 'bold' 
+    },
     button: {
         color: '#fff',
         backgroundColor: '#4caf50',
@@ -83,12 +92,14 @@ class Player extends Component {
     }
 
     render() {
-        const { classes, credentials: { administrator }, data: { loading }, player: { name, position, team, price, imageUrl } } = this.props; //player que vem da props da home
+        const { classes, credentials: { administrator }, player: { name, position, team, price, imageUrl } } = this.props; //player que vem da props da home
         return (
-            <Box>
+            <Box className={classes.box}>
                 <Paper className={classes.paper}>
                     <div className="image-wrapper">
-                        <img src={imageUrl} alt={name} className="image-profile"/> 
+                        <MuiLink component={Link} to={`/players/${name}`} variant="subtitle1" >
+                            <img src={imageUrl} alt={name} className="image-profile"/>     
+                        </MuiLink> 
                         <input 
                             type="file"
                             id={name}
@@ -105,7 +116,11 @@ class Player extends Component {
                     <div className="profile-details">
                         <span className="price">R$ {price}</span>
                         <hr/>
-                        <span className="name">{name}</span>
+                        {administrator ? 
+                            <EditPlayer player={this.props.player} /> :
+                        <MuiLink className={classes.Mui} component={Link} to={`/players/${name}`} variant="subtitle1">
+                            {name}
+                        </MuiLink>}
                         <hr/>
                         <span className="position">{position}</span>
                         <hr/>
