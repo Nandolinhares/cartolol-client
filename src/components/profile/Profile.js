@@ -138,6 +138,7 @@ class Profile extends Component {
                         <hr/>
                         <CalendarToday color="primary" /> {' '}
                         <span>Membro {dayjs(createdAt).fromNow()}</span>
+                       
                     </div>
                 </div>
             </Paper>

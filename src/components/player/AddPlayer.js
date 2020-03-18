@@ -125,6 +125,7 @@ export class addPlayer extends Component {
                         className={classes.button}>
                             Cadastrar
                     </Button>
+                        {errors ? (<h4>{errors.message}</h4>) : (<hr />)}
                 </form>
                 </Paper>
             </div>

@@ -6,9 +6,11 @@ import Grid from "@material-ui/core/Grid";
 import { withStyles } from '@material-ui/core/styles';
 //Components
 import Player from '../components/player/Player';
+import Team from '../components/team/Team';
 ///Redux Stuff
 import { connect } from 'react-redux';
 import { getAllPlayers } from '../redux/actions/dataActions';
+import { getUserTeam } from '../redux/actions/userActions';
 
 const styles = {
 	h3: {
@@ -19,6 +21,7 @@ const styles = {
 class home extends Component {
 
 	componentDidMount(){
+		this.props.getUserTeam();	
 		this.props.getAllPlayers();
 	}
 
@@ -26,7 +29,8 @@ class home extends Component {
       const { 
 				classes,
 				user: { 
-						authenticated 
+						authenticated,
+						userTeam
 					},
 				data: { players }	
 			} = this.props;
@@ -35,7 +39,15 @@ class home extends Component {
 				<Grid container spacing={3}>
 					<Grid item xs={12} sm={8}>
 					{authenticated ? (
-							<h2>Time do usuário com 5 players</h2>
+						<Grid container spacing={2}>
+							{console.log(userTeam.length)}
+							{userTeam.length > 0 ? (
+								userTeam.map(myTeam => (
+									<Grid key={myTeam.playerId} item>
+										<Team team={myTeam} />
+									</Grid>))
+							) : <p>Você não tem jogadores</p>}
+						</Grid>
 						) : <h2>Criar conteúdo para quem não está logado</h2>}
 					</Grid>
 					<Grid item xs={12} sm={4}>
@@ -69,7 +81,8 @@ home.propTypes = {
 	classes: PropTypes.object.isRequired,
   	user: PropTypes.object.isRequired,
   	data: PropTypes.object.isRequired,
-  	getAllPlayers: PropTypes.func.isRequired
+	getAllPlayers: PropTypes.func.isRequired,
+	getUserTeam: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
@@ -78,7 +91,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapActionsToProps = {
-	getAllPlayers
+	getAllPlayers,
+	getUserTeam
 }
 
 export default connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(home));

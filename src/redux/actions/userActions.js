@@ -1,4 +1,4 @@
-import { SET_USER, SET_ERRORS, CLEAR_ERRORS, LOADING_UI, SET_UNAUTHENTICATED, LOADING_USER } from '../types';
+import { SET_USER, SET_ERRORS, CLEAR_ERRORS, LOADING_UI, SET_UNAUTHENTICATED, LOADING_USER, SET_USER_TEAM } from '../types';
 import axios from 'axios';
 
 export const loginUser = (userData, history) => (dispatch) => {
@@ -61,7 +61,18 @@ export const updateUserDetails = (userData) => (dispatch) => {
         });
 }  
 
-export const getUserData = () => (dispatch) => {
+export const getUserTeam = () => (dispatch) => {
+    axios.get('/user/team')
+        .then(res => {
+            dispatch({
+                type: SET_USER_TEAM,
+                payload: res.data
+            });
+        })
+        .catch(err => console.error(err));
+}
+
+export const getUserData = () => (dispatch) => { 
     axios.get('/user') 
         .then(res => {
             dispatch({
