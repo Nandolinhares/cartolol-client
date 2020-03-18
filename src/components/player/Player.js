@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import MuiLink from '@material-ui/core/Link';
 import EditPlayer from './EditPlayer';
+import Errors from '../Errors';
 //MUI Stuff
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -14,6 +15,7 @@ import { Button } from '@material-ui/core';
 //Redux Stuff
 import { connect } from 'react-redux';
 import { updatePlayerImage } from '../../redux/actions/dataActions';
+import { buyPlayer } from '../../redux/actions/userActions';
 
 const styles = {
     box: {
@@ -77,7 +79,7 @@ const styles = {
 }
 
 class Player extends Component {
-
+  
     handleImageChange = (event) => {
         const image = event.target.files[0];
         const formData = new FormData();
@@ -91,8 +93,13 @@ class Player extends Component {
         fileInput.click();
     }
 
+    //Comprar um player
+    handleBuyPlayer = (name) => {
+        this.props.buyPlayer(name);
+    }
+
     render() {
-        const { classes, credentials: { administrator }, player: { name, position, team, price, imageUrl } } = this.props; //player que vem da props da home
+        const { classes, credentials: { administrator }, player: { name, position, team, price, imageUrl }, ui: { errors } } = this.props; //player que vem da props da home
         return (
             <Box className={classes.box}>
                 <Paper className={classes.paper}>
@@ -126,8 +133,8 @@ class Player extends Component {
                         <hr/>
                         <span>{team}</span>
                         <hr/>
-                        <Button variant="contained" color="inherit" className={classes.button}>Comprar</Button>
-                    </div>
+                        <Button variant="contained" color="inherit" className={classes.button} onClick={() => this.handleBuyPlayer(name)}>Comprar</Button>  
+                    </div> 
                 </Paper>
             </Box>
         )
@@ -136,17 +143,21 @@ class Player extends Component {
 
 Player.propTypes ={
     classes: PropTypes.object.isRequired,
+    ui: PropTypes.object.isRequired,
     data: PropTypes.object.isRequired,
-    updatePlayerImage: PropTypes.func.isRequired
+    updatePlayerImage: PropTypes.func.isRequired,
+    buyPlayer: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
     credentials: state.user.credentials,
-    data: state.data
+    data: state.data,
+    ui: state.ui
 });
 
 const mapActionToProps = {
-    updatePlayerImage
+    updatePlayerImage,
+    buyPlayer
 }
 
 export default connect(mapStateToProps, mapActionToProps)(withStyles(styles)(Player));

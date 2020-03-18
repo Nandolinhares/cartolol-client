@@ -61,6 +61,27 @@ export const updateUserDetails = (userData) => (dispatch) => {
         });
 }  
 
+export const buyPlayer = (playerName) => (dispatch) => {
+    dispatch({ type: LOADING_USER });
+    axios.post(`/user/player/${playerName}`)
+        .then(res => {
+            dispatch({
+                type: SET_USER_TEAM,
+                payload: res.data
+            })
+            dispatch(getUserTeam());
+            dispatch(getUserData());
+            dispatch({ type: CLEAR_ERRORS });
+        })
+        .catch(err => {
+            console.error(err);
+            dispatch({
+                type: SET_ERRORS,
+                payload: err.response.data
+            })
+        })
+}
+
 export const getUserTeam = () => (dispatch) => {
     axios.get('/user/team')
         .then(res => {

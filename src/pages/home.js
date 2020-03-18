@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import Profile from '../components/profile/Profile';
+import Errors from '../components/Errors';
 //MUI Stuff
 import Grid from "@material-ui/core/Grid";
 import { withStyles } from '@material-ui/core/styles';
@@ -15,7 +16,7 @@ import { getUserTeam } from '../redux/actions/userActions';
 const styles = {
 	h3: {
 		textAlign: 'center'
-	}
+	}	
 }
 
 class home extends Component {
@@ -32,15 +33,16 @@ class home extends Component {
 						authenticated,
 						userTeam
 					},
-				data: { players }	
+				data: { players },
+				ui: { errors }	
 			} = this.props;
         return (
 			<div>
 				<Grid container spacing={3}>
 					<Grid item xs={12} sm={8}>
+					<h2 className={classes.h2}>Meu time</h2>
 					{authenticated ? (
 						<Grid container spacing={2}>
-							{console.log(userTeam.length)}
 							{userTeam.length > 0 ? (
 								userTeam.map(myTeam => (
 									<Grid key={myTeam.playerId} item>
@@ -64,6 +66,7 @@ class home extends Component {
 								<Grid key={player.playerId} item>
 									<Player player={player} />
 								</Grid>))}
+								{errors.message ? (<Errors errors={errors} />) : (<hr />)}
 							</Grid>
 						) : <p>Não há jogadores</p>
 							
@@ -87,7 +90,8 @@ home.propTypes = {
 
 const mapStateToProps = (state) => ({
   user: state.user,
-  data: state.data
+  data: state.data,
+  ui: state.ui
 });
 
 const mapActionsToProps = {

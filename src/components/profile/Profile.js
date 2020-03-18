@@ -60,6 +60,10 @@ const styles = {
             '&:hover': {
                 cursor: 'pointer'
             }
+        },
+        '& .money': {
+            color: '#4caf50',
+            fontWeight: 'bold'
         }
     },
     buttons: {
@@ -99,7 +103,7 @@ class Profile extends Component {
         dayjs.locale('pt-br')
         const { classes, 
                 user: { 
-                    credentials: { email, handle, createdAt, imageUrl },
+                    credentials: { email, handle, createdAt, imageUrl, money },
                     authenticated,
                     loading
                 }
@@ -138,7 +142,8 @@ class Profile extends Component {
                         <hr/>
                         <CalendarToday color="primary" /> {' '}
                         <span>Membro {dayjs(createdAt).fromNow()}</span>
-                       
+                       <hr />
+                       <h3 className="money">R${money}</h3>
                     </div>
                 </div>
             </Paper>
