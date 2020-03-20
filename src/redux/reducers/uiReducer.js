@@ -1,8 +1,9 @@
-import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI } from '../types';
+import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI, POSITIVE_MESSAGES } from '../types';
 
 const initialState = {
     loading: false,
-    errors: {}
+    errors: {},
+    messages: {}
 };
 
 export default function(state = initialState, action){
@@ -23,7 +24,12 @@ export default function(state = initialState, action){
             return {
                 ...state,
                 loading: true
-            };    
+            };
+        case POSITIVE_MESSAGES:
+            return {
+                ...state,
+                messages: action.payload  
+            };        
         default:
             return state;
     }

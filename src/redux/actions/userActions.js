@@ -1,4 +1,4 @@
-import { SET_USER, SET_ERRORS, CLEAR_ERRORS, LOADING_UI, SET_UNAUTHENTICATED, LOADING_USER, SET_USER_TEAM } from '../types';
+import { SET_USER, SET_ERRORS, CLEAR_ERRORS, LOADING_UI, SET_UNAUTHENTICATED, LOADING_USER, SET_USER_TEAM, POSITIVE_MESSAGES } from '../types';
 import axios from 'axios';
 
 export const loginUser = (userData, history) => (dispatch) => {
@@ -62,11 +62,11 @@ export const updateUserDetails = (userData) => (dispatch) => {
 }  
 
 export const buyPlayer = (playerName) => (dispatch) => {
-    dispatch({ type: LOADING_USER });
+    dispatch({ type: LOADING_UI });
     axios.post(`/user/player/${playerName}`)
         .then(res => {
             dispatch({
-                type: SET_USER_TEAM,
+                type: POSITIVE_MESSAGES,
                 payload: res.data
             })
             dispatch(getUserTeam());

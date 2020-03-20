@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import MuiLink from '@material-ui/core/Link';
 import EditPlayer from './EditPlayer';
-import Errors from '../Errors';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 //MUI Stuff
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -16,6 +17,7 @@ import { Button } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { updatePlayerImage } from '../../redux/actions/dataActions';
 import { buyPlayer } from '../../redux/actions/userActions';
+import Information from '../Information';
 
 const styles = {
     box: {
@@ -78,8 +80,16 @@ const styles = {
     }  
 }
 
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
 class Player extends Component {
-  
+
+    state = {
+        open: false
+    }
+
     handleImageChange = (event) => {
         const image = event.target.files[0];
         const formData = new FormData();
@@ -96,10 +106,21 @@ class Player extends Component {
     //Comprar um player
     handleBuyPlayer = (name) => {
         this.props.buyPlayer(name);
+        const { ui: { errors, messages } } = this.props;
+        this.setState({ open: true })
     }
 
+    //Fechat notificação
+    handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        this.setState({ open: false })
+      };
+
     render() {
-        const { classes, credentials: { administrator }, player: { name, position, team, price, imageUrl }, ui: { errors } } = this.props; //player que vem da props da home
+        const { classes, credentials: { administrator }, player: { name, position, team, price, imageUrl }, ui: { errors, messages } } = this.props; //player que vem da props da home
         return (
             <Box className={classes.box}>
                 <Paper className={classes.paper}>
@@ -133,7 +154,16 @@ class Player extends Component {
                         <hr/>
                         <span>{team}</span>
                         <hr/>
-                        <Button variant="contained" color="inherit" className={classes.button} onClick={() => this.handleBuyPlayer(name)}>Comprar</Button>  
+                        <Button variant="contained" color="inherit" className={classes.button} onClick={() => this.handleBuyPlayer(name)}>Comprar</Button>   
+                        {errors.message ? <Snackbar open={this.state.open} autoHideDuration={6000} onClose={this.handleClose}>
+                            <Alert onClose={this.handleClose} severity="error">
+                                {errors.message}
+                            </Alert>
+                        </Snackbar> : messages.message ? <Snackbar open={this.state.open} autoHideDuration={6000} onClose={this.handleClose}>
+                            <Alert onClose={this.handleClose} severity="success">
+                                {messages.message}
+                            </Alert>
+                        </Snackbar> : <div></div> }
                     </div> 
                 </Paper>
             </Box>

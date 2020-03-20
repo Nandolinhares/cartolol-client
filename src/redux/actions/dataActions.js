@@ -60,6 +60,7 @@ export const updatePlayerDetails = (playerData, playerName) => (dispatch) => {
     axios.post(`/player/${playerName}`, playerData)
         .then(() => {
             dispatch(getAllPlayers());
+            window.location.reload(false);
         })
         .catch(err => {
             dispatch({

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import Profile from '../components/profile/Profile';
-import Errors from '../components/Errors';
+import Information from '../components/Information';
 //MUI Stuff
 import Grid from "@material-ui/core/Grid";
 import { withStyles } from '@material-ui/core/styles';
@@ -34,7 +34,7 @@ class home extends Component {
 						userTeam
 					},
 				data: { players },
-				ui: { errors }	
+				ui: { errors, messages }
 			} = this.props;
         return (
 			<div>
@@ -65,8 +65,7 @@ class home extends Component {
 								{players.map(player => (
 								<Grid key={player.playerId} item>
 									<Player player={player} />
-								</Grid>))}
-								{errors.message ? (<Errors errors={errors} />) : (<hr />)}
+								</Grid>))}	
 							</Grid>
 						) : <p>Não há jogadores</p>
 							

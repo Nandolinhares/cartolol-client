@@ -9,6 +9,7 @@ export const SET_USER_TEAM = 'SET_USER_TEAM';
 export const SET_ERRORS = 'SET_ERRORS';
 export const LOADING_UI = 'LOADING_UI';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
+export const POSITIVE_MESSAGES = 'POSITIVE_MESSAGES';
 
 //Data types
 export const SET_PLAYERS = 'SET_PLAYERS';
