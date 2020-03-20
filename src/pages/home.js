@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import Profile from '../components/profile/Profile';
-import Information from '../components/Information';
 //MUI Stuff
 import Grid from "@material-ui/core/Grid";
 import { withStyles } from '@material-ui/core/styles';
@@ -33,8 +32,7 @@ class home extends Component {
 						authenticated,
 						userTeam
 					},
-				data: { players },
-				ui: { errors, messages }
+				data: { players }
 			} = this.props;
         return (
 			<div>

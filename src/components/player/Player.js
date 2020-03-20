@@ -17,7 +17,6 @@ import { Button } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { updatePlayerImage } from '../../redux/actions/dataActions';
 import { buyPlayer } from '../../redux/actions/userActions';
-import Information from '../Information';
 
 const styles = {
     box: {
@@ -106,11 +105,10 @@ class Player extends Component {
     //Comprar um player
     handleBuyPlayer = (name) => {
         this.props.buyPlayer(name);
-        const { ui: { errors, messages } } = this.props;
         this.setState({ open: true })
     }
 
-    //Fechat notificação
+    //Fechar notificação
     handleClose = (event, reason) => {
         if (reason === 'clickaway') {
           return;
@@ -155,11 +153,12 @@ class Player extends Component {
                         <span>{team}</span>
                         <hr/>
                         <Button variant="contained" color="inherit" className={classes.button} onClick={() => this.handleBuyPlayer(name)}>Comprar</Button>   
-                        {errors.message ? <Snackbar open={this.state.open} autoHideDuration={6000} onClose={this.handleClose}>
+                        {errors.message ? 
+                        <Snackbar open={this.state.open} autoHideDuration={3500} onClose={this.handleClose}>
                             <Alert onClose={this.handleClose} severity="error">
                                 {errors.message}
                             </Alert>
-                        </Snackbar> : messages.message ? <Snackbar open={this.state.open} autoHideDuration={6000} onClose={this.handleClose}>
+                        </Snackbar> : messages.message ? <Snackbar open={this.state.open} autoHideDuration={3500} onClose={this.handleClose}>
                             <Alert onClose={this.handleClose} severity="success">
                                 {messages.message}
                             </Alert>

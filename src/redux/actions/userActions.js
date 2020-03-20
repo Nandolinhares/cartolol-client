@@ -82,6 +82,27 @@ export const buyPlayer = (playerName) => (dispatch) => {
         })
 }
 
+export const removePlayerFromUserTeam = (playerName) => (dispatch) => {
+    dispatch({ type: LOADING_UI });
+    axios.delete(`/user/${playerName}/delete`)
+        .then(res => {
+            dispatch({
+                type: POSITIVE_MESSAGES,
+                payload: res.data
+            })
+            dispatch(getUserTeam());
+            dispatch(getUserData());
+            dispatch({ type: CLEAR_ERRORS });
+        })
+        .catch(err => {
+            console.error(err);
+            dispatch({
+                type: SET_ERRORS,
+                payload: err.response.data
+            })
+        })
+}
+
 export const getUserTeam = () => (dispatch) => {
     axios.get('/user/team')
         .then(res => {
