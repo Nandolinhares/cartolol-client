@@ -11,10 +11,6 @@ const AdminRoute = ({ component: Component, credentials: { administrator }, ...r
     ></Route>
 );
 
-AdminRoute.propTypes = {
-    credentials: PropTypes.object.isRequired
-  }
-
 const mapStateToProps = (state) => ({
     credentials: state.user.credentials
 });

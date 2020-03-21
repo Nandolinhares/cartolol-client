@@ -1,6 +1,6 @@
 import {SET_PLAYERS, SET_PLAYER, LOADING_DATA, CREATE_PLAYER, CLEAR_ERRORS, SET_ERRORS} from '../types';
 import axios from 'axios';
-import { getUserTeam, getUserData } from './userActions';
+import { getUserTeam } from './userActions';
 
 export const createPlayer = (playerData) => (dispatch) => {
     dispatch({ type: LOADING_DATA });
@@ -60,8 +60,7 @@ export const updatePlayerDetails = (playerData, playerName) => (dispatch) => {
     dispatch({ type: LOADING_DATA });
     axios.post(`/player/${playerName}`, playerData)
         .then(() => {
-            dispatch(getAllPlayers());
-            
+            dispatch(getAllPlayers());    
         })
         .then(() => {
             dispatch(getUserTeam());

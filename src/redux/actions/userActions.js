@@ -61,6 +61,19 @@ export const updateUserDetails = (userData) => (dispatch) => {
         });
 }  
 
+export const updateUserPoints = () => (dispatch) => {
+    dispatch({ type: LOADING_UI });
+    axios.post('/users/updatePoints')
+        .then(res => {
+            dispatch({
+                type: POSITIVE_MESSAGES,
+                payload: res.data
+            })
+            dispatch(getUserData());
+        })
+        .catch(err => console.error(err));
+}
+
 export const buyPlayer = (playerName) => (dispatch) => {
     dispatch({ type: LOADING_UI });
     axios.post(`/user/player/${playerName}`)

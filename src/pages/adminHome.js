@@ -5,8 +5,10 @@ import Grid from '@material-ui/core/Grid';
 //Redux Stuff
 import { connect } from 'react-redux';
 
+
 //Components
 import AddPlayer from '../components/player/AddPlayer';
+import PlayerPoints from '../components/PlayerPoints';
 
 export class adminHome extends Component {
     render() {
@@ -25,7 +27,9 @@ export class adminHome extends Component {
                     <Grid item sm>
                         <AddPlayer />
                     </Grid>
-                    <Grid item sm></Grid>
+                    <Grid item sm>
+                        <PlayerPoints />
+                    </Grid>
                 </Grid>
             </div>
         ) : (

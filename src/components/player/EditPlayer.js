@@ -35,16 +35,18 @@ export class EditPlayer extends Component {
         positionState: "",
         teamState: "",
         priceState: 0,
+        pointsState: 0,
         open: false
     }
 
     componentDidMount() {
-        const { player: { name, position, team, price } } = this.props;
+        const { player: { name, position, team, price, points } } = this.props;
         this.setState({
             nameState: name,
             positionState: position,
             teamState: team,
-            priceState: price
+            priceState: price,
+            pointsState: points
         })
     }
 
@@ -68,7 +70,8 @@ export class EditPlayer extends Component {
             name: this.state.nameState,
             position: this.state.positionState,
             team: this.state.teamState,
-            price: Number(this.state.priceState)
+            price: Number(this.state.priceState),
+            points: Number(this.state.pointsState)
         }
 
         this.props.updatePlayerDetails(playerDetails, playerName);
@@ -137,6 +140,16 @@ export class EditPlayer extends Component {
                                 className={classes.textField}
                                 onChange={this.handleChange}
                                 value={this.state.priceState}
+                                fullWidth
+                            />
+                            <TextField 
+                                id="points"
+                                name="pointsState"
+                                label="Pontos"
+                                type="number"
+                                className={classes.textField}
+                                onChange={this.handleChange}
+                                value={this.state.pointsState}
                                 fullWidth
                             />
                             </form>

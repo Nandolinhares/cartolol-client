@@ -26,7 +26,7 @@ const styles = {
     paper: {
         padding: 20,
         width:200,
-        height: 310,   
+        height: 380,   
         '& .image-profile':{
             width: 100,
             height: 100,
@@ -76,6 +76,13 @@ const styles = {
         '&:hover': {
             backgroundColor: '#388e3c'
         }
+    },
+    points: {
+        color: "#037ffc",
+        fontWeight: 'bold',
+        fontSize: 40,
+        margin: 0,
+        textAlign: 'center'
     }  
 }
 
@@ -118,7 +125,7 @@ class Player extends Component {
       };
 
     render() {
-        const { classes, credentials: { administrator }, player: { name, position, team, price, imageUrl }, ui: { errors, messages } } = this.props; //player que vem da props da home
+        const { classes, credentials: { administrator }, player: { name, position, team, price, imageUrl, points }, ui: { errors, messages } } = this.props; //player que vem da props da home
         return (
             <Box className={classes.box}>
                 <Paper className={classes.paper}>
@@ -153,6 +160,8 @@ class Player extends Component {
                         <span>{team}</span>
                         <hr/>
                         <Button variant="contained" color="inherit" className={classes.button} onClick={() => this.handleBuyPlayer(name)}>Comprar</Button>   
+                        <hr/>
+                        <h2 className={classes.points}>+{points}</h2>
                         {errors.message ? 
                         <Snackbar open={this.state.open} autoHideDuration={3500} onClose={this.handleClose}>
                             <Alert onClose={this.handleClose} severity="error">

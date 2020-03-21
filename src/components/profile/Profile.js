@@ -80,6 +80,10 @@ const styles = {
     },
     textField: {
         margin: '10px auto 10px auto'
+    },
+    points: {
+        fontWeight: 'bold',
+        color: "#037ffc"
     }
 };
 
@@ -103,7 +107,7 @@ class Profile extends Component {
         dayjs.locale('pt-br')
         const { classes, 
                 user: { 
-                    credentials: { email, handle, createdAt, imageUrl, money },
+                    credentials: { email, handle, createdAt, imageUrl, money, points },
                     authenticated,
                     loading
                 }
@@ -144,6 +148,8 @@ class Profile extends Component {
                         <span>Membro {dayjs(createdAt).fromNow()}</span>
                        <hr />
                        <h3 className="money">R${money}</h3>
+                       <h3>Pontuação da semana</h3>
+                       <h2 className={classes.points}>{points}</h2>
                     </div>
                 </div>
             </Paper>
