@@ -10,14 +10,13 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-//Redux Stuff
 import { useSelector , useDispatch } from 'react-redux';
-import { updateUserPoints } from '../redux/actions/userActions';
+import { resetPoints } from '../../redux/actions/userActions';
 
 const useStyles = makeStyles({
     paper: {
         padding: 20,
-        marginLeft: '52px',
+        marginRight: '52px',
         textAlign: 'center',
         '& .h3': { textAlign: 'center' },
     },
@@ -34,7 +33,7 @@ function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-function PlayerPoints() {
+export default function ResetPoints() {
     const classes = useStyles();
     const dispatch = useDispatch();
     const { errors, messages } = useSelector(state => state.ui);
@@ -42,8 +41,8 @@ function PlayerPoints() {
     const [open, setOpen] = useState(false);
     const [confirm, setConfirm] = useState(false);
 
-    const handleUpdateUserPoints = () => {
-        dispatch(updateUserPoints());
+    const handleResetUserPoints = () => {
+        dispatch(resetPoints());
         setOpen(false);
         setConfirm(true);
     }
@@ -60,9 +59,9 @@ function PlayerPoints() {
     return (
         <div>
             <Paper className={classes.paper}>
-                <h3 className="h3">Pontuação dos membros cadastrados</h3>
-                <p>Nessa aba, você poderá atualizar a pontuação semanal dos jogadores.</p>
-                <p>Antes de atualizar, lembre-se de atualizar a pontuação indiviual dos jogadores.</p>
+                <h3 className="h3">Resetar pontuação dos membros cadastrados</h3>
+                <p>Nessa aba, você poderá resetar a pontuação de todos os membros com uma ação.</p>
+                <p>Antes de resetar, lembre-se de verificar que é isso mesmo o necessário.</p>
                 <Button variant="contained" className={classes.button} onClick={handleOpen}>Atualizar</Button>
                 <Dialog
                     open={open}
@@ -70,17 +69,17 @@ function PlayerPoints() {
                     aria-labelledby="alert-dialog-title"
                     aria-describedby="alert-dialog-description"
                 >
-                    <DialogTitle id="alert-dialog-title">Deseja mesmo atualizar a pontuação dos membros?</DialogTitle>
+                    <DialogTitle id="alert-dialog-title">Deseja mesmo resetar a pontuação dos membros?</DialogTitle>
                     <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                    Antes de atualizar, lembre-se de atualizar a pontuação indiviual dos jogadores.
+                        Antes de resetar, lembre-se de verificar que é isso mesmo o necessário.
                     </DialogContentText>
                     </DialogContent>
                     <DialogActions>
                     <Button onClick={handleClose} color="primary">
                         Cancelar
                     </Button>
-                    <Button onClick={handleUpdateUserPoints} color="primary" autoFocus>
+                    <Button onClick={handleResetUserPoints} color="primary" autoFocus>
                         Atualizar
                     </Button>
                     </DialogActions>
@@ -99,5 +98,3 @@ function PlayerPoints() {
         </div>
     )
 }
-
-export default PlayerPoints;

@@ -61,6 +61,19 @@ export const updateUserDetails = (userData) => (dispatch) => {
         });
 }  
 
+export const resetPoints = () => (dispatch) => {
+    dispatch({ type: LOADING_UI });
+    axios.post('/users/reset')
+        .then(res => {
+            dispatch({
+                type: POSITIVE_MESSAGES,
+                payload: res.data
+            });
+            dispatch(getUserData());
+            dispatch({ type: CLEAR_ERRORS });
+        })
+}
+
 export const updateUserPoints = () => (dispatch) => {
     dispatch({ type: LOADING_UI });
     axios.post('/users/updatePoints')
@@ -70,6 +83,7 @@ export const updateUserPoints = () => (dispatch) => {
                 payload: res.data
             })
             dispatch(getUserData());
+            dispatch({ type: CLEAR_ERRORS });
         })
         .catch(err => console.error(err));
 }

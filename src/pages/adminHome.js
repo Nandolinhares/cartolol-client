@@ -8,7 +8,8 @@ import { connect } from 'react-redux';
 
 //Components
 import AddPlayer from '../components/player/AddPlayer';
-import PlayerPoints from '../components/PlayerPoints';
+import PlayerPoints from '../components/points/PlayerPoints';
+import ResetPoints from '../components/points/ResetPoints';
 
 export class adminHome extends Component {
     render() {
@@ -23,7 +24,9 @@ export class adminHome extends Component {
         let adminProfile = administrator ? (
             <div>
                 <Grid container>
-                    <Grid item sm></Grid>
+                    <Grid item sm>
+                        <ResetPoints />
+                    </Grid>
                     <Grid item sm>
                         <AddPlayer />
                     </Grid>
