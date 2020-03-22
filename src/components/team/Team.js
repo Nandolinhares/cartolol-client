@@ -19,7 +19,7 @@ const styles = {
     paper: {
         padding: 20,
         width:200,
-        height: 310,   
+        height: 380,   
         '& .image-profile':{
             width: 100,
             height: 100,
@@ -64,7 +64,15 @@ const styles = {
         '&:hover': {
             backgroundColor: '#ba2020'
         }
-    }
+    },
+    points: {
+        color: "#037ffc",
+        fontWeight: 'bold',
+        marginTop: 20,
+        fontSize: 40,
+        margin: 0,
+        textAlign: 'center'
+    } 
 }
 
 function Alert(props) {
@@ -93,7 +101,7 @@ export class Team extends Component {
       };
 
     render() {
-        const { classes, team: { name, position, price, imageUrl, team }, ui: { errors, messages } } = this.props;
+        const { classes, team: { name, position, price, imageUrl, team, points }, ui: { errors, messages }  } = this.props;
         return (
             <Box className={classes.box}>
                 <Paper className={classes.paper}>
@@ -110,6 +118,7 @@ export class Team extends Component {
                         <span>{team}</span>
                         <hr/>
                         <Button variant="contained" className={classes.button} onClick={() => this.removePlayer(name)}>Remover</Button>
+                        <h2 className={classes.points}>+{points}</h2>
                         {errors.message ? 
                         <Snackbar open={this.state.open} autoHideDuration={3500} onClose={this.handleClose}>
                             <Alert onClose={this.handleClose} severity="error">

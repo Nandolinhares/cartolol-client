@@ -65,6 +65,7 @@ export const updatePlayerDetails = (playerData, playerName) => (dispatch) => {
         .then(() => {
             dispatch(getUserTeam());
             window.location.reload(false);
+            dispatch(getUserTeam());
         })
         .catch(err => {
             dispatch({
