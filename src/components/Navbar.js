@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -10,21 +10,23 @@ import Grid from '@material-ui/core/Grid';
 //Redux Stuff
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../redux/actions/userActions";
-
+//Icons
+import FacebookIcon from '@material-ui/icons/Facebook';
 //Images
 import metaLogo from '../images/metaLogo2.png';
 
 const useStyles = makeStyles(theme => ({
   image: {
     width: 140,
-    padding: 20,
-    flexGrow: 1
+    padding: 20
   },
   root: {
-    flexGrow: 1
+    display: 'flex',
   },
-  menuButtons: {
-    
+  menuNavigation :{
+    display: 'flex',
+    flexGrow: 1,
+    justifyContent: 'flex-end'
   }
 }));
 
@@ -33,7 +35,7 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const {
     authenticated,
-    credentials: { administrator }
+    credentials: { administrator, handle }
   } = useSelector(state => state.user);
 
   function handleLogout() {
@@ -42,39 +44,45 @@ const Navbar = () => {
   }
 
   return (
-    <AppBar position="fixed" className={classes.root}>
-      <Toolbar className="menu">
+    <div>
+      <AppBar position="fixed">    
         {authenticated ? (
-            <div>
-              <img src={metaLogo} className={classes.image} />
-                <Button color="inherit" className="activeButton" component={Link} to="/">
-                  Home
-                </Button>
-                {administrator ? (
-                  <Button color="inherit" className="activeButton" component={Link} to="/secretAdmin">
-                    Admin
-                  </Button>
-                ) : (<span></span>)}
-                <Button color="inherit" onClick={handleLogout}>
-                  Logout
-                </Button>
-            </div>
-          ) 
-          : (
-          <div>
-            <Button color="inherit" component={Link} to="/signup">
-              Signup
-            </Button>
-            <Button color="inherit" component={Link} to="/">
-              Home
-            </Button>
-            <Button color="inherit" component={Link} to="/login">
-              Login
-            </Button>
-          </div>
-        )}
-      </Toolbar>
-    </AppBar>
+          <Toolbar className={classes.root}>
+            <img src={metaLogo} className={classes.image} />
+            <section className={classes.menuNavigation}>
+                <ul>
+                  <li><Button color="inherit" className="activeButton" component={Link} to="/">
+                    Home
+                  </Button></li>
+                  {administrator ? (
+                    <li><Button color="inherit" className="activeButton" component={Link} to="/secretAdmin">
+                      Admin
+                    </Button></li>
+                  ) : (<span></span>)}
+                  <li><Button color="inherit" onClick={handleLogout}>
+                    Logout
+                  </Button></li>
+                  <li id="barrinha">/ </li>
+                  <li className="robotoFont">BEM VINDO</li>
+                  <li className="robotoFontBold"> {handle}</li>
+                </ul>
+            </section>  
+          </Toolbar>) 
+            : (
+            <Toolbar className={classes.root}>
+              <Button color="inherit" component={Link} to="/signup">
+                Signup
+              </Button>
+              <Button color="inherit" component={Link} to="/">
+                Home
+              </Button>
+              <Button color="inherit" component={Link} to="/login">
+                Login
+              </Button>
+            </Toolbar>
+          )}
+      </AppBar>
+    </div>
   );
 };
 
