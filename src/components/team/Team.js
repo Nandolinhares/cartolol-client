@@ -18,11 +18,11 @@ const styles = {
     },
     paper: {
         padding: 20,
-        width:200,
-        height: 380,   
+        width: 140,
+        height: 280,   
         '& .image-profile':{
-            width: 100,
-            height: 100,
+            width: 80,
+            height: 80,
             objectFit: 'cover',
             maxWidth: '100%',
             borderRadius: '50%'
@@ -37,8 +37,9 @@ const styles = {
             }
         },
         '& .profile-details': {
-            marginTop: 20,
+            marginTop: 10,
             textAlign: 'center',
+            fontSize: 12 ,
             '& .span, svg': {
                 verticalAlign: 'middle'        
             },
@@ -63,13 +64,14 @@ const styles = {
         color: '#fff',
         '&:hover': {
             backgroundColor: '#ba2020'
-        }
+        },
+        fontSize: 10
     },
     points: {
         color: "#037ffc",
         fontWeight: 'bold',
-        marginTop: 20,
-        fontSize: 40,
+        marginTop: 10,
+        fontSize: 30,
         margin: 0,
         textAlign: 'center'
     } 
@@ -111,7 +113,7 @@ export class Team extends Component {
                     <div className="profile-details">
                         <span className="price">R$ {price}</span>
                         <hr/>
-                        <span>{name}</span>
+                        <span className="name">{name}</span>
                         <hr/>
                         <span className="position">{position}</span>
                         <hr/>

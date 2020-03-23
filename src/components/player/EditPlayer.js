@@ -25,6 +25,7 @@ const styles = {
     },
     editIcon: {
         cursor: 'pointer',
+        top: '50%'
     }
 }
 

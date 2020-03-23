@@ -36,10 +36,11 @@ class home extends Component {
 			} = this.props;
         return (
 			<div>
+				{authenticated ? (
+					/*Primeira parte */
 				<Grid container spacing={3}>
-					<Grid item xs={12} sm={8}>
+					<Grid item xs={12} sm={10}>
 					<h2 className={classes.h2}>Meu time</h2>
-					{authenticated ? (
 						<Grid container spacing={2}>
 							{userTeam.length > 0 ? (
 								userTeam.map(myTeam => (
@@ -48,30 +49,27 @@ class home extends Component {
 									</Grid>))
 							) : <p>Você não tem jogadores</p>}
 						</Grid>
-						) : <h2>Criar conteúdo para quem não está logado</h2>}
 					</Grid>
-					<Grid item xs={12} sm={4}>
-					<Profile />    
+					<Grid item xs={12} sm={2}>
+						<Profile />    
 					</Grid>
-				</Grid>
+				</Grid>) : (<div>Criar conteúdo para quem não está logado</div>)}
+				{authenticated ? (
+					/* Mercado */
 				<Grid container spacing={3}>
-					<Grid item>
-						<h3 className={classes.h3}>Mercado</h3>
-						{authenticated ? (
-							players.length > 0 ? (
-							<Grid container spacing={2}>
-								{players.map(player => (
-								<Grid key={player.playerId} item>
-									<Player player={player} />
-								</Grid>))}	
-							</Grid>
-						) : <p>Não há jogadores</p>
-							
-						) : (<div>
-							<p>Criar conteúdo pra quem não está logado</p>
-						</div>)}
-					</Grid>
+				<Grid item>
+					<h3 className={classes.h3}>Mercado</h3>
+					{players.length > 0 ? (
+						<Grid container spacing={2}>
+							{players.map(player => (
+							<Grid key={player.playerId} item>
+								<Player player={player} />
+							</Grid>))}	
+						</Grid>
+					) : <p>Não há jogadores</p>}
 				</Grid>
+			</Grid>
+				) : (<div>Criar conteúdo pra quem não está logado</div>)}
 			</div>	
         )
     }

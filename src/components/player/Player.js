@@ -25,11 +25,11 @@ const styles = {
     },
     paper: {
         padding: 20,
-        width:200,
-        height: 380,   
+        width:140,
+        height: 280,   
         '& .image-profile':{
-            width: 100,
-            height: 100,
+            width: 80,
+            height: 80,
             objectFit: 'cover',
             maxWidth: '100%',
             borderRadius: '50%'
@@ -39,19 +39,20 @@ const styles = {
             position: 'relative',
             '& .button': {
                 position: 'absolute',
-                top: '80%',
+                top: '52%',
                 left: '70%'
             }
         },
         '& .profile-details': {
-            marginTop: 20,
+            marginTop: 10,
             textAlign: 'center',
+            fontSize: 12,
             '& .span, svg': {
                 verticalAlign: 'middle'        
             },
             '& hr': {
                 border: 'none',
-                margin: '0 0 10px 0'
+                //margin: '0 0 10px 0'
             },
             '& .price': {
                 color: '#4caf50',
@@ -75,12 +76,13 @@ const styles = {
         backgroundColor: '#4caf50',
         '&:hover': {
             backgroundColor: '#388e3c'
-        }
+        },
+        fontSize: 10,
     },
     points: {
         color: "#037ffc",
         fontWeight: 'bold',
-        fontSize: 40,
+        fontSize: 30,
         margin: 0,
         textAlign: 'center'
     }  

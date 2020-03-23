@@ -1,14 +1,33 @@
 html,
 body{
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+    sans-serif; */
+    font-family: 'Open Sans', sans-serif;;
     background-color: rgb(245,245,245);
 }
 .container{
   margin: 80px auto 0 auto;
   max-width: 1200px;
 }
+
+/*Navbar*/
+
 .menu{
-  margin: 0 auto;
+  /*margin: 0 auto;*/
+}
+.MuiButton-label {
+  font-family: 'Open Sans', sans-serif;
+  font-style: italic;
+  font-size: 12px;
+}
+
+.MuiAppBar-colorPrimary {
+  background-color: #403351 !important;
+}
+.MuiButton-colorInherit:hover {
+  color: #f9f911;
+}
+.activeButton:focus {
+  color: #f9f911;
 }
