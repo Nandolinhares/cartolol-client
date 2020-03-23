@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
+import MuiLink from '@material-ui/core/Link';
 //import Typography from '@material-ui/core/Typography';
 import Button from "@material-ui/core/Button";
 import { makeStyles } from '@material-ui/core/styles';
@@ -12,6 +13,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../redux/actions/userActions";
 //Icons
 import FacebookIcon from '@material-ui/icons/Facebook';
+import TwitterIcon from '@material-ui/icons/Twitter';
+
 //Images
 import metaLogo from '../images/metaLogo2.png';
 
@@ -27,6 +30,9 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexGrow: 1,
     justifyContent: 'flex-end'
+  },
+  lolzetas: {
+    display: 'flex'
   }
 }));
 
@@ -35,7 +41,7 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const {
     authenticated,
-    credentials: { administrator, handle }
+    credentials: { administrator, handle, money }
   } = useSelector(state => state.user);
 
   function handleLogout() {
@@ -65,7 +71,18 @@ const Navbar = () => {
                   <li id="barrinha">/ </li>
                   <li className="robotoFont">BEM VINDO</li>
                   <li className="robotoFontBold"> {handle}</li>
+                  <li id="barrinha"> / &nbsp; </li>
                 </ul>
+                <span className="icones">
+                  <a className="individualIcon" href="https://www.facebook.com/metaesportsbr" target="_blank"><FacebookIcon style={{ fontSize: 20 }} /></a>   
+                  <TwitterIcon style={{ fontSize: 20 }}  className="individualIcon"/>              
+                </span>
+            </section>
+            <section className={classes.lolzetas}>
+              <ul className="lolzetas">
+                  <li>Lolzetas: </li>
+                  <li className="money">R$ {money}</li>
+              </ul>
             </section>  
           </Toolbar>) 
             : (

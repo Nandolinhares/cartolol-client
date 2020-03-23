@@ -18,11 +18,11 @@ const styles = {
     },
     paper: {
         padding: 20,
-        width: 140,
-        height: 280,   
+        width: 120,
+        height: 240,   
         '& .image-profile':{
-            width: 80,
-            height: 80,
+            width: 50,
+            height: 50,
             objectFit: 'cover',
             maxWidth: '100%',
             borderRadius: '50%'
@@ -40,6 +40,7 @@ const styles = {
             marginTop: 10,
             textAlign: 'center',
             fontSize: 12 ,
+            color: '#fff',
             '& .span, svg': {
                 verticalAlign: 'middle'        
             },
@@ -68,11 +69,11 @@ const styles = {
         fontSize: 10
     },
     points: {
-        color: "#037ffc",
-        fontWeight: 'bold',
+        color: "#fff",
         marginTop: 10,
         fontSize: 30,
         margin: 0,
+        fontFamily: 'Roboto Condensed, san-serif',
         textAlign: 'center'
     } 
 }
@@ -106,7 +107,7 @@ export class Team extends Component {
         const { classes, team: { name, position, price, imageUrl, team, points }, ui: { errors, messages }  } = this.props;
         return (
             <Box className={classes.box}>
-                <Paper className={classes.paper}>
+                <Paper elevation={3} className={classes.paper}>
                     <div className="image-wrapper">
                         <img src={imageUrl} alt={name} className="image-profile"/>          
                     </div> 

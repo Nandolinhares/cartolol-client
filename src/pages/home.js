@@ -15,7 +15,7 @@ import { getUserTeam } from '../redux/actions/userActions';
 const styles = {
 	h3: {
 		textAlign: 'center'
-	}	
+	}
 }
 
 class home extends Component {
@@ -39,8 +39,8 @@ class home extends Component {
 				{authenticated ? (
 					/*Primeira parte */
 				<Grid container spacing={3}>
-					<Grid item xs={12} sm={10}>
-					<h2 className={classes.h2}>Meu time</h2>
+					<Grid item xs={12} sm={9}>
+					<h2 className="h2">Meu time</h2>
 						<Grid container spacing={2}>
 							{userTeam.length > 0 ? (
 								userTeam.map(myTeam => (
@@ -50,7 +50,7 @@ class home extends Component {
 							) : <p>Você não tem jogadores</p>}
 						</Grid>
 					</Grid>
-					<Grid item xs={12} sm={2}>
+					<Grid item xs={12} sm={3}>
 						<Profile />    
 					</Grid>
 				</Grid>) : (<div>Criar conteúdo para quem não está logado</div>)}
@@ -58,7 +58,7 @@ class home extends Component {
 					/* Mercado */
 				<Grid container spacing={3}>
 				<Grid item>
-					<h3 className={classes.h3}>Mercado</h3>
+					<h3 className={classes.h3} id="mercado" >Mercado</h3>
 					{players.length > 0 ? (
 						<Grid container spacing={2}>
 							{players.map(player => (

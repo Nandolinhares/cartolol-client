@@ -27,7 +27,8 @@ import { uploadImage } from '../../redux/actions/userActions';
 
 const styles = {
     paper: {
-        padding: 20
+        padding: 20,
+        marginTop: 14
     },
     profile: {
         '& .image-wrapper': {
@@ -49,8 +50,12 @@ const styles = {
         '& .profile-details': {
             textAlign: 'center',
             fontSize: '12px',
+            color: '#fff',
             '& .span, svg': {
                 verticalAlign: 'middle'        
+            },
+            '& .muiColor': {
+                color: '#fff'
             }
         },
         '& hr': {
@@ -84,7 +89,9 @@ const styles = {
     },
     points: {
         fontWeight: 'bold',
-        color: "#037ffc"
+        color: "#037ffc",
+        fontFamily: 'Roboto condensed, san-serif',
+        fontSize: 25
     }
 };
 
@@ -127,13 +134,13 @@ class Profile extends Component {
                         />
                         <Tooltip title="Alterar foto de perfil" placement="top">
                             <IconButton onClick={this.handleEditPicture} className="button">
-                                <EditIcon color="primary" />
+                                <EditIcon className="editIcon" />
                             </IconButton>
                         </Tooltip>
                     </div>
                     <hr/>
                     <div className="profile-details">
-                        <MuiLink component={Link} to={`/users/${handle}`} color="primary" variant="h5">
+                        <MuiLink component={Link} to={`/users/${handle}`} color="primary" variant="h5" className="muiColor">
                             @{handle}
                         </MuiLink>
                         <hr/>
@@ -142,14 +149,14 @@ class Profile extends Component {
 
                         <hr/>
                         <Fragment>
-                            <MailOutlineIcon /> <span>{email}</span>
+                            <MailOutlineIcon className="iconesProfile" /> <span>{email}</span>
                         </Fragment>
                         <hr/>
-                        <CalendarToday color="primary" /> {' '}
+                        <CalendarToday className="iconesProfile" /> {' '}
                         <span>Membro {dayjs(createdAt).fromNow()}</span>
                        <hr />
                        <h3 className="money">R${money}</h3>
-                       <h3>Pontuação da semana</h3>
+                       <h3>Pontuação Total</h3>
                        <h2 className={classes.points}>{points}</h2>
                     </div>
                 </div>

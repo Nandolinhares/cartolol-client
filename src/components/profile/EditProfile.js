@@ -20,9 +20,6 @@ import { updateUserDetails } from '../../redux/actions/userActions';
 const styles = {
     textField: {
         margin: '10px auto 10px auto'
-    },
-    editIcon: {
-        cursor: 'pointer',
     }
 }
 
@@ -75,10 +72,10 @@ export class EditProfile extends Component {
         return (
             <section>
                 <Fragment>
-                    <PersonIcon color="primary" /> <span>{name}</span> &nbsp; 
+                    <PersonIcon className="iconesProfile" /> <span>{name}</span> &nbsp; 
                     <Tooltip title="Alterar nome" placement="top">   
                         <IconButton onClick={this.handleClickOpen} className="button">
-                            <EditOutlinedIcon color="primary" className={classes.editIcon} />
+                            <EditOutlinedIcon  className="editIcon" />
                         </IconButton>
                     </Tooltip>
                 </Fragment>
