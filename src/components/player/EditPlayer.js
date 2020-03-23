@@ -18,7 +18,7 @@ import { updatePlayerDetails } from '../../redux/actions/dataActions';
 const styles = {
     name: {
         textAlign: 'center',
-        marginLeft: '28%'
+        marginLeft: '10%'
     },
     textField: {
         margin: '10px auto 10px auto'

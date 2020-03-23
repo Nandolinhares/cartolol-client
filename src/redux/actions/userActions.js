@@ -88,9 +88,9 @@ export const updateUserPoints = () => (dispatch) => {
         .catch(err => console.error(err));
 }
 
-export const buyPlayer = (playerName) => (dispatch) => {
+export const buyPlayer = (playerName, playerPosition) => (dispatch) => {
     dispatch({ type: LOADING_UI });
-    axios.post(`/user/player/${playerName}`)
+    axios.post(`/user/player/${playerName}/${playerPosition}`)
         .then(res => {
             dispatch({
                 type: POSITIVE_MESSAGES,

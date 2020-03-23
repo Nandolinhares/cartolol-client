@@ -117,8 +117,8 @@ class Player extends Component {
     }
 
     //Comprar um player
-    handleBuyPlayer = (name) => {
-        this.props.buyPlayer(name);
+    handleBuyPlayer = (name, playerPosition) => {
+        this.props.buyPlayer(name, playerPosition);
         this.setState({ open: true })
     }
 
@@ -167,7 +167,7 @@ class Player extends Component {
                         <hr/>
                         <span>{team}</span>
                         <hr/>
-                        <Button variant="contained" color="inherit" className={classes.button} onClick={() => this.handleBuyPlayer(name)}>Comprar</Button>   
+                        <Button variant="contained" color="inherit" className={classes.button} onClick={() => this.handleBuyPlayer(name, position)}>Comprar</Button>   
                         <hr/>
                         <h2 className={classes.points}>+{points}</h2>
                         {errors.message ? 

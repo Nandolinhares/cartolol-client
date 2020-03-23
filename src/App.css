@@ -57,6 +57,7 @@ ul li{
 .robotoFont {
   font-family: 'Roboto Condensed', sans-serif;
   font-size: 12px;
+  color: #fff;
 }
 .lolzetas {
   font-family: 'Roboto Condensed', sans-serif;
@@ -74,6 +75,7 @@ ul li{
   font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
+  color: #fff;
 }
 
 .MuiAppBar-colorPrimary {
@@ -97,6 +99,12 @@ ul li{
 .activeButton:focus {
   color: #f9f911;
 }
+
+/* Menu mobile */
+.MuiList-root {
+  background-color: #303030;
+}
+
 /* Meu Time */
 .paperIntro {
   padding: 1px;
