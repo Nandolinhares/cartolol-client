@@ -114,3 +114,8 @@ ul li{
   width: 96%;
   box-shadow: 1px 1px 1px -2px #00ff5b,1px 1px 1px 0px #00ff5b,-2px 1px 8px 0px #00ff5b !important;
 }
+
+/* Admin */
+.marginComponents {
+  margin-top: 8% !important;
+}

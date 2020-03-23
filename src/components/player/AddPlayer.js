@@ -9,6 +9,40 @@ import Paper from '@material-ui/core/Paper';
 import { createPlayer } from '../../redux/actions/dataActions';
 import { connect } from 'react-redux';
 
+const CssTextField = withStyles({
+    root: {
+      '& label.Mui-focused': {
+        color: '#00ff5b',
+      },
+      '& .MuiInputLabel-formControl': {
+        color: '#fff'
+      },
+      '& .MuiInput-underline::before': {
+        borderBottomColor: '#fff'
+      },
+      '& .MuiInput-underline:hover:not(.Mui-disabled)::before': {
+        borderBottomColor: '#fff'
+      },
+      '& .MuiInput-underline:after': {
+        borderBottomColor: '#00ff5b',
+      },
+      '& .MuiInputBase-root': {
+        color: '#fff'
+      },
+      '& .MuiOutlinedInput-root': {
+        '& fieldset': {
+          borderColor: 'red',
+        },
+        '&:hover fieldset': {
+          borderColor: 'yellow',
+        },
+        '&.Mui-focused fieldset': {
+          borderColor: '#00ff5b',
+        }
+      },
+    },
+  })(TextField);
+
 const styles = {
     paper: {
         padding: 20
@@ -17,7 +51,8 @@ const styles = {
         textAlign: 'center'
     },
     h3: {
-        textAlign: 'center'
+        textAlign: 'center',
+        color: '#fff'
     },
     textField: {
         margin: '10px auto 10px auto'
@@ -68,7 +103,7 @@ export class addPlayer extends Component {
                 <Paper className={classes.paper}>
                 <h3 className={classes.h3}>Cadastrar Jogador</h3>
                 <form noValidate className={classes.form} onSubmit={this.handleSubmit}>
-                    <TextField 
+                    <CssTextField 
                         type="text"
                         id="name"
                         name="name"
@@ -76,11 +111,12 @@ export class addPlayer extends Component {
                         helperText={errors.name}
                         error={errors.name ? true : false}
                         className={classes.textField}
+                        color="#00ff5b"
                         onChange={this.handleChange}
                         value={this.state.name}
                         fullWidth
                     />
-                    <TextField 
+                    <CssTextField 
                         type="text"
                         id="position"
                         name="position"
@@ -93,7 +129,7 @@ export class addPlayer extends Component {
                         value={this.state.position}
                         fullWidth
                     />
-                    <TextField 
+                    <CssTextField 
                         type="Text"
                         id="team"
                         name="team"
@@ -105,7 +141,7 @@ export class addPlayer extends Component {
                         value={this.state.team}
                         fullWidth
                     />
-                    <TextField 
+                    <CssTextField 
                         type="number"
                         id="price"
                         name="price"

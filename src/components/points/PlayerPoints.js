@@ -20,6 +20,11 @@ const useStyles = makeStyles({
         marginLeft: '52px',
         textAlign: 'center',
         '& .h3': { textAlign: 'center' },
+        color: '#fff'
+    },
+    text: {
+        textAlign: 'justify',
+        fontSize: 14
     },
     button: {
         backgroundColor: "#37bd71",
@@ -61,8 +66,8 @@ function PlayerPoints() {
         <div>
             <Paper className={classes.paper}>
                 <h3 className="h3">Pontuação dos membros cadastrados</h3>
-                <p>Nessa aba, você poderá atualizar a pontuação semanal dos jogadores.</p>
-                <p>Antes de atualizar, lembre-se de atualizar a pontuação indiviual dos jogadores.</p>
+                <p className={classes.text}>Nessa aba, você poderá atualizar a pontuação semanal dos jogadores.</p>
+                <p className={classes.text}>Antes de atualizar, lembre-se de atualizar a pontuação indiviual dos jogadores.</p>
                 <Button variant="contained" className={classes.button} onClick={handleOpen}>Atualizar</Button>
                 <Dialog
                     open={open}

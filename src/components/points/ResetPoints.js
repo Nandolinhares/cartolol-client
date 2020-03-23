@@ -18,7 +18,15 @@ const useStyles = makeStyles({
         padding: 20,
         marginRight: '52px',
         textAlign: 'center',
-        '& .h3': { textAlign: 'center' },
+    },
+    h3: {
+        textAlign: 'center',
+        color: '#fff'
+    },
+    text: {
+        color: '#fff',
+        textAlign: 'justify',
+        fontSize: 14
     },
     button: {
         backgroundColor: "#37bd71",
@@ -59,9 +67,9 @@ export default function ResetPoints() {
     return (
         <div>
             <Paper className={classes.paper}>
-                <h3 className="h3">Resetar pontuação dos membros cadastrados</h3>
-                <p>Nessa aba, você poderá resetar a pontuação de todos os membros com uma ação.</p>
-                <p>Antes de resetar, lembre-se de verificar que é isso mesmo o necessário.</p>
+                <h3 className={classes.h3}>Resetar pontuação dos membros cadastrados</h3>
+                <p className={classes.text}>Nessa aba, você poderá resetar a pontuação de todos os membros com uma ação.</p>
+                <p className={classes.text}>Antes de resetar, lembre-se de verificar que é isso mesmo o necessário.</p>
                 <Button variant="contained" className={classes.button} onClick={handleOpen}>Atualizar</Button>
                 <Dialog
                     open={open}

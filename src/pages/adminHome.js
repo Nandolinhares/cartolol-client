@@ -23,7 +23,7 @@ export class adminHome extends Component {
 
         let adminProfile = administrator ? (
             <div>
-                <Grid container>
+                <Grid container spacing={3} className="marginComponents">
                     <Grid item sm>
                         <ResetPoints />
                     </Grid>
