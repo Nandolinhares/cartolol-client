@@ -25,11 +25,11 @@ const styles = {
     },
     paper: {
         padding: 20,
-        width:140,
-        height: 280,   
+        width:120,
+        height: 240,   
         '& .image-profile':{
-            width: 80,
-            height: 80,
+            width: 50,
+            height: 50,
             objectFit: 'cover',
             maxWidth: '100%',
             borderRadius: '50%'
@@ -47,6 +47,8 @@ const styles = {
             marginTop: 10,
             textAlign: 'center',
             fontSize: 12,
+            fontFamily: 'Roboto Condensed',
+            color: "#fff" ,
             '& .span, svg': {
                 verticalAlign: 'middle'        
             },
@@ -80,11 +82,14 @@ const styles = {
         fontSize: 10,
     },
     points: {
-        color: "#037ffc",
+        color: "#f9f911",
         fontWeight: 'bold',
         fontSize: 30,
         margin: 0,
         textAlign: 'center'
+    },
+    name: {
+        fontWeight: 'bold'
     }  
 }
 
@@ -144,7 +149,7 @@ class Player extends Component {
                         {administrator ? 
                         <Tooltip title="Alterar foto do jogador">
                             <IconButton onClick={() => this.handleEditPicture(name)} className="button">
-                                <EditIcon color="primary" />
+                                <EditIcon className="editIcon" />
                             </IconButton>
                         </Tooltip> : <div></div>}
                     </div> 
@@ -153,9 +158,10 @@ class Player extends Component {
                         <hr/>
                         {administrator ? 
                             <EditPlayer player={this.props.player} /> :
-                        <MuiLink className={classes.Mui} component={Link} to={`/players/${name}`} variant="subtitle1">
-                            {name}
-                        </MuiLink>}
+                            <div>
+                                <span className={classes.name}>{name}</span> <p></p>
+                            </div>
+                        }
                         <hr/>
                         <span className="position">{position}</span>
                         <hr/>

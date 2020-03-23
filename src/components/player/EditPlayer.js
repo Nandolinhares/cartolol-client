@@ -25,7 +25,9 @@ const styles = {
     },
     editIcon: {
         cursor: 'pointer',
-        top: '50%'
+        top: '50%',
+        color: '#00ff5b',
+        fontSize: 20
     }
 }
 
@@ -87,7 +89,7 @@ export class EditPlayer extends Component {
                     <span className={classes.name}>{name}</span> &nbsp; 
                     <Tooltip title="Alterar informações" placement="top">   
                         <IconButton onClick={this.handleClickOpen} className="button">
-                            <EditOutlinedIcon color="primary" className={classes.editIcon} />
+                            <EditOutlinedIcon  className={classes.editIcon} />
                         </IconButton>
                     </Tooltip>
                 </Fragment>

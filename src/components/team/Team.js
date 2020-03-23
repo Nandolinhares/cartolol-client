@@ -40,6 +40,7 @@ const styles = {
             marginTop: 10,
             textAlign: 'center',
             fontSize: 12 ,
+            fontFamily: 'Roboto Condensed',
             color: '#fff',
             '& .span, svg': {
                 verticalAlign: 'middle'        
@@ -50,7 +51,8 @@ const styles = {
             },
             '& .price': {
                 color: '#4caf50',
-                fontWeight: 'bold'
+                fontWeight: 'bold',
+                fontFamily: 'Roboto Condensed'
             },
             '& .name': {
                 fontWeight: 'bold'
@@ -69,7 +71,7 @@ const styles = {
         fontSize: 10
     },
     points: {
-        color: "#fff",
+        color: "#f9f911",
         marginTop: 10,
         fontSize: 30,
         margin: 0,

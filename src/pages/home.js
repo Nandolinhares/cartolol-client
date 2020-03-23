@@ -4,6 +4,7 @@ import Profile from '../components/profile/Profile';
 //MUI Stuff
 import Grid from "@material-ui/core/Grid";
 import { withStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
 //Components
 import Player from '../components/player/Player';
 import Team from '../components/team/Team';
@@ -14,7 +15,7 @@ import { getUserTeam } from '../redux/actions/userActions';
 
 const styles = {
 	h3: {
-		textAlign: 'center'
+		marginLeft: '14px'
 	}
 }
 
@@ -40,7 +41,9 @@ class home extends Component {
 					/*Primeira parte */
 				<Grid container spacing={3}>
 					<Grid item xs={12} sm={9}>
-					<h2 className="h2">Meu time</h2>
+						<Paper elevation={3} className="paperIntro">
+							<h2 className="h2">Meu time</h2>
+						</Paper>
 						<Grid container spacing={2}>
 							{userTeam.length > 0 ? (
 								userTeam.map(myTeam => (
@@ -58,7 +61,9 @@ class home extends Component {
 					/* Mercado */
 				<Grid container spacing={3}>
 				<Grid item>
-					<h3 className={classes.h3} id="mercado" >Mercado</h3>
+					<Paper elevation={3} className="paperIntro">
+						<h3 className={classes.h3} id="mercado" >Mercado</h3>
+					</Paper>
 					{players.length > 0 ? (
 						<Grid container spacing={2}>
 							{players.map(player => (

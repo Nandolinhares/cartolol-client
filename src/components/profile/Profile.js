@@ -89,7 +89,7 @@ const styles = {
     },
     points: {
         fontWeight: 'bold',
-        color: "#037ffc",
+        color: "#f9f911",
         fontFamily: 'Roboto condensed, san-serif',
         fontSize: 25
     }
