@@ -10,12 +10,22 @@ import Menu from '@material-ui/core/Menu';
 import MenuIcon from '@material-ui/icons/Menu';
 import IconButton from '@material-ui/core/IconButton';
 import Divider from '@material-ui/core/Divider';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import Drawer from '@material-ui/core/Drawer';
 //Redux Stuff
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../redux/actions/userActions";
 //Icons
 import FacebookIcon from '@material-ui/icons/Facebook';
 import TwitterIcon from '@material-ui/icons/Twitter';
+import HomeIcon from '@material-ui/icons/Home';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import PersonIcon from '@material-ui/icons/Person';
 
 //Images
 import metaLogo from '../images/metaLogo2.png';
@@ -53,16 +63,35 @@ const useStyles = makeStyles(theme => ({
     '&:hover': {
       backgroundColor: 'blue'
     }
+  },
+  list: {
+    width: 250,
+  },
+  IconList: {
+    color: "#fff"
+  },
+  NameList: {
+    color: "#fff"
   }
 }));
+
+function ListItemLink(props) {
+  return <ListItem button component={Link} {...props} />;
+}
 
 const Navbar = () => {
   const classes = useStyles();
 
-  const [anchorEl, setAnchorEl] = useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
+  const [open, setOpen] = useState(false);
 
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  //Menu lateral mobilw
+  const toggleDrawer = (open) => event => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+
+    setOpen(open);
+  };
 
   const dispatch = useDispatch();
   const {
@@ -75,52 +104,101 @@ const Navbar = () => {
     dispatch(logoutUser());
   }
 
-  //Funções Menu mobile
-  const handleMobileMenuOpen = event => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
-
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
-  };
+  const list = () => (
+    <div
+      className={classes.list}
+      role="presentation"
+      onClick={toggleDrawer(false)}
+      onKeyDown={toggleDrawer(false)}
+    >
+      {authenticated ? (administrator ? (
+        <div>
+          <List component="nav" aria-label="main mailbox folders">
+            <ListItem button>
+              <ListItemIcon>
+                <HomeIcon className={classes.IconList} />
+              </ListItemIcon>
+              <ListItemLink to="/">
+                <ListItemText className={classes.NameList} primary="Home" />
+              </ListItemLink>
+            </ListItem>
+            <Divider />
+            <ListItem button>
+              <ListItemIcon>
+                <SupervisorAccountIcon className={classes.IconList} />
+              </ListItemIcon>
+              <ListItemLink to="/secretAdmin">
+                <ListItemText className={classes.NameList} primary="Admin" />
+              </ListItemLink>
+            </ListItem>
+            <Divider />
+            <ListItem button>
+              <ListItemIcon>
+                <ExitToAppIcon className={classes.IconList} />
+              </ListItemIcon>
+                <ListItemText className={classes.NameList} primary="Home" onClick={handleLogout} primary="Logout" />  
+            </ListItem>
+          </List>
+          <Divider />
+        </div>
+      ) : (
+        <div>
+          <List component="nav" aria-label="main mailbox folders">
+            <ListItem button>
+              <ListItemIcon>
+                <HomeIcon className={classes.IconList} />
+              </ListItemIcon>
+              <ListItemLink to="/">
+                <ListItemText className={classes.NameList} primary="Home" />
+              </ListItemLink>
+            </ListItem>
+            <Divider />
+            <ListItem button>
+              <ListItemIcon>
+                <ExitToAppIcon className={classes.IconList} />
+              </ListItemIcon>
+                <ListItemText className={classes.NameList} primary="Home" onClick={handleLogout} primary="Logout" />  
+            </ListItem>
+          </List>
+          <Divider />
+        </div>)
+      ) : (
+        <div>
+          <List component="nav" aria-label="main mailbox folders">
+            <ListItem button>
+              <ListItemIcon>
+                <HomeIcon className={classes.IconList} />
+              </ListItemIcon>
+              <ListItemLink to="/">
+                <ListItemText className={classes.NameList} primary="Home" />
+              </ListItemLink>
+            </ListItem>
+            <Divider />
+            <ListItem button>
+              <ListItemIcon>
+                <AccountCircleIcon className={classes.IconList} />
+              </ListItemIcon>
+              <ListItemLink to="/login">
+                <ListItemText className={classes.NameList} primary="Login" />
+              </ListItemLink>
+            </ListItem>
+            <Divider />
+            <ListItem button>
+              <ListItemIcon>
+                <PersonIcon className={classes.IconList} />
+              </ListItemIcon>
+              <ListItemLink to="/signup">
+                <ListItemText className={classes.NameList} primary="Cadastrar" />
+              </ListItemLink>
+            </ListItem>
+          </List>
+          <Divider />
+        </div>
+      )}
+    </div>
+  );
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
-
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem>
-        <span className="robotoFont">BEM VINDO &nbsp;</span>
-        <span className="robotoFontBold"> {handle}</span>
-      </MenuItem>
-      <Divider />
-      <MenuItem component={Link} to="/">
-        <p className={classes.menuMobile}>Home</p>
-      </MenuItem>
-      <Divider />
-      <MenuItem component={Link} to="/secretAdmin">
-        <p className={classes.menuMobile}>Admin</p>
-      </MenuItem>
-      <Divider />
-      <MenuItem>
-        <p className={classes.menuMobile}>Logout</p>
-      </MenuItem>
-      <Divider />
-      <MenuItem>
-      <span className="icones">
-        <a className="individualIcon" href="https://www.facebook.com/metaesportsbr" target="_blank"><FacebookIcon style={{ fontSize: 20 }} /></a>   
-        <TwitterIcon style={{ fontSize: 20 }}  className="individualIcon"/>              
-      </span>
-      </MenuItem>
-    </Menu>
-  );
 
   return (
     <div>
@@ -139,7 +217,7 @@ const Navbar = () => {
                     </Button></li>
                   ) : (<span></span>)}
                   <li><Button color="inherit" onClick={handleLogout}>
-                    Logout
+                    Sair
                   </Button></li>
                   <li id="barrinha">/ </li>
                   <li className="robotoFont">BEM VINDO</li>
@@ -156,31 +234,62 @@ const Navbar = () => {
                   <li>Lolzetas: </li>
                   <li className="money">R$ {money}</li>
               </ul>
-            </section>  
+            </section>
             <div className={classes.sectionMobile}>
-              <IconButton
-                aria-label="show more"
-                aria-controls={mobileMenuId}
-                aria-haspopup="true"
-                onClick={handleMobileMenuOpen}
-                color="inherit"
-              >
-               <MenuIcon />
-              </IconButton>
-              {renderMobileMenu}
-            </div>
+                <IconButton
+                  aria-label="veja mais"
+                  aria-controls={mobileMenuId}
+                  aria-haspopup="true"
+                  onClick={toggleDrawer(true)}
+                  color="inherit"
+                >
+                <MenuIcon />
+                </IconButton>
+                <Drawer open={open} onClose={toggleDrawer(false)}>
+                  {list()}
+                </Drawer>
+              </div>        
           </Toolbar>) 
             : (
             <Toolbar className={classes.root}>
-              <Button color="inherit" component={Link} to="/signup">
-                Signup
-              </Button>
-              <Button color="inherit" component={Link} to="/">
-                Home
-              </Button>
-              <Button color="inherit" component={Link} to="/login">
-                Login
-              </Button>
+              <img src={metaLogo} className={classes.image} />
+              <section className={classes.menuNavigation}>
+                <ul>
+                  <li><Button color="inherit" component={Link} to="/signup">
+                        Cadastrar
+                      </Button>
+                  </li>
+                  <li>
+                    <Button color="inherit" component={Link} to="/">
+                       Home
+                    </Button>
+                  </li>
+                  <li>
+                    <Button color="inherit" component={Link} to="/login">
+                      Login
+                    </Button>
+                  </li>
+                  <li id="barrinha">/ &nbsp;</li>
+                </ul>
+                  <span className="icones">
+                    <a className="individualIcon" href="https://www.facebook.com/metaesportsbr" target="_blank"><FacebookIcon style={{ fontSize: 20 }} /></a>   
+                    <TwitterIcon style={{ fontSize: 20 }}  className="individualIcon"/>              
+                  </span>  
+              </section>
+              <div className={classes.sectionMobile}>
+                <IconButton
+                  aria-label="veja mais"
+                  aria-controls={mobileMenuId}
+                  aria-haspopup="true"
+                  onClick={toggleDrawer(true)}
+                  color="inherit"
+                >
+                <MenuIcon />
+                </IconButton>
+                <Drawer open={open} onClose={toggleDrawer(false)}>
+                  {list()}
+                </Drawer>
+              </div> 
             </Toolbar>
           )}
       </AppBar>

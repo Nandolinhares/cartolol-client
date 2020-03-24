@@ -101,8 +101,8 @@ ul li{
 }
 
 /* Menu mobile */
-.MuiList-root {
-  background-color: #303030;
+.MuiList-root, .MuiDrawer-paper {
+  background-color: #303030 !important;
 }
 
 /* Meu Time */

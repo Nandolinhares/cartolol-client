@@ -1,18 +1,22 @@
 import React, { Component } from "react";
-import { withStyles } from "@material-ui/core/styles";
+import { withStyles, createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import PropTypes from 'prop-types';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Paper from '@material-ui/core/Paper';
 //Redux Stuff
 import { loginUser } from '../redux/actions/userActions';
 import { connect } from 'react-redux';
 
 const styles = {
-  h3: {
-    textAlign: "center"
+  h1: {
+    fontFamily: 'Roboto Condensed',
+    fontWeight: 'bold',
+    color: '#fff',
+    marginLeft: 14
   },
   form: {
     textAlign: "center"
@@ -31,6 +35,14 @@ const styles = {
     }
   }
 };
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#00ff5b'
+    }
+  },
+});
 
 export class login extends Component {
   state = {
@@ -59,16 +71,16 @@ export class login extends Component {
     const { classes, ui: { loading, errors } } = this.props;
     return (
       <Grid container>
-        <Grid item sm></Grid>
-        <Grid item sm>
-          <Typography variant="h3" className={classes.h3}>
-            Login
-          </Typography>
+        <Grid item sm={5}>
+            <Paper elevation={3} className="paperIntro">
+              <h1 className={classes.h1}>Login</h1>
+						</Paper>
           <form
             noValidate
             onSubmit={this.handleSubmit}
             className={classes.form}
           >
+          <ThemeProvider theme={theme}>
             <TextField
               id="email"
               type="email"
@@ -79,6 +91,8 @@ export class login extends Component {
               onChange={this.handleChange}
               value={this.state.email}
               className={classes.TextField}
+              variant="outlined"
+                
               fullWidth
             />
             <TextField
@@ -91,8 +105,11 @@ export class login extends Component {
               onChange={this.handleChange}
               value={this.state.password}
               className={classes.TextField}
+              variant="outlined"
               fullWidth
             />
+          </ThemeProvider>  
+
             {errors.message && (
               <Typography variant="body2" className={classes.customError}>
                 {errors.message}
@@ -109,6 +126,9 @@ export class login extends Component {
               )}
             </Button>
           </form>
+        </Grid>
+        <Grid item sm>
+          
         </Grid>
         <Grid item sm></Grid>
       </Grid>
