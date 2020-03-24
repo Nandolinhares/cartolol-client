@@ -11,6 +11,40 @@ import Paper from '@material-ui/core/Paper';
 import { loginUser } from '../redux/actions/userActions';
 import { connect } from 'react-redux';
 
+const CssTextField = withStyles({
+  root: {
+    '& label.Mui-focused': {
+      color: '#00ff5b',
+    },
+    '& .MuiInputLabel-formControl': {
+      color: '#fff'
+    },
+    '& .MuiInput-underline::before': {
+      borderBottomColor: '#fff'
+    },
+    '& .MuiInput-underline:hover:not(.Mui-disabled)::before': {
+      borderBottomColor: '#fff'
+    },
+    '& .MuiInput-underline:after': {
+      borderBottomColor: '#00ff5b',
+    },
+    '& .MuiInputBase-root': {
+      color: '#fff'
+    },
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: '#fff',
+      },
+      '&:hover fieldset': {
+        borderColor: '#00ff5b',
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: '#00ff5b',
+      }
+    },
+  },
+})(TextField);
+
 const styles = {
   h1: {
     fontFamily: 'Roboto Condensed',
@@ -27,12 +61,19 @@ const styles = {
   button: {
     marginTop: 20,
     position: "relative",
-    backgroundColor: "#ffb74d",
+    backgroundColor: "#1bd75e",
     color: "#fff",
+    fontFamily: 'Roboto Condensed',
+    fontWeight: 'bold',
+    borderRadius: '22px',
     fontWeight: "bold",
+    padding: 12 ,
     "&:hover": {
-      background: "#ff9800"
+      background: "#00ff5b"
     }
+  },
+  paperForm: {
+    padding: 20
   }
 };
 
@@ -72,60 +113,62 @@ export class login extends Component {
     return (
       <Grid container>
         <Grid item sm={5}>
-            <Paper elevation={3} className="paperIntro">
-              <h1 className={classes.h1}>Login</h1>
-						</Paper>
-          <form
-            noValidate
-            onSubmit={this.handleSubmit}
-            className={classes.form}
-          >
-          <ThemeProvider theme={theme}>
-            <TextField
-              id="email"
-              type="email"
-              name="email"
-              label="Email"
-              helperText={errors.email}
-              error={errors.email ? true : false}
-              onChange={this.handleChange}
-              value={this.state.email}
-              className={classes.TextField}
-              variant="outlined"
-                
-              fullWidth
-            />
-            <TextField
-              id="password"
-              type="password"
-              name="password"
-              label="Senha"
-              helperText={errors.password}
-              error={errors.password ? true : false}
-              onChange={this.handleChange}
-              value={this.state.password}
-              className={classes.TextField}
-              variant="outlined"
-              fullWidth
-            />
-          </ThemeProvider>  
-
-            {errors.message && (
-              <Typography variant="body2" className={classes.customError}>
-                {errors.message}
-              </Typography>
-            )}
-            <Button
-              type="submit"
-              variant="contained"
-              className={classes.button}
+          <Paper elevation={3} className="paperIntro">
+            <h1 className={classes.h1}>Login</h1>
+          </Paper>
+          <Paper elevation={3} className={classes.paperForm}>
+            <form
+              noValidate
+              onSubmit={this.handleSubmit}
+              className={classes.form}
             >
-              Login
-              {loading &&(
-                <CircularProgress className={classes.progress} />
+              <CssTextField
+                id="email"
+                type="email"
+                name="email"
+                label="Email"
+                helperText={errors.email}
+                color="#00ff5b"
+                error={errors.email ? true : false}
+                onChange={this.handleChange}
+                value={this.state.email}
+                className={classes.TextField}
+                variant="outlined"  
+                fullWidth
+              />
+              <CssTextField
+                id="password"
+                type="password"
+                name="password"
+                label="Senha"
+                color="#00ff5b"
+                helperText={errors.password}
+                error={errors.password ? true : false}
+                onChange={this.handleChange}
+                value={this.state.password}
+                className={classes.TextField}
+                variant="outlined"
+                fullWidth
+              /> 
+
+              {errors.message && (
+                <Typography variant="body2" className={classes.customError}>
+                  {errors.message}
+                </Typography>
               )}
-            </Button>
-          </form>
+              <Button
+                type="submit"
+                variant="contained"
+                className={classes.button}
+                fullWidth
+              >
+                Login
+                {loading &&(
+                  <CircularProgress className={classes.progress} />
+                )}
+              </Button>
+            </form>
+          </Paper>
         </Grid>
         <Grid item sm>
           
