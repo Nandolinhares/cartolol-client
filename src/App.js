@@ -19,6 +19,7 @@ import signup from "./pages/signup";
 import login from "./pages/login";
 import adminHome from './pages/adminHome';
 import playerProfile from './pages/playerProfile';
+import ResetPassword from './pages/ResetPassword';
 
 const token = localStorage.FBIdToken;
 
@@ -62,6 +63,11 @@ function App() {
                 exact 
                 path="/players/:name" 
                 component={playerProfile} />
+                <Route 
+                  exact
+                  path="/resetPassword"
+                  component={ResetPassword}  
+                />
             </Switch>
           </div>
         </Router>

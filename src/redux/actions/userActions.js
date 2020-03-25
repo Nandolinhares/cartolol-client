@@ -106,6 +106,7 @@ export const buyPlayer = (playerName, playerPosition) => (dispatch) => {
                 type: SET_ERRORS,
                 payload: err.response.data
             })
+            dispatch({ type: CLEAR_ERRORS });
         })
 }
 
@@ -120,6 +121,7 @@ export const resetUserPassword = (email) => (dispatch) => {
             dispatch({ type: CLEAR_ERRORS });
         })
         .catch(err => {
+            console.error(err);
             dispatch({
                 type: SET_ERRORS,
                 payload: err.response.data
