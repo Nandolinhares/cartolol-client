@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { withStyles, createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import { Link } from 'react-router-dom';
+import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
@@ -10,6 +11,8 @@ import Paper from '@material-ui/core/Paper';
 //Redux Stuff
 import { loginUser } from '../redux/actions/userActions';
 import { connect } from 'react-redux';
+//Pages
+import { resetPassword } from './resetPassword';
 
 const CssTextField = withStyles({
   root: {
@@ -41,8 +44,8 @@ const CssTextField = withStyles({
       '&.Mui-focused fieldset': {
         borderColor: '#00ff5b',
       }
-    },
-  },
+    }
+  }
 })(TextField);
 
 const styles = {
@@ -66,7 +69,6 @@ const styles = {
     fontFamily: 'Roboto Condensed',
     fontWeight: 'bold',
     borderRadius: '22px',
-    fontWeight: "bold",
     padding: 12 ,
     "&:hover": {
       background: "#00ff5b"
@@ -74,16 +76,46 @@ const styles = {
   },
   paperForm: {
     padding: 20
-  }
-};
-
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: '#00ff5b'
+  },
+  forgotPassword: {
+    margin: 8,
+    textAlign: 'left',
+    fontSize: 14
+  },
+  forgot: {
+    color: "#f9f911",
+    fontFamily: 'Roboto Condensed',
+    textTransform: 'uppercase',
+    fontWeight: 'bold',
+    textDecoration: 'none',
+    '&:hover': {
+      color: '#00ff5b'
     }
   },
-});
+  password: {
+    color: "#fff",
+    fontFamily: 'Roboto Condensed',
+    textTransform: 'uppercase'
+  },
+  signup: {
+    fontFamily: 'Roboto Condensed',
+    textTransform: 'uppercase',
+    fontSize: 14,
+    fontWeight: 'bold',
+    textAlign: 'right',
+    marginTop: -26
+  },
+  facaSeu: {
+    color: '#fff'
+  },
+  cadastro: {
+    color: '#f9f911',
+    textDecoration: 'none',
+    '&:hover': {
+      color: '#00ff5b'
+    } 
+  }
+};
 
 export class login extends Component {
   state = {
@@ -127,8 +159,7 @@ export class login extends Component {
                 type="email"
                 name="email"
                 label="Email"
-                helperText={errors.email}
-                color="#00ff5b"
+                helperText={errors.email}         
                 error={errors.email ? true : false}
                 onChange={this.handleChange}
                 value={this.state.email}
@@ -141,7 +172,6 @@ export class login extends Component {
                 type="password"
                 name="password"
                 label="Senha"
-                color="#00ff5b"
                 helperText={errors.password}
                 error={errors.password ? true : false}
                 onChange={this.handleChange}
@@ -167,6 +197,14 @@ export class login extends Component {
                   <CircularProgress className={classes.progress} />
                 )}
               </Button>
+             <div className={classes.forgotPassword}>
+              <a className={classes.forgot} href="/resetPassword">Recuperar </a>
+              <span className={classes.password}>Senha</span>
+             </div> 
+             <div className={classes.signup}>
+              <span className={classes.facaSeu}>Faça seu </span>
+              <a className={classes.cadastro} href="/signup">Cadastro</a>
+             </div>
             </form>
           </Paper>
         </Grid>

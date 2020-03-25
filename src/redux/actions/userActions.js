@@ -109,6 +109,24 @@ export const buyPlayer = (playerName, playerPosition) => (dispatch) => {
         })
 }
 
+export const resetUserPassword = (email) => (dispatch) => {
+    dispatch({ type: LOADING_UI });
+    axios.post('/resetUserPassword', email)
+        .then(res => {
+            dispatch({
+                type: POSITIVE_MESSAGES,
+                payload: res.data
+            })
+            dispatch({ type: CLEAR_ERRORS });
+        })
+        .catch(err => {
+            dispatch({
+                type: SET_ERRORS,
+                payload: err.response.data
+            })
+        }) 
+}
+
 export const removePlayerFromUserTeam = (playerName) => (dispatch) => {
     dispatch({ type: LOADING_UI });
     axios.delete(`/user/${playerName}/delete`)

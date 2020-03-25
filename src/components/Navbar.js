@@ -134,7 +134,7 @@ const Navbar = () => {
               <ListItemIcon>
                 <ExitToAppIcon className={classes.IconList} />
               </ListItemIcon>
-                <ListItemText className={classes.NameList} primary="Home" onClick={handleLogout} primary="Logout" />  
+                <ListItemText className={classes.NameList} primary="Logout" onClick={handleLogout} />  
             </ListItem>
           </List>
           <Divider />
@@ -155,7 +155,7 @@ const Navbar = () => {
               <ListItemIcon>
                 <ExitToAppIcon className={classes.IconList} />
               </ListItemIcon>
-                <ListItemText className={classes.NameList} primary="Home" onClick={handleLogout} primary="Logout" />  
+                <ListItemText className={classes.NameList} primary="Logout" onClick={handleLogout} />  
             </ListItem>
           </List>
           <Divider />
@@ -203,7 +203,7 @@ const Navbar = () => {
       <AppBar position="fixed">    
         {authenticated ? (
           <Toolbar className={classes.root}>
-            <img src={metaLogo} className={classes.image} />
+            <img src={metaLogo} className={classes.image} alt="Meta Esports Logo" />
             <section className={classes.menuNavigation}>
                 <ul>
                   <li><Button color="inherit" className="activeButton" component={Link} to="/">
@@ -223,7 +223,7 @@ const Navbar = () => {
                   <li id="barrinha"> / &nbsp; </li>
                 </ul>
                 <span className="icones">
-                  <a className="individualIcon" href="https://www.facebook.com/metaesportsbr" target="_blank"><FacebookIcon style={{ fontSize: 20 }} /></a>   
+                  <a className="individualIcon" href="https://www.facebook.com/metaesportsbr" target="_blank" rel="noopener noreferrer"><FacebookIcon style={{ fontSize: 20 }} /></a>   
                   <TwitterIcon style={{ fontSize: 20 }}  className="individualIcon"/>              
                 </span>
             </section>
@@ -250,7 +250,7 @@ const Navbar = () => {
           </Toolbar>) 
             : (
             <Toolbar className={classes.root}>
-              <img src={metaLogo} className={classes.image} />
+              <img src={metaLogo} className={classes.image} alt="Meta Esports Logo" />
               <section className={classes.menuNavigation}>
                 <ul>
                   <li><Button color="inherit" component={Link} to="/signup">
@@ -270,7 +270,7 @@ const Navbar = () => {
                   <li id="barrinha">/ &nbsp;</li>
                 </ul>
                   <span className="icones">
-                    <a className="individualIcon" href="https://www.facebook.com/metaesportsbr" target="_blank"><FacebookIcon style={{ fontSize: 20 }} /></a>   
+                    <a className="individualIcon" href="https://www.facebook.com/metaesportsbr" target="_blank" rel="noopener noreferrer"><FacebookIcon style={{ fontSize: 20 }} /></a>   
                     <TwitterIcon style={{ fontSize: 20 }}  className="individualIcon"/>              
                   </span>  
               </section>
