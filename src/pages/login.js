@@ -106,7 +106,7 @@ const styles = {
     color: '#fff'
   },
   cadastro: {
-    color: '#f9f911',
+    color: '#f9f911', 
     textDecoration: 'none',
     '&:hover': {
       color: '#00ff5b'

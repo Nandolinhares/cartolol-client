@@ -5,12 +5,53 @@ import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import PropTypes from 'prop-types';
+import Paper from '@material-ui/core/Paper';
 import CircularProgress from '@material-ui/core/CircularProgress';
 //Redux Stuff
 import { connect } from 'react-redux';  
 import { signupUser } from '../redux/actions/userActions';
 
+const CssTextField = withStyles({
+  root: {
+    '& label.Mui-focused': {
+      color: '#00ff5b',
+    },
+    '& .MuiInputLabel-formControl': {
+      color: '#fff'
+    },
+    '& .MuiInput-underline::before': {
+      borderBottomColor: '#fff'
+    },
+    '& .MuiInput-underline:hover:not(.Mui-disabled)::before': {
+      borderBottomColor: '#fff'
+    },
+    '& .MuiInput-underline:after': {
+      borderBottomColor: '#00ff5b',
+    },
+    '& .MuiInputBase-root': {
+      color: '#fff'
+    },
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: '#fff',
+      },
+      '&:hover fieldset': {
+        borderColor: '#00ff5b',
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: '#00ff5b',
+      }
+    }
+  }
+})(TextField);
+
 const styles = {
+  h1: {
+    fontFamily: 'Roboto Condensed',
+    fontWeight: 'bold',
+    color: '#fff',
+    marginLeft: 14
+  },
   form: {
     textAlign: "center"
   },
@@ -20,15 +61,39 @@ const styles = {
   TextField: {
     margin: "10px auto 10px auto"
   },
-  Button: {
+  button: {
     marginTop: 20,
     position: "relative",
-    backgroundColor: "#ffb74d",
+    backgroundColor: "#1bd75e",
     color: "#fff",
-    fontWeight: "bold",
+    fontFamily: 'Roboto Condensed',
+    fontWeight: 'bold',
+    borderRadius: '22px',
+    padding: 12 ,
     "&:hover": {
-      background: "#ff9800"
+      background: "#00ff5b"
     }
+  },
+  paperForm: {
+    padding: 20
+  },
+  loginDiv: {
+    fontFamily: 'Roboto Condensed',
+    textTransform: 'uppercase',
+    fontSize: 14,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginTop: 26
+  },
+  fazerLogin: {
+    color: '#fff'
+  },
+  Login: {
+    color: '#f9f911', 
+    textDecoration: 'none',
+    '&:hover': {
+      color: '#00ff5b'
+    } 
   }
 };
 
@@ -65,94 +130,105 @@ export class signup extends Component {
 
     return (
       <Grid container>
-        <Grid item sm></Grid>
-        <Grid item sm>
-          <Typography variant="h3" className={classes.h3}>
-            Signup
-          </Typography>
-          <form
-            noValidate
-            onSubmit={this.handleSubmit}
-            className={classes.form}
-          >
-            <TextField
-              className={classes.TextField}
-              id="name"
-              type="text"
-              name="name"
-              label="Nome"
-              helperText={errors.name}
-              error={errors.name ? true : false}
-              onChange={this.handleChange}
-              value={this.state.name}
-              fullWidth
-            />
-            <TextField
-              className={classes.TextField}
-              id="email"
-              type="email"
-              name="email"
-              label="Email"
-              helperText={errors.email}
-              error={errors.email ? true : false}
-              onChange={this.handleChange}
-              value={this.state.email}
-              fullWidth
-            />
-            <TextField
-              className={classes.TextField}
-              id="password"
-              type="password"
-              name="password"
-              label="Senha"
-              helperText={errors.password}
-              error={errors.password ? true : false}
-              onChange={this.handleChange}
-              value={this.state.password}
-              fullWidth
-            />
-            <TextField
-              className={classes.TextField}
-              id="confirmPassword"
-              type="password"
-              name="confirmPassword"
-              label="Confirmar Senha"
-              helperText={errors.confirmPassword}
-              error={errors.confirmPassword ? true : false}
-              onChange={this.handleChange}
-              value={this.state.confirmPassword}
-              fullWidth
-            />
-            <TextField
-              className={classes.TextField}
-              id="handle"
-              type="text"
-              name="handle"
-              label="Username"
-              helperText={errors.handle}
-              error={errors.handle ? true : false}
-              onChange={this.handleChange}
-              value={this.state.handle}
-              fullWidth
-            />
-            {errors.general && (
-              <Typography variant="body2" className={classes.customError}>
-                {errors.general}
-              </Typography>
-            )}
-            <Button
-              className={classes.Button}
-              variant="contained"
-              type="submit"
+        <Grid item sm={5}>
+          <Paper elevation={3} className="paperIntro">
+            <h1 className={classes.h1}>Cadastrar</h1>
+          </Paper>
+          <Paper elevation={3} className={classes.paperForm}>
+            <form
+              noValidate
+              onSubmit={this.handleSubmit}
+              className={classes.form}
             >
-              Cadastrar
-              {loading &&(
-                <CircularProgress className={classes.progress} />
+              <CssTextField
+                className={classes.TextField}
+                id="name"
+                type="text"
+                name="name"
+                label="Nome"
+                helperText={errors.name}
+                error={errors.name ? true : false}
+                onChange={this.handleChange}
+                value={this.state.name}
+                variant="outlined"
+                fullWidth
+              />
+              <CssTextField
+                className={classes.TextField}
+                id="email"
+                type="email"
+                name="email"
+                label="Email"
+                helperText={errors.email}
+                error={errors.email ? true : false}
+                onChange={this.handleChange}
+                value={this.state.email}
+                variant="outlined"
+                fullWidth
+              />
+              <CssTextField
+                className={classes.TextField}
+                id="password"
+                type="password"
+                name="password"
+                label="Senha"
+                helperText={errors.password}
+                error={errors.password ? true : false}
+                onChange={this.handleChange}
+                value={this.state.password}
+                variant="outlined"
+                fullWidth
+              />
+              <CssTextField
+                className={classes.TextField}
+                id="confirmPassword"
+                type="password"
+                name="confirmPassword"
+                label="Confirmar Senha"
+                helperText={errors.confirmPassword}
+                error={errors.confirmPassword ? true : false}
+                onChange={this.handleChange}
+                value={this.state.confirmPassword}
+                variant="outlined"
+                fullWidth
+              />
+              <CssTextField
+                className={classes.TextField}
+                id="handle"
+                type="text"
+                name="handle"
+                label="Username"
+                helperText={errors.handle}
+                error={errors.handle ? true : false}
+                onChange={this.handleChange}
+                value={this.state.handle}
+                variant="outlined"
+                fullWidth
+              />
+              {errors.general && (
+                <Typography variant="body2" className={classes.customError}>
+                  {errors.general}
+                </Typography>
               )}
-            </Button>
-          </form>
+              <Button
+                className={classes.button}
+                variant="contained"
+                type="submit"
+                fullWidth
+              >
+                Cadastrar
+                {loading &&(
+                  <CircularProgress className={classes.progress} />
+                )}
+              </Button>
+              <div className={classes.loginDiv} >
+              <span className={classes.fazerLogin} >Já tem cadastro? </span>
+              <a className={classes.Login} href="/login">Login</a>
+             </div>
+            </form>
+          </Paper>
         </Grid>
-        <Grid item sm></Grid>
+        <Grid item sm={7}></Grid>
       </Grid>
     );
   }
