@@ -106,7 +106,6 @@ export const buyPlayer = (playerName, playerPosition) => (dispatch) => {
                 type: SET_ERRORS,
                 payload: err.response.data
             })
-            dispatch({ type: CLEAR_ERRORS });
         })
 }
 
