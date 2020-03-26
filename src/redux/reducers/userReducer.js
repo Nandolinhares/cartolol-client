@@ -3,13 +3,15 @@ import {
     SET_AUTHENTICATED, 
     SET_UNAUTHENTICATED,
     LOADING_USER,
-    SET_USER_TEAM
+    SET_USER_TEAM,
+    SET_USERS_BY_POINTS
 } from '../types';
 
  const initialState = {
     authenticated: false,
     userTeam: [],
     credentials: [],
+    users: [],
     loading: false
  }
 
@@ -43,7 +45,12 @@ import {
             return {
                 ...state,
                 loading: true
-            };      
+            };
+        case SET_USERS_BY_POINTS:
+            return {
+                ...state,
+                users: action.payload
+            }          
 
         default:
             return state;    

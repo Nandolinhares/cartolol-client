@@ -1,4 +1,15 @@
-import { SET_USER, SET_ERRORS, CLEAR_ERRORS, LOADING_UI, SET_UNAUTHENTICATED, LOADING_USER, SET_USER_TEAM, POSITIVE_MESSAGES } from '../types';
+import 
+{ 
+    SET_USER, 
+    SET_ERRORS, 
+    CLEAR_ERRORS, 
+    LOADING_UI, 
+    SET_UNAUTHENTICATED, 
+    LOADING_USER, 
+    SET_USER_TEAM, 
+    POSITIVE_MESSAGES,
+    SET_USERS_BY_POINTS 
+} from '../types';
 import axios from 'axios';
 
 export const loginUser = (userData, history) => (dispatch) => {
@@ -107,6 +118,19 @@ export const buyPlayer = (playerName, playerPosition) => (dispatch) => {
                 payload: err.response.data
             })
         })
+}
+
+export const getUserByPoints = () => (dispatch) => {
+    dispatch({ type: LOADING_UI });
+    axios.get('/users/position')
+        .then(res => {
+            dispatch({
+                type: SET_USERS_BY_POINTS,
+                payload: res.data
+            })
+            dispatch({ type: CLEAR_ERRORS });
+        })
+        .catch(err => console.error(err));
 }
 
 export const resetUserPassword = (email) => (dispatch) => {

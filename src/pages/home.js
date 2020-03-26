@@ -8,10 +8,11 @@ import Paper from '@material-ui/core/Paper';
 //Components
 import Player from '../components/player/Player';
 import Team from '../components/team/Team';
+import Users from '../components/users/Users';
 ///Redux Stuff
 import { connect } from 'react-redux';
 import { getAllPlayers } from '../redux/actions/dataActions';
-import { getUserTeam } from '../redux/actions/userActions';
+import { getUserTeam, getUserByPoints } from '../redux/actions/userActions';
 
 const styles = {
 	h3: {
@@ -24,6 +25,7 @@ class home extends Component {
 	componentDidMount(){
 		this.props.getUserTeam();	
 		this.props.getAllPlayers();
+		this.props.getUserByPoints();
 	}
 
     render() { 
@@ -31,13 +33,14 @@ class home extends Component {
 				classes,
 				user: { 
 						authenticated,
-						userTeam
+						userTeam,
+						users
 					},
 				data: { players }
 			} = this.props;
         return (
 			<div>
-				{authenticated ? (
+				{authenticated && (
 					/*Primeira parte */
 				<Grid container spacing={3}>
 					<Grid item xs={12} sm={9}>
@@ -56,8 +59,8 @@ class home extends Component {
 					<Grid item xs={12} sm={3}>
 						<Profile />    
 					</Grid>
-				</Grid>) : (<div>Criar conteúdo para quem não está logado</div>)}
-				{authenticated ? (
+				</Grid>)}
+				{authenticated && (
 					/* Mercado */
 				<Grid container spacing={3}>
 				<Grid item>
@@ -74,7 +77,21 @@ class home extends Component {
 					) : <p>Não há jogadores</p>}
 				</Grid>
 			</Grid>
-				) : (<div>Criar conteúdo pra quem não está logado</div>)}
+				)}
+			{authenticated === false && (
+				<Grid container spacing={3}>
+					<Grid item xs={12} sm={4}>
+						{users.length > 0 ? (
+							users.map(user => (
+								<Grid key={user.userId}>
+									<Users user={user} />
+								</Grid>
+							))
+						) : (<p>Não há jogadores com pontuações</p>)}	
+					</Grid>
+				</Grid>
+			)}
+
 			</div>	
         )
     }
@@ -96,7 +113,8 @@ const mapStateToProps = (state) => ({
 
 const mapActionsToProps = {
 	getAllPlayers,
-	getUserTeam
+	getUserTeam,
+	getUserByPoints
 }
 
 export default connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(home));
