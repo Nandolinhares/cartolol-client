@@ -52,6 +52,13 @@ const styles = {
     color: '#fff',
     marginLeft: 14
   },
+  h2: {
+    fontFamily: 'Roboto Condensed',
+    fontWeight: 'bold',
+    fontSize: 28,
+    color: '#fff',
+    marginLeft: 14
+  },
   form: {
     textAlign: "center"
   },
@@ -94,6 +101,16 @@ const styles = {
     '&:hover': {
       color: '#00ff5b'
     } 
+  },
+  paper: {
+    padding: 20,
+    color: '#fff',
+    fontFamily: 'Roboto Condensed',
+    textAlign: 'justify',
+    lineHeight: '1.5'
+  },
+  color: {
+    color: "#00ff5b"
   }
 };
 
@@ -129,8 +146,8 @@ export class signup extends Component {
     const { classes, ui: { loading, errors } } = this.props;
 
     return (
-      <Grid container>
-        <Grid item sm={5}>
+      <Grid container spacing={3}>
+        <Grid item sm={6}>
           <Paper elevation={3} className="paperIntro">
             <h1 className={classes.h1}>Cadastrar</h1>
           </Paper>
@@ -228,7 +245,20 @@ export class signup extends Component {
             </form>
           </Paper>
         </Grid>
-        <Grid item sm={7}></Grid>
+        <Grid item xs={12} sm={6}>
+          <Paper elevation={3} className="paperIntro2">
+            <h2 className={classes.h2}>O que é o Cartolol?</h2>
+          </Paper>
+          <Paper elevation={3} className={classes.paper}>
+            O Cartolol é uma plataforma criada pelo grupo <strong className={classes.color}>Meta Esports</strong>.
+            Nela, os membros podem escalar sua própria equipe para cada semana do CBLOL e concorrer a 
+            <strong className={classes.color}> prêmios</strong> todo mês, tendo todos os jogadores participantes,
+            que podem valorizar ou desvalorizar o preço a cada desempenho.
+            <p>Por isso, é muito importante manter sua estratégia em dia para não ficar para trás. Convide seus amigos 
+              e participem juntos da <strong className={classes.color}>liga nacional</strong> e também criem sua própria liga.
+            </p>
+          </Paper>
+        </Grid>
       </Grid>
     );
   }
