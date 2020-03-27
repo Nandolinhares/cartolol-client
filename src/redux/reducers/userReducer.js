@@ -4,7 +4,9 @@ import {
     SET_UNAUTHENTICATED,
     LOADING_USER,
     SET_USER_TEAM,
-    SET_USERS_BY_POINTS
+    SET_USERS_BY_POINTS,
+    GET_USER_PROFILE,
+    GET_USER_LEAGUES
 } from '../types';
 
  const initialState = {
@@ -12,6 +14,8 @@ import {
     userTeam: [],
     credentials: [],
     users: [],
+    user: [],
+    myLeagues: [],
     loading: false
  }
 
@@ -50,8 +54,17 @@ import {
             return {
                 ...state,
                 users: action.payload
-            }          
-
+            } 
+        case GET_USER_PROFILE:
+            return {
+                ...state,
+                user: action.payload
+            }                 
+        case GET_USER_LEAGUES:
+            return {
+                ...state,
+                myLeagues: action.payload
+            }    
         default:
             return state;    
      }

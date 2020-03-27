@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
@@ -15,6 +14,7 @@ const useStyles = makeStyles({
     }
 });
 
+//Lista de jogadores com mais pontos, limitado a 10
 export default function Users(props) {
     const classes = useStyles();
     const user = props.user;

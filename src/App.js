@@ -20,6 +20,8 @@ import login from "./pages/login";
 import adminHome from './pages/adminHome';
 import playerProfile from './pages/playerProfile';
 import ResetPassword from './pages/ResetPassword';
+import UserProfile from './pages/UserProfile';
+import MyLeagues from './pages/MyLeagues';
 
 const token = localStorage.FBIdToken;
 
@@ -63,11 +65,21 @@ function App() {
                 exact 
                 path="/players/:name" 
                 component={playerProfile} />
-                <Route 
-                  exact
-                  path="/resetPassword"
-                  component={ResetPassword}  
-                />
+              <Route 
+                exact
+                path="/resetPassword"
+                component={ResetPassword}  
+              />
+              <Route 
+                exact
+                path="/users/:handle"
+                component={UserProfile}
+              />
+              <Route 
+                exact
+                path="/:handle/ligas"
+                component={MyLeagues}
+              />
             </Switch>
           </div>
         </Router>

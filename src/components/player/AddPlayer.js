@@ -111,7 +111,6 @@ export class addPlayer extends Component {
                         helperText={errors.name}
                         error={errors.name ? true : false}
                         className={classes.textField}
-                        color="#00ff5b"
                         onChange={this.handleChange}
                         value={this.state.name}
                         fullWidth

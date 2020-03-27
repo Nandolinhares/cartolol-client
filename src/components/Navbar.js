@@ -214,6 +214,9 @@ const Navbar = () => {
                       Admin
                     </Button></li>
                   ) : (<span></span>)}
+                  <li><Button color="inherit" className="activeButton" component={Link} to={`${handle}/ligas`}>
+                    Minhas Ligas  
+                  </Button></li>
                   <li><Button color="inherit" onClick={handleLogout}>
                     Sair
                   </Button></li>

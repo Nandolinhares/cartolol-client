@@ -8,7 +8,9 @@ import
     LOADING_USER, 
     SET_USER_TEAM, 
     POSITIVE_MESSAGES,
-    SET_USERS_BY_POINTS 
+    SET_USERS_BY_POINTS,
+    GET_USER_PROFILE,
+    GET_USER_LEAGUES 
 } from '../types';
 import axios from 'axios';
 
@@ -133,6 +135,25 @@ export const getUserByPoints = () => (dispatch) => {
         .catch(err => console.error(err));
 }
 
+export const getUserProfile = (handle) => (dispatch) => {
+    dispatch({ type: LOADING_UI });
+    axios.get(`/users/profile/${handle}`)
+        .then(res => {
+            dispatch({
+                type: GET_USER_PROFILE,
+                payload: res.data
+            })
+            dispatch({ type: CLEAR_ERRORS });
+        })
+        .catch(err => {
+            console.error(err);
+            dispatch({
+                type: SET_ERRORS,
+                payload: err.response.data
+            })
+        });
+}
+
 export const resetUserPassword = (email) => (dispatch) => {
     dispatch({ type: LOADING_UI });
     axios.post('/resetUserPassword', email)
@@ -150,6 +171,26 @@ export const resetUserPassword = (email) => (dispatch) => {
                 payload: err.response.data
             })
         }) 
+}
+
+//Leagues
+export const getMyLeagues = () => (dispatch) => {
+    dispatch({ type: LOADING_UI });
+    axios.get('/user/leagues')
+        .then(res => {
+            dispatch({
+                type: GET_USER_LEAGUES,
+                payload: res.data
+            })
+            dispatch({ type: CLEAR_ERRORS });
+        })
+        .catch(err => {
+            console.error(err);
+            dispatch({
+                type: SET_ERRORS,
+                payload: err.response.data
+            })
+        })
 }
 
 export const removePlayerFromUserTeam = (playerName) => (dispatch) => {

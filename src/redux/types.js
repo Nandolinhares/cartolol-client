@@ -5,6 +5,8 @@ export const SET_USER = 'SET_USER';
 export const LOADING_USER = 'LOADING_USER';
 export const SET_USER_TEAM = 'SET_USER_TEAM';
 export const SET_USERS_BY_POINTS = 'SET_USERS_BY_POINTS';
+export const GET_USER_PROFILE = 'GET_USER_PROFILE';
+export const GET_USER_LEAGUES = 'GET_USER_LEAGUES';
 
 //UI types
 export const SET_ERRORS = 'SET_ERRORS';
