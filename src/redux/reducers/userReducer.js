@@ -63,7 +63,8 @@ import {
         case GET_USER_LEAGUES:
             return {
                 ...state,
-                myLeagues: action.payload
+                myLeagues: action.payload,
+                loading: false
             }    
         default:
             return state;    

@@ -5,6 +5,7 @@ import Profile from '../components/profile/Profile';
 import Grid from "@material-ui/core/Grid";
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
+import CircularProgress from '@material-ui/core/CircularProgress';
 //Components
 import Player from '../components/player/Player';
 import Team from '../components/team/Team';
@@ -36,61 +37,68 @@ class home extends Component {
 						userTeam,
 						users
 					},
-				data: { players }
+				data: { players },
+				ui: { loading }
 			} = this.props;
         return (
 			<div>
-				{authenticated && (
-					/*Primeira parte */
-				<Grid container spacing={3}>
-					<Grid item xs={12} sm={9}>
+				{!loading ? (
+					authenticated && (
+						/*Primeira parte */
+					<Grid container spacing={3}>
+						<Grid item xs={12} sm={9}>
+							<Paper elevation={3} className="paperIntro">
+								<h2 className="h2">Meu time</h2>
+							</Paper>
+							<Grid container spacing={2}>
+								{userTeam.length > 0 ? (
+									userTeam.map(myTeam => (
+										<Grid key={myTeam.playerId} item>
+											<Team team={myTeam} />
+										</Grid>))
+								) : <p>Você não tem jogadores</p>}
+							</Grid>
+						</Grid>
+						<Grid item xs={12} sm={3}>
+							<Profile />    
+						</Grid>
+					</Grid>)
+				) : <CircularProgress />}
+				{!loading ? (
+					authenticated && (
+						/* Mercado */
+					<Grid container spacing={3}>
+					<Grid item>
 						<Paper elevation={3} className="paperIntro">
-							<h2 className="h2">Meu time</h2>
+							<h3 className={classes.h3} id="mercado" >Mercado</h3>
 						</Paper>
-						<Grid container spacing={2}>
-							{userTeam.length > 0 ? (
-								userTeam.map(myTeam => (
-									<Grid key={myTeam.playerId} item>
-										<Team team={myTeam} />
-									</Grid>))
-							) : <p>Você não tem jogadores</p>}
-						</Grid>
-					</Grid>
-					<Grid item xs={12} sm={3}>
-						<Profile />    
-					</Grid>
-				</Grid>)}
-				{authenticated && (
-					/* Mercado */
-				<Grid container spacing={3}>
-				<Grid item>
-					<Paper elevation={3} className="paperIntro">
-						<h3 className={classes.h3} id="mercado" >Mercado</h3>
-					</Paper>
-					{players.length > 0 ? (
-						<Grid container spacing={2}>
-							{players.map(player => (
-							<Grid key={player.playerId} item>
-								<Player player={player} />
-							</Grid>))}	
-						</Grid>
-					) : <p>Não há jogadores</p>}
-				</Grid>
-			</Grid>
-				)}
-			{authenticated === false && (
-				<Grid container spacing={3}>
-					<Grid item xs={12} sm={4}>
-						{users.length > 0 ? (
-							users.map(user => (
-								<Grid key={user.userId}>
-									<Users user={user} />
-								</Grid>
-							))
-						) : (<p>Não há jogadores com pontuações</p>)}	
+						{players.length > 0 ? (
+							<Grid container spacing={2}>
+								{players.map(player => (
+								<Grid key={player.playerId} item>
+									<Player player={player} />
+								</Grid>))}	
+							</Grid>
+						) : <p>Não há jogadores</p>}
 					</Grid>
 				</Grid>
-			)}
+					)
+				) : <CircularProgress />}
+			{!loading ? (
+				authenticated === false && (
+					<Grid container spacing={3}>
+						<Grid item xs={12} sm={4}>
+							{users.length > 0 ? (
+								users.map(user => (
+									<Grid key={user.userId}>
+										<Users user={user} />
+									</Grid>
+								))
+							) : (<p>Não há jogadores com pontuações</p>)}	
+						</Grid>
+					</Grid>
+				)
+			) : <CircularProgress />}
 
 			</div>	
         )

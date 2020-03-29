@@ -72,7 +72,7 @@ function App() {
               />
               <Route 
                 exact
-                path="/users/:handle"
+                path="/:handle"
                 component={UserProfile}
               />
               <Route 
