@@ -1,4 +1,13 @@
-import {SET_PLAYERS, SET_PLAYER, LOADING_DATA, CREATE_PLAYER, CLEAR_ERRORS, SET_ERRORS} from '../types';
+import {
+    SET_PLAYERS, 
+    SET_PLAYER, 
+    LOADING_DATA, 
+    CREATE_PLAYER, 
+    CLEAR_ERRORS, 
+    CLEAR_LOADING_PLAYERS, 
+    SET_ERRORS,
+    LOADING_PLAYERS
+} from '../types';
 import axios from 'axios';
 import { getUserTeam } from './userActions';
 
@@ -31,16 +40,19 @@ export const updatePlayerImage = (formData, playerName) => (dispatch) => {
 }
 
 export const getAllPlayers = () => (dispatch) => {
-    dispatch({ type: LOADING_DATA });
+    dispatch({ type: LOADING_PLAYERS });
     axios.get('/players')
         .then(res => {
             dispatch({
                 type: SET_PLAYERS,
                 payload: res.data
             });
-            dispatch({ type: CLEAR_ERRORS });
+            dispatch({ type: CLEAR_LOADING_PLAYERS });
         })
-        .catch(err => console.error(err));
+        .catch(err => {
+            console.error(err);
+            dispatch({ type: CLEAR_LOADING_PLAYERS });
+        });
 } 
 
 export const getPlayer = (playerName) => (dispatch) => {

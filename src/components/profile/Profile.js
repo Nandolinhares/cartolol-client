@@ -121,22 +121,26 @@ class Profile extends Component {
                 }
             } = this.props;
         
-        let profileMarkup = !loading ? (authenticated ? ( 
+        let profileMarkup =  authenticated ? ( 
             <Paper className={classes.paper}>
                 <div className={classes.profile}>
                     <div className="image-wrapper">
-                    <img src={imageUrl} alt="Imagem de Perfil" className="profile-image" />
-                        <input
-                            type="file"
-                            id="imageInput"
-                            hidden="hidden"
-                            onChange={this.handleImageChange}
-                        />
-                        <Tooltip title="Alterar foto de perfil" placement="top">
-                            <IconButton onClick={this.handleEditPicture} className="button">
-                                <EditIcon className="editIcon" />
-                            </IconButton>
-                        </Tooltip>
+                        {!loading ? (
+                            <div>
+                                <img src={imageUrl} alt="Imagem de Perfil" className="profile-image" />
+                                <input
+                                    type="file"
+                                    id="imageInput"
+                                    hidden="hidden"
+                                    onChange={this.handleImageChange}
+                                />
+                                <Tooltip title="Alterar foto de perfil" placement="top">
+                                    <IconButton onClick={this.handleEditPicture} className="button">
+                                        <EditIcon className="editIcon" />
+                                    </IconButton>
+                                </Tooltip>
+                            </div>
+                        ) : (<CircularProgress />)}
                     </div>
                     <hr/>
                     <div className="profile-details">
@@ -169,7 +173,7 @@ class Profile extends Component {
                     <Button variant="contained" color="secondary" component={Link} to="/signup">Signup</Button>
                 </div>
             </Paper>
-        )) : (<CircularProgress />)
+        )
 
         return profileMarkup; 
     }

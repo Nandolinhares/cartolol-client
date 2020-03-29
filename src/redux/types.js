@@ -7,6 +7,10 @@ export const SET_USER_TEAM = 'SET_USER_TEAM';
 export const SET_USERS_BY_POINTS = 'SET_USERS_BY_POINTS';
 export const GET_USER_PROFILE = 'GET_USER_PROFILE';
 export const GET_USER_LEAGUES = 'GET_USER_LEAGUES';
+export const LOADING_POINTS = 'LOADING_POINTS';
+export const CLEAR_LOADING_POINTS = 'CLEAR_LOADING_POINTS';
+export const GET_USER_TEAM = 'GET_USER_TEAM';
+export const CLEAR_USER_TEAM = 'CLEAR_USER_TEAM';
 
 //UI types
 export const SET_ERRORS = 'SET_ERRORS';
@@ -19,6 +23,8 @@ export const SET_PLAYERS = 'SET_PLAYERS';
 export const LOADING_DATA = 'LOADING_DATA';
 export const SET_PLAYER = 'SET_PLAYER';
 export const CREATE_PLAYER = 'CREATE_PLAYER';
+export const LOADING_PLAYERS = 'LOADING_PLAYERS';
+export const CLEAR_LOADING_PLAYERS = 'CLEAR_LOADING_PLAYERS';
 
 
 

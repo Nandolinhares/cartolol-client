@@ -35,14 +35,16 @@ class home extends Component {
 				user: { 
 						authenticated,
 						userTeam,
-						users
+						users,
+						loadingPoints,
+						loadingUserTeam
 					},
-				data: { players },
+				data: { players, loadingPlayers },
 				ui: { loading }
 			} = this.props;
         return (
 			<div>
-				{!loading ? (
+				{!loadingUserTeam ? (
 					authenticated && (
 						/*Primeira parte */
 					<Grid container spacing={3}>
@@ -64,7 +66,7 @@ class home extends Component {
 						</Grid>
 					</Grid>)
 				) : <CircularProgress />}
-				{!loading ? (
+				{!loadingPlayers ? (
 					authenticated && (
 						/* Mercado */
 					<Grid container spacing={3}>
@@ -84,7 +86,7 @@ class home extends Component {
 				</Grid>
 					)
 				) : <CircularProgress />}
-			{!loading ? (
+			{!loadingPoints ? (
 				authenticated === false && (
 					<Grid container spacing={3}>
 						<Grid item xs={12} sm={4}>

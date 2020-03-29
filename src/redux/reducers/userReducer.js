@@ -3,10 +3,14 @@ import {
     SET_AUTHENTICATED, 
     SET_UNAUTHENTICATED,
     LOADING_USER,
+    LOADING_POINTS,
+    CLEAR_LOADING_POINTS,
     SET_USER_TEAM,
     SET_USERS_BY_POINTS,
     GET_USER_PROFILE,
-    GET_USER_LEAGUES
+    GET_USER_LEAGUES,
+    GET_USER_TEAM,
+    CLEAR_USER_TEAM
 } from '../types';
 
  const initialState = {
@@ -16,7 +20,9 @@ import {
     users: [],
     user: [],
     myLeagues: [],
-    loading: false
+    loading: false,
+    loadingPoints: false,
+    loadingUserTeam: false
  }
 
  export default function(state = initialState, action){
@@ -50,6 +56,16 @@ import {
                 ...state,
                 loading: true
             };
+        case LOADING_POINTS:
+            return {
+                ...state,
+                loadingPoints: true
+            }
+        case CLEAR_LOADING_POINTS:
+            return {
+                ...state,
+                loadingPoints: false
+            }        
         case SET_USERS_BY_POINTS:
             return {
                 ...state,
@@ -65,7 +81,17 @@ import {
                 ...state,
                 myLeagues: action.payload,
                 loading: false
-            }    
+            } 
+        case GET_USER_TEAM:
+            return {
+                ...state,
+                loadingUserTeam: true
+            } 
+        case CLEAR_USER_TEAM:
+            return {
+                ...state,
+                loadingUserTeam: false
+            }          
         default:
             return state;    
      }

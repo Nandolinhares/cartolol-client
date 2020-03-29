@@ -3,14 +3,18 @@ import
     SET_USER, 
     SET_ERRORS, 
     CLEAR_ERRORS, 
-    LOADING_UI, 
+    LOADING_UI,
+    LOADING_POINTS,
+    CLEAR_LOADING_POINTS, 
     SET_UNAUTHENTICATED, 
     LOADING_USER, 
     SET_USER_TEAM, 
     POSITIVE_MESSAGES,
     SET_USERS_BY_POINTS,
     GET_USER_PROFILE,
-    GET_USER_LEAGUES 
+    GET_USER_LEAGUES,
+    GET_USER_TEAM,
+    CLEAR_USER_TEAM 
 } from '../types';
 import axios from 'axios';
 
@@ -123,16 +127,19 @@ export const buyPlayer = (playerName, playerPosition) => (dispatch) => {
 }
 
 export const getUserByPoints = () => (dispatch) => {
-    dispatch({ type: LOADING_UI });
+    dispatch({ type: LOADING_POINTS });
     axios.get('/users/position')
         .then(res => {
             dispatch({
                 type: SET_USERS_BY_POINTS,
                 payload: res.data
             })
-            dispatch({ type: CLEAR_ERRORS });
+            dispatch({ type: CLEAR_LOADING_POINTS });
         })
-        .catch(err => console.error(err));
+        .catch(err => {
+            console.error(err);
+            dispatch({ type: CLEAR_LOADING_POINTS });
+        });
 }
 
 export const getUserProfile = (handle) => (dispatch) => {
@@ -215,14 +222,19 @@ export const removePlayerFromUserTeam = (playerName) => (dispatch) => {
 }
 
 export const getUserTeam = () => (dispatch) => {
+    dispatch({ type: GET_USER_TEAM });
     axios.get('/user/team')
         .then(res => {
             dispatch({
                 type: SET_USER_TEAM,
                 payload: res.data
             });
+            dispatch({ type: CLEAR_USER_TEAM });
         })
-        .catch(err => console.error(err));
+        .catch(err => {
+            console.error(err);
+            dispatch({ type: CLEAR_USER_TEAM });
+        });
 }
 
 export const getUserData = () => (dispatch) => { 

@@ -1,9 +1,10 @@
-import { SET_PLAYERS, LOADING_DATA, SET_PLAYER, CREATE_PLAYER } from '../types';
+import { SET_PLAYERS, LOADING_DATA, SET_PLAYER, CREATE_PLAYER, CLEAR_LOADING_PLAYERS, LOADING_PLAYERS } from '../types';
 
 const initialState = {
     players: [],
     player: {},
-    loading: false
+    loading: false,
+    loadingPlayers: false
 }
 
 export default function(state = initialState, action){
@@ -29,7 +30,17 @@ export default function(state = initialState, action){
             return {
                 ...state,
                 players: [action.payload, ...state.players]
-            }   
+            }
+        case LOADING_PLAYERS:
+            return {
+                ...state,
+                loadingPlayers: true
+            }    
+        case CLEAR_LOADING_PLAYERS:
+            return {
+                ...state,
+                loadingPlayers: false
+            }       
         default:
             return state;        
     }
