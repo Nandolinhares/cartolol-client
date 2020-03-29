@@ -180,26 +180,6 @@ export const resetUserPassword = (email) => (dispatch) => {
         }) 
 }
 
-//Leagues
-export const getMyLeagues = () => (dispatch) => {
-    dispatch({ type: LOADING_UI });
-    axios.get('/user/leagues')
-        .then(res => {
-            dispatch({
-                type: GET_USER_LEAGUES,
-                payload: res.data
-            })
-            dispatch({ type: CLEAR_ERRORS });
-        })
-        .catch(err => {
-            console.error(err);
-            dispatch({
-                type: SET_ERRORS,
-                payload: err.response.data
-            })
-        })
-}
-
 export const removePlayerFromUserTeam = (playerName) => (dispatch) => {
     dispatch({ type: LOADING_UI });
     axios.delete(`/user/${playerName}/delete`)
@@ -258,4 +238,24 @@ export const logoutUser = () => (dispatch) => {
     localStorage.removeItem('FBIdToken');
     delete axios.defaults.headers.commom['Authorization'];
     dispatch({ type: SET_UNAUTHENTICATED });
+}
+
+//Leagues
+export const getMyLeagues = () => (dispatch) => {
+    dispatch({ type: LOADING_UI });
+    axios.get('/user/leagues')
+        .then(res => {
+            dispatch({
+                type: GET_USER_LEAGUES,
+                payload: res.data
+            })
+            dispatch({ type: CLEAR_ERRORS });
+        })
+        .catch(err => {
+            console.error(err);
+            dispatch({
+                type: SET_ERRORS,
+                payload: err.response.data
+            })
+        })
 }
