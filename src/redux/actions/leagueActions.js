@@ -18,7 +18,6 @@ export const createLeague = (leagueDetails) => (dispatch) => {
             });
 
             dispatch({ type: CLEAR_LOADING_CREATE_LEAGUE });
-            dispatch(getMyLeagues());
         })
         .catch(err => {
             console.error(err);
