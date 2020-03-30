@@ -80,14 +80,9 @@ export default function CreateLeague() {
     }
 
     return (
-        <div>
-            <Grid container spacing={3}>
-                <Grid item sm></Grid>
-                <Grid item sm></Grid>
-                <Grid item sm>
-                    <Button variant="contained" onClick={handleClickOpen} className={classes.buttonCreateLeague}>Criar liga</Button>
-                </Grid>
-            </Grid>
+        <div>   
+            <Button variant="contained" onClick={handleClickOpen} className={classes.buttonCreateLeague}>Criar liga</Button>
+               
             {/* Form create league */}
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" className={classes.dialog}>
                 <DialogTitle id="form-dialog-title" className={classes.leagueTitle}>Criar Liga</DialogTitle>
