@@ -22,6 +22,7 @@ import playerProfile from './pages/playerProfile';
 import ResetPassword from './pages/ResetPassword';
 import UserProfile from './pages/UserProfile';
 import MyLeagues from './pages/MyLeagues';
+import PublicLeague from './pages/PublicLeague';
 
 const token = localStorage.FBIdToken;
 
@@ -72,13 +73,18 @@ function App() {
               />
               <Route 
                 exact
-                path="/:handle"
-                component={UserProfile}
+                path="/users/:handle"
+                component={UserProfile} 
               />
               <Route 
                 exact
                 path="/:handle/ligas"
                 component={MyLeagues}
+              />
+              <Route 
+                exact
+                path="/ligas/:league"
+                component={PublicLeague}
               />
             </Switch>
           </div>

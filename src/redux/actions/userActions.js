@@ -14,7 +14,10 @@ import
     GET_USER_PROFILE,
     GET_USER_LEAGUES,
     GET_USER_TEAM,
-    CLEAR_USER_TEAM 
+    CLEAR_USER_TEAM,
+    LOADING_PUBLIC_USER_LEAGUES,
+    CLEAR_LOADING_PUBLIC_USER_LEAGUES,
+    GET_PUBLIC_USER_LEAGUES 
 } from '../types';
 import axios from 'axios';
 
@@ -250,6 +253,25 @@ export const getMyLeagues = () => (dispatch) => {
                 payload: res.data
             })
             dispatch({ type: CLEAR_ERRORS });
+        })
+        .catch(err => {
+            console.error(err);
+            dispatch({
+                type: SET_ERRORS,
+                payload: err.response.data
+            })
+        })
+}
+
+export const getUserLeagues = (handle) => (dispatch) => {
+    dispatch({ type: LOADING_PUBLIC_USER_LEAGUES });
+    axios.get(`/user/leagues/${handle}`)
+        .then(res => {
+            dispatch({
+                type: GET_PUBLIC_USER_LEAGUES,
+                payload: res.data
+            })
+            dispatch({ type: CLEAR_LOADING_PUBLIC_USER_LEAGUES });
         })
         .catch(err => {
             console.error(err);

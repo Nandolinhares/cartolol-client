@@ -25,7 +25,7 @@ export default function League(props) {
                 <Grid item sm={2}></Grid>
                 <Grid item sm={8}>
                     <List dense className={classes.root}>
-                        <ListItem button component={Link} to={`/${friend.handle}`}>
+                        <ListItem button component={Link} to={`/users/${friend.handle}`}>
                             <ListItemAvatar>
                             <Avatar
                                 alt={`${friend.handle}`}

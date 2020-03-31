@@ -4,14 +4,19 @@ import {
     CREATE_LEAGUE,
     ADD_FRIEND_TO_LEAGUE,
     LOADING_ADD_FRIEND_TO_LEAGUE,
-    CLEAR_LOADING_ADD_FRIEND_TO_LEAGUE
+    CLEAR_LOADING_ADD_FRIEND_TO_LEAGUE,
+    LOADING_PUBLIC_LEAGUE,
+    CLEAR_LOADING_PUBLIC_LEAGUE,
+    GET_PUBLIC_LEAGUE
 } from '../types';
 
 const initialState = {
     loadingCreateLeague: false,
     messageCreateLeague: {},
     loadingAddFriendsToLeague: false,
-    messageAddFriendToLeague: {} 
+    messageAddFriendToLeague: {},
+    loadingPublicLeague: false,
+    publicLeague: [] 
 };
 
 export default function (state = initialState, action) {
@@ -45,7 +50,22 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 messageAddFriendToLeague: action.payload
-            }    
+            }
+        case LOADING_PUBLIC_LEAGUE:
+            return {
+                ...state,
+                loadingPublicLeague: true
+            }
+        case CLEAR_LOADING_PUBLIC_LEAGUE:
+            return {
+                ...state,
+                loadingPublicLeague: false
+            }
+        case GET_PUBLIC_LEAGUE:
+            return {
+                ...state,
+                publicLeague: action.payload
+            }                
         default:
             return state;            
     }

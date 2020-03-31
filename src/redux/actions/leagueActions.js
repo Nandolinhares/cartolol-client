@@ -5,7 +5,10 @@ import {
     SET_ERRORS,
     ADD_FRIEND_TO_LEAGUE,
     LOADING_ADD_FRIEND_TO_LEAGUE,
-    CLEAR_LOADING_ADD_FRIEND_TO_LEAGUE
+    CLEAR_LOADING_ADD_FRIEND_TO_LEAGUE,
+    LOADING_PUBLIC_LEAGUE,
+    CLEAR_LOADING_PUBLIC_LEAGUE,
+    GET_PUBLIC_LEAGUE
 } from '../types';
 import axios from 'axios';
 
@@ -47,5 +50,23 @@ export const addFriendToLeague = (leagueName, friendHandle) => (dispatch) => {
                 payload: err.response.data
             })
             dispatch({ type: CLEAR_LOADING_ADD_FRIEND_TO_LEAGUE });
+        })
+}
+export const getOneLeague = (leagueName) => (dispatch) => {
+    dispatch({ type: LOADING_PUBLIC_LEAGUE });
+    axios.get(`/leagues/${leagueName}`)
+        .then(res => {
+            dispatch({
+                type: GET_PUBLIC_LEAGUE,
+                payload: res.data
+            });
+            dispatch({ type: CLEAR_LOADING_PUBLIC_LEAGUE });
+        })
+        .catch(err => {
+            console.error(err);
+            dispatch({
+                type: SET_ERRORS,
+                payload: err.response.data
+            })
         })
 }

@@ -10,7 +10,10 @@ import {
     GET_USER_PROFILE,
     GET_USER_LEAGUES,
     GET_USER_TEAM,
-    CLEAR_USER_TEAM
+    CLEAR_USER_TEAM,
+    LOADING_PUBLIC_USER_LEAGUES,
+    CLEAR_LOADING_PUBLIC_USER_LEAGUES,
+    GET_PUBLIC_USER_LEAGUES
 } from '../types';
 
  const initialState = {
@@ -22,7 +25,9 @@ import {
     myLeagues: [],
     loading: false,
     loadingPoints: false,
-    loadingUserTeam: false
+    loadingUserTeam: false,
+    loadingPublicUserLeagues: false,
+    publicUserLeagues: []
  }
 
  export default function(state = initialState, action){
@@ -91,7 +96,22 @@ import {
             return {
                 ...state,
                 loadingUserTeam: false
-            }          
+            }
+        case LOADING_PUBLIC_USER_LEAGUES:
+            return {
+                ...state,
+                loadingPublicUserLeagues: true
+            }
+        case CLEAR_LOADING_PUBLIC_USER_LEAGUES:
+            return {
+                ...state,
+                loadingPublicUserLeagues: false
+            }
+        case GET_PUBLIC_USER_LEAGUES:
+            return {
+                ...state,
+                publicUserLeagues: action.payload
+            }                     
         default:
             return state;    
      }
