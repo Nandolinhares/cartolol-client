@@ -6,7 +6,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import Grid from '@material-ui/core/Grid';
 //Components
-import League from '../components/Leagues/League';
+import MyLeague from '../components/Leagues/MyLeague';
 import CreateLeague from '../components/Leagues/CreateLeague';
 //Redux Stuff
 import { useSelector, useDispatch } from 'react-redux';
@@ -28,17 +28,17 @@ function Alert(props) {
 
 export default function MyLeagues(props) {
     const { myLeagues, authenticated } = useSelector(state => state.user);
-    const { messageCreateLeague, messageAddFriendToLeague } = useSelector(state => state.league);
+    const { messageCreateLeague, messageAddFriendToLeague, messageDeleteUser } = useSelector(state => state.league);
     const{ errors, loading } = useSelector(state => state.ui);
     const dispatch = useDispatch();
     const classes = useStyles();
     
     useEffect(() => {
         dispatch(getMyLeagues());
-        if(messageCreateLeague.message || messageAddFriendToLeague.message) {
+        if(messageCreateLeague.message || messageAddFriendToLeague.message || messageDeleteUser) {
             setOpenNotification(true);
         }
-    }, [dispatch, messageCreateLeague, messageAddFriendToLeague]); 
+    }, [dispatch, messageCreateLeague, messageAddFriendToLeague, messageDeleteUser]); 
 
     //const userHandle = props.match.params.handle;
 
@@ -82,8 +82,8 @@ export default function MyLeagues(props) {
                                         <Grid item sm xs></Grid>
                                     </Grid>
             
-                                    {league.friends.map((friend) => (
-                                        <League key={Math.random() * 10000} friend={friend} />
+                                    {league.friends.map((friend) => ( 
+                                        <MyLeague key={Math.random() * 10000} friend={friend} league={league} />
                                     )).sort(function(a, b){
                                         return a.points - b.points
                                     })}
@@ -92,6 +92,13 @@ export default function MyLeagues(props) {
                         ))
                         
                     ) : <p>Você não possui ligas</p>}
+                    {errors.message === 'Você não pode se remover da própria liga' &&(
+                        <Snackbar open={openNotification} autoHideDuration={3500} onClose={handleCloseSnackbar}>
+                            <Alert onClose={handleCloseSnackbar} severity="error">
+                                {errors.message}
+                            </Alert>
+                        </Snackbar>
+                    )}
                     {messageCreateLeague.message &&(
                         <Snackbar open={openNotification} autoHideDuration={3500} onClose={handleCloseSnackbar}>
                             <Alert onClose={handleCloseSnackbar} severity="success">
@@ -105,7 +112,14 @@ export default function MyLeagues(props) {
                                 {messageAddFriendToLeague.message}
                             </Alert>
                         </Snackbar>
-                    )}       
+                    )}
+                    {messageDeleteUser.message &&(
+                        <Snackbar open={openNotification} autoHideDuration={3500} onClose={handleCloseSnackbar}>
+                            <Alert onClose={handleCloseSnackbar} severity="success">
+                                {messageDeleteUser.message}
+                            </Alert>
+                        </Snackbar>
+                    )}         
                </div>
             ) 
             ) : <CircularProgress />}

@@ -8,7 +8,10 @@ import {
     CLEAR_LOADING_ADD_FRIEND_TO_LEAGUE,
     LOADING_PUBLIC_LEAGUE,
     CLEAR_LOADING_PUBLIC_LEAGUE,
-    GET_PUBLIC_LEAGUE
+    GET_PUBLIC_LEAGUE,
+    LOADING_REMOVE_USER_FROM_LEAGUE,
+    CLEAR_LOADING_REMOVE_USER_FROM_LEAGUE,
+    DELETING_USER_FROM_LEAGUE
 } from '../types';
 import axios from 'axios';
 
@@ -61,6 +64,25 @@ export const getOneLeague = (leagueName) => (dispatch) => {
                 payload: res.data
             });
             dispatch({ type: CLEAR_LOADING_PUBLIC_LEAGUE });
+        })
+        .catch(err => {
+            console.error(err);
+            dispatch({
+                type: SET_ERRORS,
+                payload: err.response.data
+            })
+        })
+}
+
+export const removeUserFromLeague = (leagueName, handle) => (dispatch) => {
+    dispatch({ type: LOADING_REMOVE_USER_FROM_LEAGUE });
+    axios.delete(`/leagues/${leagueName}/${handle}`)
+        .then(res => {
+            dispatch({
+                type: DELETING_USER_FROM_LEAGUE,
+                payload: res.data
+            });
+            dispatch({ type: CLEAR_LOADING_REMOVE_USER_FROM_LEAGUE });
         })
         .catch(err => {
             console.error(err);
