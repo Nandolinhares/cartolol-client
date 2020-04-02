@@ -44,6 +44,7 @@ function UserProfile(props) {
             <section>
                 <Grid container spacing={3}>
                     <Grid item sm={9}>
+                        <h2>Week Team</h2>
                             {!loading ? (
                             user.map(doc => (
                                 <div key={doc.userId}>

@@ -1,10 +1,27 @@
-import { SET_PLAYERS, LOADING_DATA, SET_PLAYER, CREATE_PLAYER, CLEAR_LOADING_PLAYERS, LOADING_PLAYERS } from '../types';
+import { 
+        SET_PLAYERS, 
+        LOADING_DATA, 
+        SET_PLAYER, 
+        CREATE_PLAYER, 
+        CLEAR_LOADING_PLAYERS, 
+        LOADING_PLAYERS,
+        GET_SUPS,
+        GET_ADCS,
+        GET_MIDS,
+        GET_JGS,
+        GET_TOPS 
+    } from '../types';
 
 const initialState = {
     players: [],
     player: {},
     loading: false,
-    loadingPlayers: false
+    loadingPlayers: false,
+    bestSups: [],
+    bestAdcs: [],
+    bestMids: [],
+    bestJgs: [],
+    bestTops: []
 }
 
 export default function(state = initialState, action){
@@ -12,7 +29,7 @@ export default function(state = initialState, action){
         case SET_PLAYERS:
             return {
                 ...state,
-                players: action.payload,
+                players: action.payload, 
                 loading: false
             }
         case SET_PLAYER:
@@ -40,7 +57,32 @@ export default function(state = initialState, action){
             return {
                 ...state,
                 loadingPlayers: false
-            }       
+            }
+        case GET_SUPS:
+            return {
+                ...state,
+                bestSups: action.payload
+            }
+        case GET_ADCS:
+            return {
+                ...state,
+                bestAdcs: action.payload
+            }
+        case GET_MIDS:
+            return {
+                ...state,
+                bestMids: action.payload
+            }
+        case GET_JGS:
+            return {
+                ...state,
+                bestJgs: action.payload
+            }
+        case GET_TOPS:
+            return {
+                ...state,
+                bestTops: action.payload
+            }                           
         default:
             return state;        
     }

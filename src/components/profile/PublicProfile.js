@@ -75,7 +75,7 @@ export default function PublicProfile(props) {
         <div>
             <Paper className={classes.paper}>
                 {user.map(u => (
-                    <div className={classes.profile}>
+                    <div key={Math.random() * 10000} className={classes.profile}>
                         <div className="image-wrapper">
                             <div>
                                 <img src={u.imageUrl} alt="Imagem de Perfil" className="profile-image" />

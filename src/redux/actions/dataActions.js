@@ -6,7 +6,12 @@ import {
     CLEAR_ERRORS, 
     CLEAR_LOADING_PLAYERS, 
     SET_ERRORS,
-    LOADING_PLAYERS
+    LOADING_PLAYERS,
+    GET_SUPS,
+    GET_ADCS,
+    GET_MIDS,
+    GET_JGS,
+    GET_TOPS
 } from '../types';
 import axios from 'axios';
 import { getUserTeam } from './userActions';
@@ -84,5 +89,91 @@ export const updatePlayerDetails = (playerData, playerName) => (dispatch) => {
                 type: SET_ERRORS,
                 payload: err.response.data
             })
+        })
+}
+
+//Get players by position
+export const getSups = () => (dispatch) => {
+    axios.get('/player/sups')
+        .then(res => {
+            dispatch({
+                type: GET_SUPS,
+                payload: res.data
+            });
+        })
+        .catch(err => {
+            console.error(err);
+            dispatch({ 
+                type: SET_ERRORS,
+                payload: err.response.data 
+            });
+        })
+}
+
+export const getAdcs = () => (dispatch) => {
+    axios.get('/player/adcs')
+        .then(res => {
+            dispatch({
+                type: GET_ADCS,
+                payload: res.data
+            });
+        })
+        .catch(err => {
+            console.error(err);
+            dispatch({ 
+                type: SET_ERRORS,
+                payload: err.response.data 
+            });
+        })
+}
+
+export const getMids = () => (dispatch) => {
+    axios.get('/player/mids')
+        .then(res => {
+            dispatch({
+                type: GET_MIDS,
+                payload: res.data
+            });
+        })
+        .catch(err => {
+            console.error(err);
+            dispatch({ 
+                type: SET_ERRORS,
+                payload: err.response.data 
+            });
+        })
+}
+
+export const getJgs = () => (dispatch) => {
+    axios.get('/player/jgs')
+        .then(res => {
+            dispatch({
+                type: GET_JGS,
+                payload: res.data
+            });
+        })
+        .catch(err => {
+            console.error(err);
+            dispatch({ 
+                type: SET_ERRORS,
+                payload: err.response.data 
+            });
+        })
+}
+
+export const getTops = () => (dispatch) => {
+    axios.get('/player/tops')
+        .then(res => {
+            dispatch({
+                type: GET_TOPS,
+                payload: res.data
+            });
+        })
+        .catch(err => {
+            console.error(err);
+            dispatch({ 
+                type: SET_ERRORS,
+                payload: err.response.data 
+            });
         })
 }

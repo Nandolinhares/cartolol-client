@@ -10,14 +10,29 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Player from '../components/player/Player';
 import Team from '../components/team/Team';
 import Users from '../components/users/Users';
+import BestSups from '../components/player/BestSups';
+import BestAdcs from '../components/player/BestAdcs';
+import BestMids from '../components/player/BestMids';
+import BestJgs from '../components/player/BestJgs';
+import BestTops from '../components/player/BestTops';
 ///Redux Stuff
 import { connect } from 'react-redux';
-import { getAllPlayers } from '../redux/actions/dataActions';
+import { getAllPlayers, getSups, getAdcs, getJgs, getMids, getTops } from '../redux/actions/dataActions';
 import { getUserTeam, getUserByPoints } from '../redux/actions/userActions';
 
 const styles = {
 	h3: {
 		marginLeft: '14px'
+	},
+	bestPlayers: {
+		display: 'flex',
+		flexDirection: 'row',
+		flexWrap: 'wrap',
+		justifyContent: 'center'
+	},
+	bestOfWeek: {
+		textAlign: 'center',
+		fontFamily: 'Roboto Condensed'
 	}
 }
 
@@ -27,6 +42,11 @@ class home extends Component {
 		this.props.getUserTeam();	
 		this.props.getAllPlayers();
 		this.props.getUserByPoints();
+		this.props.getSups();
+		this.props.getAdcs();
+		this.props.getMids();
+		this.props.getJgs();
+		this.props.getTops();
 	}
 
     render() { 
@@ -44,6 +64,7 @@ class home extends Component {
 			} = this.props;
         return (
 			<div>
+				{/* Autenticated */}
 				{!loadingUserTeam ? (
 					authenticated && (
 						/*Primeira parte */
@@ -86,19 +107,33 @@ class home extends Component {
 				</Grid>
 					)
 				) : <CircularProgress />}
+
+	        {/* Não autenticado */}
 			{!loadingPoints ? (
 				authenticated === false && (
-					<Grid container spacing={3}>
-						<Grid item xs={12} sm={4}>
-							{users.length > 0 ? (
-								users.map(user => (
-									<Grid key={user.userId}>
-										<Users user={user} />
-									</Grid>
-								))
-							) : (<p>Não há jogadores com pontuações</p>)}	
+					<div>
+						<Grid container spacing={3}>
+							<Grid item sm={12}><h2 className={classes.bestOfWeek}>Melhores da Semana</h2></Grid>
+							<Grid item sm={12} md={12} lg={12} className={classes.bestPlayers}>
+								<BestSups />	
+								<BestAdcs />
+								<BestMids />
+								<BestJgs />
+								<BestTops />			
+							</Grid>
 						</Grid>
-					</Grid>
+						<Grid container spacing={3}>
+							<Grid item xs={12} sm={3}>
+								{users.length > 0 ? (
+									users.map(user => (
+										<Grid key={user.userId}>
+											<Users user={user} />
+										</Grid>
+									))
+								) : (<p>Não há jogadores com pontuações</p>)}	
+							</Grid>
+						</Grid>
+					</div>
 				)
 			) : <CircularProgress />}
 
@@ -124,7 +159,12 @@ const mapStateToProps = (state) => ({
 const mapActionsToProps = {
 	getAllPlayers,
 	getUserTeam,
-	getUserByPoints
+	getUserByPoints,
+	getSups,
+	getAdcs,
+	getMids,
+	getJgs,
+	getTops
 }
 
 export default connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(home));

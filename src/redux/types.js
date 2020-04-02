@@ -28,6 +28,11 @@ export const SET_PLAYER = 'SET_PLAYER';
 export const CREATE_PLAYER = 'CREATE_PLAYER';
 export const LOADING_PLAYERS = 'LOADING_PLAYERS';
 export const CLEAR_LOADING_PLAYERS = 'CLEAR_LOADING_PLAYERS';
+export const GET_SUPS = 'GET_SUPS';
+export const GET_ADCS = 'GET_ADCS';
+export const GET_MIDS = 'GET_MIDS';
+export const GET_JGS = 'GET_JGS';
+export const GET_TOPS = 'GET_TOPS';
 
 //League types
 export const LOADING_CREATE_LEAGUE = 'LOADING_CREATE_LEAGUE';
