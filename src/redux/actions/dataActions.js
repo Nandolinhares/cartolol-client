@@ -11,7 +11,10 @@ import {
     GET_ADCS,
     GET_MIDS,
     GET_JGS,
-    GET_TOPS
+    GET_TOPS,
+    LOADING_RANKING_TEAMS,
+    CLEAR_LOADING_RANKING_TEAMS,
+    GET_TEAMS_RANKING
 } from '../types';
 import axios from 'axios';
 import { getUserTeam } from './userActions';
@@ -175,5 +178,26 @@ export const getTops = () => (dispatch) => {
                 type: SET_ERRORS,
                 payload: err.response.data 
             });
+        })
+}
+
+//Get Teams By ranking points
+export const getTeamsByPoints = () => (dispatch) => {
+    dispatch({ type: LOADING_RANKING_TEAMS });
+    axios.get('/teams/ranking')
+        .then(res => {
+            dispatch({
+                type: GET_TEAMS_RANKING,
+                payload: res.data
+            });
+            dispatch({ type: CLEAR_LOADING_RANKING_TEAMS });
+        })
+        .catch(err => {
+            console.error(err);
+            dispatch({
+                type: SET_ERRORS,
+                payload: err.response.data
+            });
+            dispatch({ type: CLEAR_LOADING_RANKING_TEAMS });
         })
 }

@@ -33,6 +33,9 @@ export const GET_ADCS = 'GET_ADCS';
 export const GET_MIDS = 'GET_MIDS';
 export const GET_JGS = 'GET_JGS';
 export const GET_TOPS = 'GET_TOPS';
+export const LOADING_RANKING_TEAMS = 'LOADING_RANKING_TEAMS';
+export const CLEAR_LOADING_RANKING_TEAMS = 'CLEAR_LOADING_RANKING_TEAMS';
+export const GET_TEAMS_RANKING = 'GET_TEAMS_RANKING';
 
 //League types
 export const LOADING_CREATE_LEAGUE = 'LOADING_CREATE_LEAGUE';

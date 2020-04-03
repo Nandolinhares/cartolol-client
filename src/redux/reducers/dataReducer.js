@@ -9,7 +9,10 @@ import {
         GET_ADCS,
         GET_MIDS,
         GET_JGS,
-        GET_TOPS 
+        GET_TOPS,
+        LOADING_RANKING_TEAMS,
+        CLEAR_LOADING_RANKING_TEAMS,
+        GET_TEAMS_RANKING 
     } from '../types';
 
 const initialState = {
@@ -21,7 +24,9 @@ const initialState = {
     bestAdcs: [],
     bestMids: [],
     bestJgs: [],
-    bestTops: []
+    bestTops: [],
+    loadingRankingTeams: false,
+    teams: []
 }
 
 export default function(state = initialState, action){
@@ -82,7 +87,22 @@ export default function(state = initialState, action){
             return {
                 ...state,
                 bestTops: action.payload
-            }                           
+            }
+        case LOADING_RANKING_TEAMS:
+            return {
+                ...state,
+                loadingRankingTeams: true
+            }
+        case CLEAR_LOADING_RANKING_TEAMS:
+            return {
+                ...state,
+                loadingRankingTeams: false
+            }                             
+        case GET_TEAMS_RANKING:
+            return {
+                ...state,
+                teams: action.payload
+            }          
         default:
             return state;        
     }

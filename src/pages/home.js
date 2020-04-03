@@ -15,9 +15,10 @@ import BestAdcs from '../components/player/BestAdcs';
 import BestMids from '../components/player/BestMids';
 import BestJgs from '../components/player/BestJgs';
 import BestTops from '../components/player/BestTops';
+import RankingTeams from '../components/team/RankingTeams';
 ///Redux Stuff
 import { connect } from 'react-redux';
-import { getAllPlayers, getSups, getAdcs, getJgs, getMids, getTops } from '../redux/actions/dataActions';
+import { getAllPlayers, getSups, getAdcs, getJgs, getMids, getTops, getTeamsByPoints } from '../redux/actions/dataActions';
 import { getUserTeam, getUserByPoints } from '../redux/actions/userActions';
 
 const styles = {
@@ -37,9 +38,19 @@ const styles = {
 	paperUsers: {
 		padding: 20
 	},
+	paperRanking: {
+		padding: 10
+	},
 	rankingName: {
 		textAlign: 'center',
 		color: '#fff'
+	},
+	firstPart: {
+		marginTop: '4px'
+	},
+	loading: {
+		margin: '0 auto',
+		display: 'table'
 	}
 }
 
@@ -54,6 +65,7 @@ class home extends Component {
 		this.props.getMids();
 		this.props.getJgs();
 		this.props.getTops();
+		this.props.getTeamsByPoints();
 	}
 
     render() { 
@@ -66,7 +78,7 @@ class home extends Component {
 						loadingPoints,
 						loadingUserTeam
 					},
-				data: { players, loadingPlayers }
+				data: { players, loadingPlayers, loadingRankingTeams, teams }
 			} = this.props;
         return (
 			<div>
@@ -92,7 +104,7 @@ class home extends Component {
 							<Profile />    
 						</Grid>
 					</Grid>)
-				) : <CircularProgress />}
+				) : <div className={classes.loading}><CircularProgress /></div>}
 				{!loadingPlayers ? (
 					authenticated && (
 						/* Mercado */
@@ -115,9 +127,42 @@ class home extends Component {
 				) : <CircularProgress />}
 
 	        {/* Não autenticado */}
-			{!loadingPoints ? (
-				authenticated === false && (
+			{authenticated === false && (
 					<div>
+						<Grid container spacing={3} className={classes.firstPart}>
+							<Grid item sm={3}>
+								{/* Classificação dos melhores membros */}
+								{!loadingPoints ? (					
+									<div>
+										{users.length > 0 ? (
+										<Paper elevation={3} className={classes.paperUsers}>
+											<h5 className={classes.rankingName}>Ranking de membros</h5>
+											{users.map((user, index) => (
+												<Grid key={user.userId}>
+													<Users user={user} index={index} />
+												</Grid> 
+											))}
+										</Paper>
+									) : (<p>Não há jogadores com pontuações</p>)}	
+									</div>	
+								) : <div className={classes.loading}><CircularProgress /></div>}
+							</Grid>
+							<Grid item sm></Grid>
+							{!loadingRankingTeams ? (
+								<Grid item sm={3}>
+									{teams.length > 0 && (
+										<Paper elevation={3} className={classes.paperRanking}>
+											<h5 className={classes.rankingName}>Classificação</h5>
+											{teams.map((team, index) => (
+												<div key={Math.random() * 10000}>
+													<RankingTeams team={team} index={index} />
+												</div>
+											))}
+										</Paper>
+									)}
+								</Grid>
+							) : <div className={classes.loading}><CircularProgress /></div>}
+						</Grid>
 						<Grid container spacing={3}>
 							<Grid item sm={12}><h2 className={classes.bestOfWeek}>Destaques da Semana</h2></Grid>
 							<Grid item sm={12} md={12} lg={12} className={classes.bestPlayers}>
@@ -128,24 +173,8 @@ class home extends Component {
 								<BestTops />			
 							</Grid>
 						</Grid>
-						{/* Classificação dos melhores membros */}
-						<Grid container spacing={3}>
-							<Grid item xs={12} sm={3}>
-								{users.length > 0 ? (
-									<Paper elevation={3} className={classes.paperUsers}>
-										<h5 className={classes.rankingName}>Ranking de membros</h5>
-										{users.map((user, index) => (
-											<Grid key={user.userId}>
-												<Users user={user} index={index} />
-											</Grid> 
-										))}
-									</Paper>
-								) : (<p>Não há jogadores com pontuações</p>)}	
-							</Grid>
-						</Grid>
 					</div>
-				)
-			) : <CircularProgress />}
+				)}
 
 			</div>	
         )
@@ -174,7 +203,8 @@ const mapActionsToProps = {
 	getAdcs,
 	getMids,
 	getJgs,
-	getTops
+	getTops,
+	getTeamsByPoints
 }
 
 export default connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(home));
