@@ -8,7 +8,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
-import { Button, ListItemSecondaryAction } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 //Redux Stuff
 import { useDispatch } from 'react-redux';
 import { removeUserFromLeague } from '../../redux/actions/leagueActions';

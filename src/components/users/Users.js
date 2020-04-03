@@ -10,7 +10,14 @@ import Avatar from '@material-ui/core/Avatar';
 
 const useStyles = makeStyles({
     root: {
-        backgroundColor: 'rgb(245,245,245) !important'
+        backgroundColor: 'transparent !important',
+        color: '#fff'
+    },
+    points: {
+      color: '#f9f911',
+      fontFamily: 'Roboto Condensed',
+      fontSize: 18,
+      fontWeight: 'bold'
     }
 });
 
@@ -21,6 +28,7 @@ export default function Users(props) {
     return (
         <List dense className={classes.root}>
           <ListItem button component={Link} to={`/users/${user.handle}`}>
+            <span className={classes.index}>{props.index + 1} &nbsp; &nbsp;</span>
             <ListItemAvatar>
               <Avatar
                 alt={`${user.name}`}
@@ -28,7 +36,7 @@ export default function Users(props) {
               />
             </ListItemAvatar>
             <ListItemText  primary={user.name} />
-                <span>{user.points}</span>  
+                <span className={classes.points}>{user.points}</span>  
           </ListItem> 
          </List>
     )

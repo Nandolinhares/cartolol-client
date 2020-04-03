@@ -33,6 +33,13 @@ const styles = {
 	bestOfWeek: {
 		textAlign: 'center',
 		fontFamily: 'Roboto Condensed'
+	},
+	paperUsers: {
+		padding: 20
+	},
+	rankingName: {
+		textAlign: 'center',
+		color: '#fff'
 	}
 }
 
@@ -59,8 +66,7 @@ class home extends Component {
 						loadingPoints,
 						loadingUserTeam
 					},
-				data: { players, loadingPlayers },
-				ui: { loading }
+				data: { players, loadingPlayers }
 			} = this.props;
         return (
 			<div>
@@ -113,7 +119,7 @@ class home extends Component {
 				authenticated === false && (
 					<div>
 						<Grid container spacing={3}>
-							<Grid item sm={12}><h2 className={classes.bestOfWeek}>Melhores da Semana</h2></Grid>
+							<Grid item sm={12}><h2 className={classes.bestOfWeek}>Destaques da Semana</h2></Grid>
 							<Grid item sm={12} md={12} lg={12} className={classes.bestPlayers}>
 								<BestSups />	
 								<BestAdcs />
@@ -122,14 +128,18 @@ class home extends Component {
 								<BestTops />			
 							</Grid>
 						</Grid>
+						{/* Classificação dos melhores membros */}
 						<Grid container spacing={3}>
 							<Grid item xs={12} sm={3}>
 								{users.length > 0 ? (
-									users.map(user => (
-										<Grid key={user.userId}>
-											<Users user={user} />
-										</Grid>
-									))
+									<Paper elevation={3} className={classes.paperUsers}>
+										<h5 className={classes.rankingName}>Ranking de membros</h5>
+										{users.map((user, index) => (
+											<Grid key={user.userId}>
+												<Users user={user} index={index} />
+											</Grid> 
+										))}
+									</Paper>
 								) : (<p>Não há jogadores com pontuações</p>)}	
 							</Grid>
 						</Grid>

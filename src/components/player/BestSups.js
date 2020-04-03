@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 //MUI Stuff
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 //Redux Stuff
-import { useSelector, useDispatch } from 'react-redux';
-import { getSups } from '../../redux/actions/dataActions';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles({
     paper: {
@@ -67,11 +66,6 @@ const useStyles = makeStyles({
 export default function BestSups() {
     const classes = useStyles();
     const { bestSups } = useSelector(state => state.data);
-    const dispatch = useDispatch();
-
-    // useEffect(() => {
-    //     dispatch(getSups());
-    // }, [dispatch])
 
     return (
         <div>

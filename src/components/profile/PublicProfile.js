@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment } from 'react';
+import React, { useEffect } from 'react';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 //MUI Stuff
@@ -59,7 +59,6 @@ const useStyles = makeStyles({
 export default function PublicProfile(props) {
     const classes = useStyles();
     const { user } = useSelector(state => state.user);
-    const { loading } = useSelector(state => state.ui);
     const dispatch = useDispatch();
 
     dayjs.extend(relativeTime);
