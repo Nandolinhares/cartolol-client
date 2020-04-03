@@ -40,7 +40,7 @@ function UserProfile(props) {
     }, [dispatch, userHandle]);
 
     return (
-        <div>
+        <div className="container">
             <section>
                 <Grid container spacing={3}>
                     <Grid item sm={9}>

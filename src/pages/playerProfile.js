@@ -14,7 +14,7 @@ export class playerProfile extends Component {
     render() {
         const { data: { player } } = this.props;
         return (
-            <div>
+            <div className="container">
                 <StaticPlayer player={player} />
             </div>
         )

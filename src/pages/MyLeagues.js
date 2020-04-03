@@ -54,76 +54,78 @@ export default function MyLeagues(props) {
       };
 
     return (
-        <div className={classes.root}>
-            {!loading ? (authenticated &&(
-               <div>    
-                    <h2>Minhas ligas</h2>
-                    {/* Add friend to league*/}
-                    <Grid container spacing={3}>
-                        <Grid item sm={8} xs></Grid>
-                        <Grid item sm xs>
-                            <CreateLeague /> 
-                        </Grid>
-                        <Grid item sm xs></Grid>
-                    </Grid> 
-                    {myLeagues.length > 0 ? (
-                        myLeagues.map(league => (
-                           <section key={Math.random() * 10000}>
-                                <div>
-                                    <h2>{league.name}</h2>
-                                    
-                                    <Grid container spacing={3}>
-                                        <Grid item sm xs>
-                                            <AddFriendToLeague league={league} />
+        <div className="container">
+            <section className={classes.root}>
+                {!loading ? (authenticated &&(
+                <div>    
+                        <h2>Minhas ligas</h2>
+                        {/* Add friend to league*/}
+                        <Grid container spacing={3}>
+                            <Grid item sm={8} xs></Grid>
+                            <Grid item sm xs>
+                                <CreateLeague /> 
+                            </Grid>
+                            <Grid item sm xs></Grid>
+                        </Grid> 
+                        {myLeagues.length > 0 ? (
+                            myLeagues.map(league => (
+                            <section key={Math.random() * 10000}>
+                                    <div>
+                                        <h2>{league.name}</h2>
+                                        
+                                        <Grid container spacing={3}>
+                                            <Grid item sm xs>
+                                                <AddFriendToLeague league={league} />
+                                            </Grid>
+                                            <Grid item sm xs>
+                                                <img src={league.leagueImageUrl} alt={league.name} className={classes.imageLeague} />
+                                            </Grid>
+                                            <Grid item sm xs></Grid>
                                         </Grid>
-                                        <Grid item sm xs>
-                                            <img src={league.leagueImageUrl} alt={league.name} className={classes.imageLeague} />
-                                        </Grid>
-                                        <Grid item sm xs></Grid>
-                                    </Grid>
+                
+                                        {league.friends.map((friend) => ( 
+                                            <MyLeague key={Math.random() * 10000} friend={friend} league={league} />
+                                        )).sort(function(a, b){
+                                            return a.points - b.points
+                                        })}
+                                    </div>
+                            </section>
+                            ))
+                            
+                        ) : <p>Você não possui ligas</p>}
+                        {errors.message === 'Você não pode se remover da própria liga' &&(
+                            <Snackbar open={openNotification} autoHideDuration={3500} onClose={handleCloseSnackbar}>
+                                <Alert onClose={handleCloseSnackbar} severity="error">
+                                    {errors.message}
+                                </Alert>
+                            </Snackbar>
+                        )}
+                        {messageCreateLeague.message &&(
+                            <Snackbar open={openNotification} autoHideDuration={3500} onClose={handleCloseSnackbar}>
+                                <Alert onClose={handleCloseSnackbar} severity="success">
+                                    {messageCreateLeague.message}
+                                </Alert>
+                            </Snackbar>
+                        )}
+                        {messageAddFriendToLeague.message &&(
+                            <Snackbar open={openNotification} autoHideDuration={3500} onClose={handleCloseSnackbar}>
+                                <Alert onClose={handleCloseSnackbar} severity="success">
+                                    {messageAddFriendToLeague.message}
+                                </Alert>
+                            </Snackbar>
+                        )}
+                        {messageDeleteUser.message &&(
+                            <Snackbar open={openNotification} autoHideDuration={3500} onClose={handleCloseSnackbar}>
+                                <Alert onClose={handleCloseSnackbar} severity="success">
+                                    {messageDeleteUser.message}
+                                </Alert>
+                            </Snackbar>
+                        )}         
+                </div>
+                ) 
+                ) : <CircularProgress />}
             
-                                    {league.friends.map((friend) => ( 
-                                        <MyLeague key={Math.random() * 10000} friend={friend} league={league} />
-                                    )).sort(function(a, b){
-                                        return a.points - b.points
-                                    })}
-                                </div>
-                           </section>
-                        ))
-                        
-                    ) : <p>Você não possui ligas</p>}
-                    {errors.message === 'Você não pode se remover da própria liga' &&(
-                        <Snackbar open={openNotification} autoHideDuration={3500} onClose={handleCloseSnackbar}>
-                            <Alert onClose={handleCloseSnackbar} severity="error">
-                                {errors.message}
-                            </Alert>
-                        </Snackbar>
-                    )}
-                    {messageCreateLeague.message &&(
-                        <Snackbar open={openNotification} autoHideDuration={3500} onClose={handleCloseSnackbar}>
-                            <Alert onClose={handleCloseSnackbar} severity="success">
-                                {messageCreateLeague.message}
-                            </Alert>
-                        </Snackbar>
-                    )}
-                     {messageAddFriendToLeague.message &&(
-                        <Snackbar open={openNotification} autoHideDuration={3500} onClose={handleCloseSnackbar}>
-                            <Alert onClose={handleCloseSnackbar} severity="success">
-                                {messageAddFriendToLeague.message}
-                            </Alert>
-                        </Snackbar>
-                    )}
-                    {messageDeleteUser.message &&(
-                        <Snackbar open={openNotification} autoHideDuration={3500} onClose={handleCloseSnackbar}>
-                            <Alert onClose={handleCloseSnackbar} severity="success">
-                                {messageDeleteUser.message}
-                            </Alert>
-                        </Snackbar>
-                    )}         
-               </div>
-            ) 
-            ) : <CircularProgress />}
-            
+            </section>
         </div>
     )
 }

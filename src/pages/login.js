@@ -157,7 +157,7 @@ export class login extends Component {
   render() { 
     const { classes, ui: { loading, errors } } = this.props;
     return (
-      <Grid container spacing={3}>
+      <Grid container spacing={3} className="container">
         <Grid item sm={6}>
           <Paper elevation={3} className="paperIntro">
             <h1 className={classes.h1}>Login</h1>

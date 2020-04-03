@@ -28,7 +28,7 @@ function PublicLeague(props) {
     }, [dispatch, leagueName])
 
     return (
-        <div>
+        <div className="container">
             <div className={classes.root}>
                 {publicLeague.map(league => (
                     <div key={Math.random() * 10000}>

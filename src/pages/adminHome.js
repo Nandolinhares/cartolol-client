@@ -22,7 +22,7 @@ export class adminHome extends Component {
             } = this.props;
 
         let adminProfile = administrator ? (
-            <div>
+            <div className="container">
                 <Grid container spacing={3} className="marginComponents">
                     <Grid item sm>
                         <ResetPoints />

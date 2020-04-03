@@ -116,7 +116,7 @@ function ResetPassword() {
   };
 
   return (
-      <div>
+      <div className="container">
         <Grid container>
           <Grid item sm={5}>
             <Paper elevation={3} className="paperIntro">

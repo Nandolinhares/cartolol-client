@@ -45,7 +45,6 @@ function App() {
       <div className="App">
         <Router>
           <Navbar />
-          <div className="container">
             <Switch>
               <Route exact path="/" component={home} />
               <AuthRoute
@@ -87,7 +86,6 @@ function App() {
                 component={PublicLeague}
               />
             </Switch>
-          </div>
         </Router>
       </div>
     </Provider>

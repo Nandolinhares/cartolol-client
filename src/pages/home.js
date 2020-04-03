@@ -16,6 +16,8 @@ import BestMids from '../components/player/BestMids';
 import BestJgs from '../components/player/BestJgs';
 import BestTops from '../components/player/BestTops';
 import RankingTeams from '../components/team/RankingTeams';
+//Images
+import Banner from '../images/BannerSite.jpg';
 ///Redux Stuff
 import { connect } from 'react-redux';
 import { getAllPlayers, getSups, getAdcs, getJgs, getMids, getTops, getTeamsByPoints } from '../redux/actions/dataActions';
@@ -47,6 +49,13 @@ const styles = {
 	},
 	firstPart: {
 		marginTop: '4px'
+	},
+	bannerGrid: {
+		padding: '0px !important'
+	},
+	banner: {
+		width: '100%',
+		marginTop: '10px'
 	},
 	loading: {
 		margin: '0 auto',
@@ -82,97 +91,106 @@ class home extends Component {
 			} = this.props;
         return (
 			<div>
-				{/* Autenticated */}
-				{!loadingUserTeam ? (
-					authenticated && (
-						/*Primeira parte */
-					<Grid container spacing={3}>
-						<Grid item xs={12} sm={9}>
+				<section className="container">
+						{/* Autenticated */}
+					{!loadingUserTeam ? (
+						authenticated && (
+							/*Primeira parte */
+						<Grid container spacing={3}>
+							<Grid item xs={12} sm={9}>
+								<Paper elevation={3} className="paperIntro">
+									<h2 className="h2">Meu time</h2>
+								</Paper>
+								<Grid container spacing={2}>
+									{userTeam.length > 0 ? (
+										userTeam.map(myTeam => (
+											<Grid key={myTeam.playerId} item>
+												<Team team={myTeam} />
+											</Grid>))
+									) : <p>Você não tem jogadores</p>}
+								</Grid>
+							</Grid>
+							<Grid item xs={12} sm={3}>
+								<Profile />    
+							</Grid>
+						</Grid>)
+					) : <div className={classes.loading}><CircularProgress /></div>}
+					{!loadingPlayers ? (
+						authenticated && (
+							/* Mercado */
+						<Grid container spacing={3}>
+						<Grid item>
 							<Paper elevation={3} className="paperIntro">
-								<h2 className="h2">Meu time</h2>
+								<h3 className={classes.h3} id="mercado" >Mercado</h3>
 							</Paper>
-							<Grid container spacing={2}>
-								{userTeam.length > 0 ? (
-									userTeam.map(myTeam => (
-										<Grid key={myTeam.playerId} item>
-											<Team team={myTeam} />
-										</Grid>))
-								) : <p>Você não tem jogadores</p>}
-							</Grid>
+							{players.length > 0 ? (
+								<Grid container spacing={2}>
+									{players.map(player => (
+									<Grid key={player.playerId} item>
+										<Player player={player} />
+									</Grid>))}	
+								</Grid>
+							) : <p>Não há jogadores</p>}
 						</Grid>
-						<Grid item xs={12} sm={3}>
-							<Profile />    
-						</Grid>
-					</Grid>)
-				) : <div className={classes.loading}><CircularProgress /></div>}
-				{!loadingPlayers ? (
-					authenticated && (
-						/* Mercado */
-					<Grid container spacing={3}>
-					<Grid item>
-						<Paper elevation={3} className="paperIntro">
-							<h3 className={classes.h3} id="mercado" >Mercado</h3>
-						</Paper>
-						{players.length > 0 ? (
-							<Grid container spacing={2}>
-								{players.map(player => (
-								<Grid key={player.playerId} item>
-									<Player player={player} />
-								</Grid>))}	
-							</Grid>
-						) : <p>Não há jogadores</p>}
 					</Grid>
-				</Grid>
-					)
-				) : <CircularProgress />}
+						)
+					) : <CircularProgress />}
+				</section>
 
-	        {/* Não autenticado */}
-			{authenticated === false && (
+				{/* Não autenticado */}
+				{authenticated === false && (
 					<div>
-						<Grid container spacing={3} className={classes.firstPart}>
-							<Grid item sm={3}>
-								{/* Classificação dos melhores membros */}
-								{!loadingPoints ? (					
-									<div>
-										{users.length > 0 ? (
-										<Paper elevation={3} className={classes.paperUsers}>
-											<h5 className={classes.rankingName}>Ranking de membros</h5>
-											{users.map((user, index) => (
-												<Grid key={user.userId}>
-													<Users user={user} index={index} />
-												</Grid> 
-											))}
-										</Paper>
-									) : (<p>Não há jogadores com pontuações</p>)}	
-									</div>	
+						<Grid container spacing={3}>
+							<Grid item xs={12} sm={12} className={classes.bannerGrid}>
+								<img src={Banner} alt="banner site" className={classes.banner} />
+							</Grid>
+						</Grid>
+						<section className="container">
+							<Grid container spacing={3} className={classes.firstPart}>
+								<Grid item sm={3}>
+									{/* Classificação dos melhores membros */}
+									{!loadingPoints ? (					
+										<div>
+											{users.length > 0 ? (
+											<Paper elevation={3} className={classes.paperUsers}>
+												<h5 className={classes.rankingName}>Ranking de membros</h5>
+												{users.map((user, index) => (
+													<Grid key={user.userId}>
+														<Users user={user} index={index} />
+													</Grid> 
+												))}
+											</Paper>
+										) : (<p>Não há jogadores com pontuações</p>)}	
+										</div>	
+									) : <div className={classes.loading}><CircularProgress /></div>}
+								</Grid>
+								<Grid item sm></Grid>
+								{!loadingRankingTeams ? (
+									<Grid item sm={3}>
+										{teams.length > 0 && (
+											<Paper elevation={3} className={classes.paperRanking}>
+												<h5 className={classes.rankingName}>Classificação</h5>
+												{teams.map((team, index) => (
+													<div key={Math.random() * 10000}>
+														<RankingTeams team={team} index={index} />
+													</div>
+												))}
+											</Paper>
+										)}
+									</Grid>
 								) : <div className={classes.loading}><CircularProgress /></div>}
 							</Grid>
-							<Grid item sm></Grid>
-							{!loadingRankingTeams ? (
-								<Grid item sm={3}>
-									{teams.length > 0 && (
-										<Paper elevation={3} className={classes.paperRanking}>
-											<h5 className={classes.rankingName}>Classificação</h5>
-											{teams.map((team, index) => (
-												<div key={Math.random() * 10000}>
-													<RankingTeams team={team} index={index} />
-												</div>
-											))}
-										</Paper>
-									)}
+							<Grid container spacing={3}>
+								<Grid item sm={12}><h2 className={classes.bestOfWeek}>Destaques da Semana</h2></Grid>
+								<Grid item sm={12} md={12} lg={12} className={classes.bestPlayers}>
+									<BestSups />	
+									<BestAdcs />
+									<BestMids />
+									<BestJgs />
+									<BestTops />			
 								</Grid>
-							) : <div className={classes.loading}><CircularProgress /></div>}
-						</Grid>
-						<Grid container spacing={3}>
-							<Grid item sm={12}><h2 className={classes.bestOfWeek}>Destaques da Semana</h2></Grid>
-							<Grid item sm={12} md={12} lg={12} className={classes.bestPlayers}>
-								<BestSups />	
-								<BestAdcs />
-								<BestMids />
-								<BestJgs />
-								<BestTops />			
 							</Grid>
-						</Grid>
+						</section>
 					</div>
 				)}
 
