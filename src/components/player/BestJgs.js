@@ -10,7 +10,7 @@ const useStyles = makeStyles({
         padding: 20,
         width:120,
         height: 220,
-        marginLeft: 4,   
+        marginLeft: 14,   
         '& .image-profile':{
             width: 50,
             height: 50,

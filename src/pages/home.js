@@ -31,11 +31,13 @@ const styles = {
 		display: 'flex',
 		flexDirection: 'row',
 		flexWrap: 'wrap',
-		justifyContent: 'center'
+		justifyContent: 'center',
+		zIndex: 2
 	},
 	bestOfWeek: {
 		textAlign: 'center',
-		fontFamily: 'Roboto Condensed'
+		fontFamily: 'Roboto Condensed',
+		color: '#fff'
 	},
 	paperUsers: {
 		padding: 20
@@ -145,9 +147,19 @@ class home extends Component {
 								<img src={Banner} alt="banner site" className={classes.banner} />
 							</Grid>
 						</Grid>
-						<section className="container">
-							<Grid container spacing={3} className={classes.firstPart}>
-								<Grid item sm={3}>
+						<section >
+							<Grid container spacing={3} className="containerAfterBanner">
+							
+								<Grid item sm={12} className="containerAfterBannerRanking"><h2 className={classes.bestOfWeek}>Destaques da Semana</h2></Grid>
+								<Grid item sm={12} md={12} lg={12} className={classes.bestPlayers}>
+									<BestSups />	
+									<BestAdcs />
+									<BestMids />
+									<BestJgs />
+									<BestTops />			
+								</Grid>
+								
+								<Grid item sm={3} className="containerAfterBannerRanking">
 									{/* Classificação dos melhores membros */}
 									{!loadingPoints ? (					
 										<div>
@@ -166,7 +178,7 @@ class home extends Component {
 								</Grid>
 								<Grid item sm></Grid>
 								{!loadingRankingTeams ? (
-									<Grid item sm={3}>
+									<Grid item sm={3} className="containerAfterBannerTeams">
 										{teams.length > 0 && (
 											<Paper elevation={3} className={classes.paperRanking}>
 												<h5 className={classes.rankingName}>Classificação</h5>
@@ -179,16 +191,6 @@ class home extends Component {
 										)}
 									</Grid>
 								) : <div className={classes.loading}><CircularProgress /></div>}
-							</Grid>
-							<Grid container spacing={3}>
-								<Grid item sm={12}><h2 className={classes.bestOfWeek}>Destaques da Semana</h2></Grid>
-								<Grid item sm={12} md={12} lg={12} className={classes.bestPlayers}>
-									<BestSups />	
-									<BestAdcs />
-									<BestMids />
-									<BestJgs />
-									<BestTops />			
-								</Grid>
 							</Grid>
 						</section>
 					</div>
