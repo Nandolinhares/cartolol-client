@@ -147,7 +147,7 @@ class home extends Component {
 								<img src={Banner} alt="banner site" className={classes.banner} />
 							</Grid>
 						</Grid>
-						<section >
+						<section>
 							<Grid container spacing={3} className="containerAfterBanner">
 							
 								<Grid item sm={12} className="containerAfterBannerRanking"><h2 className={classes.bestOfWeek}>Destaques da Semana</h2></Grid>
@@ -159,38 +159,40 @@ class home extends Component {
 									<BestTops />			
 								</Grid>
 								
-								<Grid item sm={3} className="containerAfterBannerRanking">
-									{/* Classificação dos melhores membros */}
-									{!loadingPoints ? (					
-										<div>
-											{users.length > 0 ? (
-											<Paper elevation={3} className={classes.paperUsers}>
-												<h5 className={classes.rankingName}>Ranking de membros</h5>
-												{users.map((user, index) => (
-													<Grid key={user.userId}>
-														<Users user={user} index={index} />
-													</Grid> 
-												))}
-											</Paper>
-										) : (<p>Não há jogadores com pontuações</p>)}	
-										</div>	
-									) : <div className={classes.loading}><CircularProgress /></div>}
-								</Grid>
-								<Grid item sm></Grid>
-								{!loadingRankingTeams ? (
-									<Grid item sm={3} className="containerAfterBannerTeams">
-										{teams.length > 0 && (
-											<Paper elevation={3} className={classes.paperRanking}>
-												<h5 className={classes.rankingName}>Classificação</h5>
-												{teams.map((team, index) => (
-													<div key={Math.random() * 10000}>
-														<RankingTeams team={team} index={index} />
-													</div>
-												))}
-											</Paper>
-										)}
+								<Grid container spacing={3} className="container">
+									<Grid item sm={4} className="containerAfterBannerRanking">
+										{/* Classificação dos melhores membros */}
+										{!loadingPoints ? (					
+											<div className="containerAfterBannerBeforeRanking">
+												{users.length > 0 ? (
+												<Paper elevation={3} className={classes.paperUsers}>
+													<h5 className={classes.rankingName}>Ranking de membros</h5>
+													{users.map((user, index) => (
+														<Grid key={user.userId}>
+															<Users user={user} index={index} />
+														</Grid> 
+													))}
+												</Paper>
+											) : (<p>Não há jogadores com pontuações</p>)}	
+											</div>	
+										) : <div className={classes.loading}><CircularProgress /></div>}
 									</Grid>
-								) : <div className={classes.loading}><CircularProgress /></div>}
+									{!loadingRankingTeams ? (
+										<Grid item sm={4} className="containerAfterBannerTeams">
+											{teams.length > 0 && (
+												<Paper elevation={3} className={classes.paperRanking}>
+													<h5 className={classes.rankingName}>CBLOL - 2020</h5>
+													{teams.map((team, index) => (
+														<div key={Math.random() * 10000}>
+															<RankingTeams team={team} index={index} />
+														</div>
+													))}
+												</Paper>
+											)}
+										</Grid>
+									) : <div className={classes.loading}><CircularProgress /></div>}
+									<Grid item sm></Grid>
+								</Grid>
 							</Grid>
 						</section>
 					</div>

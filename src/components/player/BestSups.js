@@ -5,11 +5,11 @@ import Paper from '@material-ui/core/Paper';
 //Redux Stuff
 import { useSelector } from 'react-redux';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
     paper: {
         padding: 20,
         width:120,
-        height: 220,   
+        height: 220,
         '& .image-profile':{
             width: 50,
             height: 50,
@@ -27,7 +27,7 @@ const useStyles = makeStyles({
             }
         },
         '& .profile-details': {
-            marginTop: 10,
+            marginTop: 10, 
             textAlign: 'center',
             fontSize: 12,
             fontFamily: 'Roboto Condensed',
@@ -60,8 +60,24 @@ const useStyles = makeStyles({
     },
     name: {
         fontWeight: 'bold'
-    }  
-});
+    },
+    [theme.breakpoints.down('sm')]: {
+        paper: {
+            width: 68,
+            height: 150,
+            '& .image-profile':{
+                width: 26,
+                height: 26,
+            },
+            '& .profile-details': {
+                fontSize: 10,
+            }
+        },
+        points: {
+            fontSize: 18
+        }
+    },     
+}));
 
 export default function BestSups() {
     const classes = useStyles();

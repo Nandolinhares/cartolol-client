@@ -5,7 +5,7 @@ import Paper from '@material-ui/core/Paper';
 //Redux Stuff
 import { useSelector } from 'react-redux';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
     paper: {
         padding: 20,
         width:120,
@@ -61,8 +61,26 @@ const useStyles = makeStyles({
     },
     name: {
         fontWeight: 'bold'
-    }  
-});
+    },
+    [theme.breakpoints.down('sm')]: {
+        paper: {
+            width: 68,
+            height: 150,
+            marginLeft: 8,
+            marginTop: 10,
+            '& .image-profile':{
+                width: 26,
+                height: 26,
+            },
+            '& .profile-details': {
+                fontSize: 10,
+            }
+        },
+        points: {
+            fontSize: 18
+        }
+    },       
+}));
 
 export default function BestJgs() {
     const classes = useStyles();

@@ -42,11 +42,17 @@ html {
 .containerAfterBannerRanking {
   z-index: 2;
   position: relative;
+  margin: 0 auto !important;
+}
+
+.containerAfterBannerBeforeRanking {
+  width: 100%;
 }
 
 .containerAfterBannerTeams {
   z-index: 2;
   position: relative;
+  width: 100%;
 }
 
 ul li{

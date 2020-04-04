@@ -31,7 +31,8 @@ import metaLogo from '../images/metaLogo2.png';
 const useStyles = makeStyles(theme => ({
   image: {
     width: 140,
-    padding: 20
+    padding: 20,
+    margin: '0 auto'
   },
   root: {
     display: 'flex',
