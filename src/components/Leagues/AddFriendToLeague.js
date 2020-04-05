@@ -17,7 +17,7 @@ import { addFriendToLeague } from '../../redux/actions/leagueActions';
 
 const useStyles = makeStyles({
     buttonAddFriend: {
-        backgroundColor: "#303030",
+        backgroundColor: "#1bd75e",
         '&:hover': {
             backgroundColor: "#1bd98e"
         },

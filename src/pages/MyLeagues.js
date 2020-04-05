@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
 //Components
 import MyLeague from '../components/Leagues/MyLeague';
 import CreateLeague from '../components/Leagues/CreateLeague';
@@ -19,6 +20,13 @@ const useStyles = makeStyles({
     },
     imageLeague: {
         width: 80
+    },
+    paper: {
+        padding: 20,
+        marginTop: 10
+    },
+    h2: {
+        color: '#fff'
     }
 });
 
@@ -56,9 +64,11 @@ export default function MyLeagues(props) {
     return (
         <div className="container">
             <section className={classes.root}>
-                {!loading ? (authenticated &&(
+                {!loading ? (authenticated &&( 
                 <div>    
-                        <h2>Minhas ligas</h2>
+                        <Paper elevation={3} className="paperIntro">
+                            <h2 className="h2">Minhas ligas</h2>
+                        </Paper>
                         {/* Add friend to league*/}
                         <Grid container spacing={3}>
                             <Grid item sm={8} xs></Grid>
@@ -67,11 +77,11 @@ export default function MyLeagues(props) {
                             </Grid>
                             <Grid item sm xs></Grid>
                         </Grid> 
-                        {myLeagues.length > 0 ? (
-                            myLeagues.map(league => (
-                            <section key={Math.random() * 10000}>
-                                    <div>
-                                        <h2>{league.name}</h2>
+                            {myLeagues.length > 0 ? (
+                                myLeagues.map(league => (
+                                <section key={Math.random() * 10000}>
+                                    <Paper elevation={3} className={classes.paper}>
+                                        <h2 className={classes.h2}>{league.name}</h2>
                                         
                                         <Grid container spacing={3}>
                                             <Grid item sm xs>
@@ -88,11 +98,11 @@ export default function MyLeagues(props) {
                                         )).sort(function(a, b){
                                             return a.points - b.points
                                         })}
-                                    </div>
-                            </section>
-                            ))
-                            
-                        ) : <p>Você não possui ligas</p>}
+                                    </Paper>
+                                </section>
+                                ))
+                                
+                            ) : <p>Você não possui ligas</p>}
                         {errors.message === 'Você não pode se remover da própria liga' &&(
                             <Snackbar open={openNotification} autoHideDuration={3500} onClose={handleCloseSnackbar}>
                                 <Alert onClose={handleCloseSnackbar} severity="error">

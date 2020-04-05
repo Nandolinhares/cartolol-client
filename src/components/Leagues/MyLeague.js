@@ -8,20 +8,28 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
-import { Button } from '@material-ui/core';
+import { IconButton } from '@material-ui/core';
+import Tooltip from '@material-ui/core/Tooltip';
+//Icons
+import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
 //Redux Stuff
 import { useDispatch } from 'react-redux';
 import { removeUserFromLeague } from '../../redux/actions/leagueActions';
 
 const useStyles = makeStyles({
     root: {
-        backgroundColor: 'rgb(245,245,245) !important'
+        backgroundColor: 'transparent !important',
+        color: '#fff'
     },
-    infos: {
-      
+    points: {
+        color: '#f9f911',
+        fontFamily: 'Roboto Condensed',
+        fontSize: 18,
+        fontWeight: 'bold'
     },
     button: {
-        marginLeft: 20
+        marginLeft: 20,
+        marginTop: 5
     }
 });
 
@@ -38,8 +46,8 @@ export default function MyLeague(props) {
     return (
         <div>
            <Grid container spacing={3}>
-                <Grid item sm={2}></Grid>
-                <Grid item sm={8}>
+                <Grid item xs={1} sm={2}></Grid>
+                <Grid item xs={8} sm={8}>
                     <List dense className={classes.root}>
                         <ListItem button component={Link} to={`/users/${friend.handle}`}>
                             <ListItemAvatar>
@@ -50,13 +58,17 @@ export default function MyLeague(props) {
                             </ListItemAvatar>
                             <ListItemText  primary={friend.handle} />
                                 <div className={classes.infos}>
-                                    <span>{friend.points}</span>     
+                                    <span className={classes.points}>{friend.points}</span>     
                                 </div> 
                         </ListItem> 
                     </List>
                 </Grid>
-                <Grid item sm={2}>
-                    <Button variant="contained" color="secondary" onClick={() => handleDelete(friend.handle)} className={classes.button}>Remover</Button>
+                <Grid item xs={3} sm={2}>
+                    <Tooltip title="Remover amigo" placement="top">
+                        <IconButton color="secondary" onClick={() => handleDelete(friend.handle)} className={classes.button}>
+                            <RemoveCircleIcon />
+                        </IconButton>
+                    </Tooltip>
                 </Grid>
            </Grid>
         </div>
