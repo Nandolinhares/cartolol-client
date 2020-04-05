@@ -39,6 +39,27 @@ const useStyles = makeStyles({
     images: {
         width: 40
     },
+    buttons: {
+        margin: '0 auto',
+        fontFamily: 'Roboto Condensed'
+    },
+    buttonNeg: {
+        backgroundColor: '#bd321c',
+        color: '#fff',
+        '&:hover': {
+            backgroundColor: '#b82f1a'
+        }
+    },
+    buttonAddEnd: {
+        backgroundColor: "#1bd75e",
+        '&:hover': {
+            backgroundColor: "#1bd98e"
+        },
+        color: "#fff"
+    },
+    tit: {
+        fontFamily: 'Roboto Condensed !important'
+    }
 });
 
 export default function CreateLeague() {
@@ -81,11 +102,11 @@ export default function CreateLeague() {
 
     return (
         <div>   
-            <Button variant="contained" onClick={handleClickOpen} className={classes.buttonCreateLeague}>Criar liga</Button>
+            <Button variant="contained" onClick={handleClickOpen} className={classes.buttonCreateLeague}>Criar Liga</Button>
                
             {/* Form create league */}
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" className={classes.dialog}>
-                <DialogTitle id="form-dialog-title" className={classes.leagueTitle}>Criar Liga</DialogTitle>
+                <DialogTitle id="form-dialog-title" className={classes.leagueTitle}><strong className={classes.tit}>Criar liga</strong></DialogTitle>
                 <DialogContent>
                 <DialogContentText>
                     Bem vindo! Vejo que deseja criar uma liga para se divertir com seus amigos.
@@ -150,11 +171,11 @@ export default function CreateLeague() {
                         fullWidth
                     />
                 </DialogContent>
-                <DialogActions>
-                <Button onClick={handleClose} color="primary">
+                <DialogActions className={classes.buttons}>
+                <Button onClick={handleClose} color="primary" className={classes.buttonNeg}>
                     Cancelar
                 </Button>
-                <Button onClick={handleSubmit} color="primary">
+                <Button onClick={handleSubmit} color="primary" className={classes.buttonAddEnd}>
                     Criar liga
                 </Button>
                 </DialogActions>

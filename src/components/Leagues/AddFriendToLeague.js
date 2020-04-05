@@ -23,6 +23,27 @@ const useStyles = makeStyles({
         },
         color: "#fff"
     },
+    buttons: {
+        margin: '0 auto',
+        fontFamily: 'Roboto Condensed'
+    },
+    buttonNeg: {
+        backgroundColor: '#bd321c',
+        color: '#fff',
+        '&:hover': {
+            backgroundColor: '#b82f1a'
+        }
+    },
+    buttonAddEnd: {
+        backgroundColor: "#1bd75e",
+        '&:hover': {
+            backgroundColor: "#1bd98e"
+        },
+        color: "#fff"
+    },
+    tit: {
+        fontFamily: 'Roboto Condensed !important'
+    }
 });
 
 export default function AddFriendToLeague(props) {
@@ -65,7 +86,7 @@ export default function AddFriendToLeague(props) {
                 </IconButton>
             </Tooltip>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">Adicionar amigo em {league.name}</DialogTitle>
+                <DialogTitle id="form-dialog-title"><strong className={classes.tit}>Adicionar amigo em {league.name}</strong></DialogTitle>
                 <DialogContent>
                 <DialogContentText>
                    Digite o nome de usuário do amigo que deseja adicionar
@@ -83,13 +104,13 @@ export default function AddFriendToLeague(props) {
                     fullWidth
                 />
                 </DialogContent>
-                <DialogActions>
-                <Button onClick={handleClose} color="primary">
-                    Cancelar
-                </Button>
-                <Button onClick={handleSubmit} color="primary">
-                    Adicionar
-                </Button>
+                <DialogActions className={classes.buttons}>
+                    <Button onClick={handleClose} color="primary" className={classes.buttonNeg}>
+                        Cancelar
+                    </Button>
+                    <Button onClick={handleSubmit} color="primary" className={classes.buttonAddEnd}>
+                        Adicionar
+                    </Button>
                 </DialogActions>
             </Dialog>        
         </div>
