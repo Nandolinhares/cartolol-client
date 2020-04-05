@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 //MUI Stuff
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
 //Components
 import PublicTeam from '../components/player/publicTeam';
 //Components
@@ -14,7 +15,8 @@ import { CircularProgress } from '@material-ui/core';
 
 const useStyles = makeStyles({
     root: {
-        textAlign: 'center'
+        textAlign: 'center',
+        width: '100%'
     },
     imageLeague: {
         width: 80
@@ -24,6 +26,15 @@ const useStyles = makeStyles({
     },
     players: {
         marginTop: 20
+    },
+    paperLeagues: {
+        padding: 10
+    },
+    h2: {
+        color: '#fff'
+    },
+    profile: {
+        width: '100%'
     }
 });
 
@@ -65,29 +76,31 @@ function UserProfile(props) {
                             </div>
                         )}
                     </Grid>
-                    <Grid item sm={3}>
+                    <Grid item sm={3} className={classes.profile}>
                        <PublicProfile handle={userHandle} />
                     </Grid>
                 </Grid>
             </section>
             {!errors.message ? (
-                publicUserLeagues.map(league => (
-                    <div key={Math.random() * 1000} className={classes.root}>
-                        <h2>{league.name}</h2>
-                        <Grid container spacing={3}>
-                            <Grid item sm xs></Grid>
-                            <Grid item sm xs>
-                                <img src={league.leagueImageUrl} alt={league.name} className={classes.imageLeague} />
-                            </Grid>
-                            <Grid item sm xs></Grid>
+                <Grid container spacing={3}>
+                    <Grid item xs={12} sm={12}>
+                        <Grid container spacing={2}>
+                            {publicUserLeagues.map(league => (
+                                <Grid item sm={4} key={Math.random() * 1000} className={classes.root}>
+                                    <Paper elevation={3} className={classes.paperLeagues}>
+                                        <h2 className={classes.h2}>{league.name}</h2>      
+                                        <img src={league.leagueImageUrl} alt={league.name} className={classes.imageLeague} />
+                                        {league.friends.map((friend, index) => (
+                                            <League key={Math.random() * 10000} friend={friend} index={index} />
+                                        )).sort(function(a, b){
+                                            return a.points - b.points
+                                        })}
+                                    </Paper>                  
+                                </Grid> 
+                            ))}
                         </Grid>
-                        {league.friends.map((friend) => (
-                            <League key={Math.random() * 10000} friend={friend} />
-                        )).sort(function(a, b){
-                            return a.points - b.points
-                        })}
-                    </div>
-                ))
+                    </Grid>
+                </Grid>
             ) : (<h2>{errors.message}</h2>)}
         </div>
     )

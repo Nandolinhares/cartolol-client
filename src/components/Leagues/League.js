@@ -11,32 +11,42 @@ import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles({
     root: {
-        backgroundColor: 'rgb(245,245,245) !important'
+        backgroundColor: 'transparent !important',
+        color: '#fff'
+    },
+    points: {
+        color: '#f9f911',
+        fontFamily: 'Roboto Condensed',
+        fontSize: 18,
+        fontWeight: 'bold'
+    },
+    leagueWidthh: {
+        width: '100%'
     }
 });
 
 export default function League(props) {
     const classes = useStyles();
-    const friend = props.friend
+    const friend = props.friend;
+    const index = props.index;
     return (
         <div>
            <Grid container spacing={3}>
-                <Grid item sm={2}></Grid>
-                <Grid item sm={8}>
+                <Grid item sm={12} className={classes.leagueWidthh}>
                     <List dense className={classes.root}>
                         <ListItem button component={Link} to={`/users/${friend.handle}`}>
+                            <span className={classes.index}>{index + 1} &nbsp; &nbsp;</span>
                             <ListItemAvatar>
-                            <Avatar
-                                alt={`${friend.handle}`}
-                                src={friend.imageUrl}
-                            />
+                                <Avatar
+                                    alt={`${friend.handle}`}
+                                    src={friend.imageUrl}
+                                />
                             </ListItemAvatar>
                             <ListItemText  primary={friend.handle} />
-                                <span>{friend.points}</span>  
+                                <span className={classes.points}>{friend.points}</span>  
                         </ListItem> 
                     </List>
                 </Grid>
-                <Grid item sm={2}></Grid>
            </Grid>
         </div>
     )
