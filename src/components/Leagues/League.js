@@ -13,7 +13,7 @@ const useStyles = makeStyles({
     root: {
         backgroundColor: 'transparent !important',
         color: '#fff'
-    },
+    }, 
     points: {
         color: '#f9f911',
         fontFamily: 'Roboto Condensed',

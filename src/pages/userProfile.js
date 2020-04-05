@@ -31,7 +31,8 @@ const useStyles = makeStyles({
         padding: 10
     },
     h2: {
-        color: '#fff'
+        color: '#fff',
+        marginLeft: 14
     },
     profile: {
         width: '100%'
@@ -39,7 +40,7 @@ const useStyles = makeStyles({
 });
 
 function UserProfile(props) {
-    const { user, publicUserLeagues } = useSelector(state => state.user);
+    const { user, publicUserLeagues, credentials } = useSelector(state => state.user);
     const { loading, errors } = useSelector(state => state.ui);
     const userHandle = props.match.params.handle;
     const dispatch = useDispatch();
@@ -55,7 +56,9 @@ function UserProfile(props) {
             <section>
                 <Grid container spacing={3}>
                     <Grid item sm={9}>
-                        <h2>Week Team</h2>
+                        <Paper elevation={3} className="paperIntro">
+                            <h2 className={classes.h2}>Time de {credentials.name}</h2>
+                        </Paper>
                             {!loading ? (
                             user.map(doc => (
                                 <div key={doc.userId}>
@@ -81,6 +84,9 @@ function UserProfile(props) {
                     </Grid>
                 </Grid>
             </section>
+            <Paper elevation={3} className="paperIntro">
+                <h2 className={classes.h2}>Ligas de {credentials.name}</h2>
+            </Paper>
             {!errors.message ? (
                 <Grid container spacing={3}>
                     <Grid item xs={12} sm={12}>
