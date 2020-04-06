@@ -5,6 +5,7 @@ import Profile from '../components/profile/Profile';
 import Grid from "@material-ui/core/Grid";
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
+import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 //Components
 import Player from '../components/player/Player';
@@ -31,7 +32,7 @@ import { connect } from 'react-redux';
 import { getAllPlayers, getSups, getAdcs, getJgs, getMids, getTops, getTeamsByPoints } from '../redux/actions/dataActions';
 import { getUserTeam, getUserByPoints } from '../redux/actions/userActions';
 
-const styles = {
+const styles = theme => ({
 	h3: {
 		marginLeft: '14px'
 	},
@@ -85,10 +86,30 @@ const styles = {
 	hourLeague: {
 		fontFamily: 'Roboto Condensed',
 		fontWeight: 'bold'
+	},
+	backdrop: {
+		zIndex: theme.zIndex.drawer + 1,
+		color: '#fff',
 	}
-}
+});
 
 class home extends Component {
+
+	state = {
+		open: false
+	}
+
+	handleClose = () => {
+		this.setState({
+			open: false
+		});
+	};
+
+	handleToggle = () => {
+		this.setState({
+			open: true
+		})
+	};
 
 	componentDidMount(){
 		this.props.getUserTeam();	
@@ -110,7 +131,8 @@ class home extends Component {
 						userTeam,
 						users,
 						loadingPoints,
-						loadingUserTeam
+						loadingUserTeam,
+						loading
 					},
 				data: { players, loadingPlayers, loadingRankingTeams, teams }
 			} = this.props;
@@ -118,6 +140,13 @@ class home extends Component {
 			<div>
 				<section className="container">
 						{/* Autenticated */}
+
+					{loading && (
+						<Backdrop className={classes.backdrop} open={this.state.open} onClick={this.handleClose}>
+							<CircularProgress color="inherit" />
+					  	</Backdrop>
+					)}
+
 					{!loadingUserTeam ? (
 						authenticated && (
 							/*Primeira parte */

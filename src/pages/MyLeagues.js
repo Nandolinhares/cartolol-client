@@ -35,8 +35,8 @@ function Alert(props) {
 }
 
 export default function MyLeagues(props) {
-    const { myLeagues, authenticated } = useSelector(state => state.user);
-    const { messageCreateLeague, messageAddFriendToLeague, messageDeleteUser } = useSelector(state => state.league);
+    const { myLeagues, authenticated, credentials } = useSelector(state => state.user);
+    const { messageCreateLeague, messageAddFriendToLeague, messageDeleteUser } = useSelector(state => state.league); 
     const{ errors, loading } = useSelector(state => state.ui);
     const dispatch = useDispatch();
     const classes = useStyles();
@@ -85,7 +85,9 @@ export default function MyLeagues(props) {
                                         
                                         <Grid container spacing={3}>
                                             <Grid item sm xs>
-                                                <AddFriendToLeague league={league} />
+                                                {league.creatorHandle === credentials.handle ? (
+                                                    <AddFriendToLeague league={league} />
+                                                ) : (<div></div>) }
                                             </Grid>
                                             <Grid item sm xs>
                                                 <img src={league.leagueImageUrl} alt={league.name} className={classes.imageLeague} />
@@ -94,9 +96,9 @@ export default function MyLeagues(props) {
                                         </Grid>
                 
                                         {league.friends.map((friend) => ( 
-                                            <MyLeague key={Math.random() * 10000} friend={friend} league={league} />
+                                            <MyLeague key={Math.random() * 10000} friend={friend} league={league} credentials={credentials} />
                                         )).sort(function(a, b){
-                                            return a.points - b.points
+                                            return a.points - b.points 
                                         })}
                                     </Paper>
                                 </section>

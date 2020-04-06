@@ -64,11 +64,13 @@ export default function MyLeague(props) {
                     </List>
                 </Grid>
                 <Grid item xs={3} sm={2}>
-                    <Tooltip title="Remover amigo" placement="top">
-                        <IconButton color="secondary" onClick={() => handleDelete(friend.handle)} className={classes.button}>
-                            <RemoveCircleIcon />
-                        </IconButton>
-                    </Tooltip>
+                    {league.creatorHandle === props.credentials.handle ? (
+                        <Tooltip title="Remover amigo" placement="top">
+                            <IconButton color="secondary" onClick={() => handleDelete(friend.handle)} className={classes.button}>
+                                <RemoveCircleIcon />
+                            </IconButton>
+                        </Tooltip>
+                    ) : (<div></div>)}
                 </Grid>
            </Grid>
         </div>
