@@ -18,6 +18,14 @@ import BestTops from '../components/player/BestTops';
 import RankingTeams from '../components/team/RankingTeams';
 //Images
 import Banner from '../images/BannerSite.jpg';
+import Pain from '../images/pain.png';
+import Prodigy from '../images/prodigy.png';
+import VKD from '../images/vivoKeyd.png';
+import Redemption from '../images/redemption.png';
+import INTZ from '../images/intz.png';
+import Furia from '../images/furia.png';
+import Flamengo from '../images/flamengo.png';
+import Kabum from '../images/kabum.png';
 ///Redux Stuff
 import { connect } from 'react-redux';
 import { getAllPlayers, getSups, getAdcs, getJgs, getMids, getTops, getTeamsByPoints } from '../redux/actions/dataActions';
@@ -62,6 +70,21 @@ const styles = {
 	loading: {
 		margin: '0 auto',
 		display: 'table'
+	},
+	teamsImages: {
+		width: 30,
+		borderRadius: 18
+	},
+	teamsName: {
+		fontFamily: 'Roboto Condensed',
+		fontWeight: 'bold'
+	},
+	table: {
+		marginTop: '-14px'
+	},
+	hourLeague: {
+		fontFamily: 'Roboto Condensed',
+		fontWeight: 'bold'
 	}
 }
 
@@ -142,6 +165,30 @@ class home extends Component {
 				{/* Não autenticado */}
 				{authenticated === false && (
 					<div>
+						
+							<Grid container className={classes.table}>
+								<Grid item xs={3} sm={3}>
+									<p className={classes.hourLeague}>13:00</p>
+									<span><p><img src={Prodigy} alt="PRG" className={classes.teamsImages} /> <span className={classes.teamsName}>PRG</span></p></span>
+									<span><p><img src={Pain} alt="Paing Gaming" className={classes.teamsImages} /> <span className={classes.teamsName}>PNG</span></p></span>
+								</Grid>
+								<Grid item xs={3} sm={3}>
+									<p className={classes.hourLeague}>14:00</p>
+									<p><img src={VKD} alt="VivoKeyd" className={classes.teamsImages} /> <span className={classes.teamsName}>VKD</span></p>
+									<p><img src={Redemption} alt="Redemption" className={classes.teamsImages} /> <span className={classes.teamsName}>RDP</span></p>
+								</Grid>
+								<Grid item xs={3} sm={3}>
+									<p className={classes.hourLeague}>15:00</p>
+									<p><img src={INTZ} alt="INTZ" className={classes.teamsImages} /> <span className={classes.teamsName}>ITZ</span></p>
+									<p><img src={Furia} alt="Furia" className={classes.teamsImages} /> <span className={classes.teamsName}>FUR</span></p>
+								</Grid>
+								<Grid item xs={3} sm={3}>
+									<p className={classes.hourLeague}>16:00</p>
+									<p><img src={Flamengo} alt="Flamengo" className={classes.teamsImages} /> <span className={classes.teamsName}>FLA</span></p>
+									<p><img src={Kabum} alt="Kabum" className={classes.teamsImages} /> <span className={classes.teamsName}>KBM</span></p>
+								</Grid>
+							</Grid>
+						
 						<Grid container spacing={3}>
 							<Grid item xs={12} sm={12} className={classes.bannerGrid}>
 								<img src={Banner} alt="banner site" className={classes.banner} />
