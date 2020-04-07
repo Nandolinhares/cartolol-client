@@ -23,6 +23,7 @@ import ResetPassword from './pages/ResetPassword';
 import UserProfile from './pages/UserProfile';
 import MyLeagues from './pages/MyLeagues';
 import PublicLeague from './pages/PublicLeague';
+import Footer from './components/Footer';
 
 axios.defaults.baseURL = 'https://us-east1-cartolol-fd251.cloudfunctions.net/api';
 
@@ -89,6 +90,7 @@ function App() {
                 component={PublicLeague}
               />
             </Switch>
+          <Footer />   
         </Router>
       </div>
     </Provider>
