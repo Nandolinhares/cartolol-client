@@ -1,6 +1,6 @@
 import 'react-app-polyfill/stable';
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import "./App.css";
 import jwtDecode from "jwt-decode";
@@ -23,6 +23,9 @@ import ResetPassword from './pages/ResetPassword';
 import UserProfile from './pages/UserProfile';
 import MyLeagues from './pages/MyLeagues';
 import PublicLeague from './pages/PublicLeague';
+
+axios.defaults.baseURL = 'https://us-east1-cartolol-fd251.cloudfunctions.net/api';
+
 
 const token = localStorage.FBIdToken;
 

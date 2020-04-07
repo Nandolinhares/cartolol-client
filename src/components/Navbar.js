@@ -100,7 +100,7 @@ const Navbar = () => {
 
   function handleLogout() {
     window.location.href = "/login";
-    dispatch(logoutUser());
+    dispatch(logoutUser()); 
   }
 
   const list = () => (

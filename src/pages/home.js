@@ -66,7 +66,7 @@ const styles = theme => ({
 	},
 	banner: {
 		width: '100%',
-		marginTop: '10px'
+		// marginTop: '10px'
 	},
 	loading: {
 		margin: '0 auto',
@@ -195,7 +195,14 @@ class home extends Component {
 				{authenticated === false && (
 					<div>
 						
-							<Grid container className={classes.table}>
+							
+						
+						<Grid container spacing={3}>
+							<Grid item xs={12} sm={12} className={classes.bannerGrid}>
+								<img src={Banner} alt="banner site" className={classes.banner} />
+							</Grid>
+						</Grid>
+						<Grid container className={classes.table}>
 								<Grid item xs={3} sm={3}>
 									<p className={classes.hourLeague}>13:00</p>
 									<span><p><img src={Prodigy} alt="PRG" className={classes.teamsImages} /> <span className={classes.teamsName}>PRG</span></p></span>
@@ -217,12 +224,6 @@ class home extends Component {
 									<p><img src={Kabum} alt="Kabum" className={classes.teamsImages} /> <span className={classes.teamsName}>KBM</span></p>
 								</Grid>
 							</Grid>
-						
-						<Grid container spacing={3}>
-							<Grid item xs={12} sm={12} className={classes.bannerGrid}>
-								<img src={Banner} alt="banner site" className={classes.banner} />
-							</Grid>
-						</Grid>
 						<section>
 							<Grid container spacing={3} className="containerAfterBanner">
 							

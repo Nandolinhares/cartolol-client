@@ -25,7 +25,7 @@ export const loginUser = (userData, history) => (dispatch) => {
     dispatch({ type: LOADING_UI });
     axios.post('/login', userData)
         .then(res => {
-            console.log(res.data);
+            //console.log(res.data);
             setAuthorizationHeader(res.data.token);
             dispatch(getUserData());
             dispatch({ type: CLEAR_ERRORS });
@@ -241,6 +241,7 @@ export const logoutUser = () => (dispatch) => {
     localStorage.removeItem('FBIdToken');
     delete axios.defaults.headers.commom['Authorization'];
     dispatch({ type: SET_UNAUTHENTICATED });
+    
 }
 
 //Leagues

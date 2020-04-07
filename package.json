@@ -12,6 +12,7 @@
     "axios": "^0.19.2",
     "dayjs": "^1.8.22",
     "jwt-decode": "^2.2.0",
+    "live-server": "^1.2.1",
     "notistack": "^0.9.9",
     "react": "^16.13.0",
     "react-app-polyfill": "^1.0.6",
