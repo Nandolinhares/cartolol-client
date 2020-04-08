@@ -65,8 +65,7 @@ const styles = theme => ({
 		padding: '0px !important'
 	},
 	banner: {
-		width: '100%',
-		// marginTop: '10px'
+		width: '100%'
 	},
 	loading: {
 		margin: '0 auto',

@@ -131,6 +131,9 @@ ul li{
 .individualIcon:hover {
   color: #00ff5b !important;
 }
+.IconFooter {
+  color: #00ff5b !important;
+}
 .MuiButton-colorInherit:hover {
   color: #f9f911;
 }

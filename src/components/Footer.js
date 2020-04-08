@@ -44,7 +44,7 @@ export default function Footer() {
             <Grid item sm={4}>
                 <Grid container spacing={2}>
                     <Grid item sm={2} className={classes.iconsImage}>
-                        <FacebookIcon style={{ fontSize: 30 }} className="individualIcon" />
+                        <FacebookIcon style={{ fontSize: 30 }} className="IconFooter" />
                     </Grid>
                     <Grid item sm={4} className={classes.facebookName}>
                         <h2 className={classes.h2}>Facebook</h2>
@@ -55,7 +55,7 @@ export default function Footer() {
             <Grid item sm={4} className={classes.iconsImage}>
                 <Grid container spacing={2}>
                     <Grid item sm={2} className={classes.iconsImage}>
-                        <TwitterIcon style={{ fontSize: 30 }} className="individualIcon" />
+                        <TwitterIcon style={{ fontSize: 30 }} className="IconFooter" />
                     </Grid>
                     <Grid item sm={4} className={classes.facebookName}>
                         <h2 className={classes.h2}>Twitter</h2>
@@ -66,7 +66,7 @@ export default function Footer() {
             <Grid item sm={4} className={classes.iconsImage}>
                 <Grid container spacing={2}>
                     <Grid item sm={2} className={classes.iconsImage}>
-                        <InstagramIcon style={{ fontSize: 30 }} className="individualIcon" />
+                        <InstagramIcon style={{ fontSize: 30 }} className="IconFooter" />
                     </Grid>
                     <Grid item sm={4} className={classes.facebookName}>
                         <h2 className={classes.h2}>Instagram</h2>
